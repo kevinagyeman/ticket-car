@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 
 export const metadata: Metadata = {
 	title: "ticket-car",
@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-const geist = Geist({
+const geistMono = Geist_Mono({
 	subsets: ["latin"],
-	variable: "--font-geist-sans",
+	variable: "--font-geist-mono",
 });
 
 export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html className={`${geist.variable}`} lang="en">
+		<html className={geistMono.variable} lang="en">
 			<body>{children}</body>
 		</html>
 	);
