@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
 
 import { LanguageSwitcher } from "@/app/_components/language-switcher";
 import { SignOutButton } from "@/app/_components/sign-out-button";

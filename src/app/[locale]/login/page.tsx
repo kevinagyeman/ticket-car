@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
 
 import { auth } from "@/server/auth";
 import { LoginForm } from "./login-form";
