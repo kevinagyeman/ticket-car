@@ -7,16 +7,8 @@ export const env = createEnv({
 	 * isn't built with invalid env vars.
 	 */
 	server: {
-		AUTH_SECRET:
-			process.env.NODE_ENV === "production"
-				? z.string()
-				: z.string().optional(),
-		// OAuth creds are optional so the app runs before they're configured.
-		// Auth routes only work once both are set.
-		AUTH_GOOGLE_ID: z.string().optional(),
-		AUTH_GOOGLE_SECRET: z.string().optional(),
-		// Comma-separated list of emails allowed to sign in.
-		ALLOWED_EMAILS: z.string().default(""),
+		// Required: signs the session JWT. Generate with `npx auth secret`.
+		AUTH_SECRET: z.string().min(1),
 		DATABASE_URL: z.string().url(),
 		NODE_ENV: z
 			.enum(["development", "test", "production"])
@@ -38,9 +30,6 @@ export const env = createEnv({
 	 */
 	runtimeEnv: {
 		AUTH_SECRET: process.env.AUTH_SECRET,
-		AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
-		AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
-		ALLOWED_EMAILS: process.env.ALLOWED_EMAILS,
 		DATABASE_URL: process.env.DATABASE_URL,
 		NODE_ENV: process.env.NODE_ENV,
 	},

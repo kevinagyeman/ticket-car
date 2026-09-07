@@ -4,6 +4,18 @@
 		"en": "Inglese",
 		"it": "Italiano"
 	},
+	"login": {
+		"title": "Accedi",
+		"subtitle": "Inserisci le tue credenziali per continuare.",
+		"email": "Email",
+		"password": "Password",
+		"submit": "Accedi",
+		"pending": "Accesso in corso…",
+		"error": "Email o password non validi."
+	},
+	"auth": {
+		"signOut": "Esci"
+	},
 	"home": {
 		"title": "Tommaso Salvatori",
 		"subtitle": "---",
