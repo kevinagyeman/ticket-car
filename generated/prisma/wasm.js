@@ -90,12 +90,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.PostScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdById: 'createdById'
+  email: 'email',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  password: 'password'
 };
 
 exports.Prisma.AccountScalarFieldEnum = {
@@ -121,19 +122,82 @@ exports.Prisma.SessionScalarFieldEnum = {
   expires: 'expires'
 };
 
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  emailVerified: 'emailVerified',
-  image: 'image',
-  password: 'password'
-};
-
 exports.Prisma.VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
   expires: 'expires'
+};
+
+exports.Prisma.ClientScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  vatNumber: 'vatNumber',
+  address: 'address',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VehicleScalarFieldEnum = {
+  id: 'id',
+  plate: 'plate',
+  make: 'make',
+  model: 'model',
+  year: 'year',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  clientId: 'clientId'
+};
+
+exports.Prisma.TicketScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  status: 'status',
+  priority: 'priority',
+  km: 'km',
+  systemModel: 'systemModel',
+  softwareVersion: 'softwareVersion',
+  complaint: 'complaint',
+  diagnosis: 'diagnosis',
+  resolutionNote: 'resolutionNote',
+  openedAt: 'openedAt',
+  closedAt: 'closedAt',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  clientId: 'clientId',
+  authorId: 'authorId',
+  assigneeId: 'assigneeId'
+};
+
+exports.Prisma.TicketEntryScalarFieldEnum = {
+  id: 'id',
+  body: 'body',
+  system: 'system',
+  createdAt: 'createdAt',
+  ticketId: 'ticketId',
+  authorId: 'authorId'
+};
+
+exports.Prisma.AttachmentScalarFieldEnum = {
+  id: 'id',
+  kind: 'kind',
+  filename: 'filename',
+  mimeType: 'mimeType',
+  size: 'size',
+  storageKey: 'storageKey',
+  createdAt: 'createdAt',
+  ticketId: 'ticketId',
+  uploadedById: 'uploadedById'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color'
 };
 
 exports.Prisma.SortOrder = {
@@ -148,11 +212,16 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Post: 'Post',
+  User: 'User',
   Account: 'Account',
   Session: 'Session',
-  User: 'User',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  Client: 'Client',
+  Vehicle: 'Vehicle',
+  Ticket: 'Ticket',
+  TicketEntry: 'TicketEntry',
+  Attachment: 'Attachment',
+  Tag: 'Tag'
 };
 /**
  * Create the Client
@@ -202,13 +271,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below\n  // Further reading:\n  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema\n  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  createdBy   User   @relation(fields: [createdById], references: [id])\n  createdById String\n\n  @@index([name])\n}\n\n// Necessary for Next auth\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String? // @db.Text\n  access_token             String? // @db.Text\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String? // @db.Text\n  session_state            String?\n  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  refresh_token_expires_in Int?\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String?   @unique\n  emailVerified DateTime?\n  image         String?\n  // bcrypt hash for email + password sign-in\n  password      String?\n  accounts      Account[]\n  sessions      Session[]\n  posts         Post[]\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n",
-  "inlineSchemaHash": "58f85630dbd05e4bc20392788337dba0c9b4fc34290b7742aaf9065ba0725f1c",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  // SQLite for now. The DB engine (MySQL / Postgres, hosted in CH) is not\n  // decided yet, so this schema deliberately avoids engine-specific features:\n  // - no native `enum` (SQLite has none) — status/priority/kind are String,\n  //   with the allowed values listed in comments and enforced via Zod in app\n  //   code (see src/lib/tickets.ts).\n  // - no @db.* column types.\n  // Switching later = change `provider` + `DATABASE_URL`, then re-migrate.\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// ---------------------------------------------------------------------------\n// Auth (email + password). Account / Session / VerificationToken are unused\n// today but kept so an OAuth adapter can be dropped in later.\n// ---------------------------------------------------------------------------\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String?   @unique\n  emailVerified DateTime?\n  image         String?\n  // bcrypt hash for email + password sign-in\n  password      String?\n\n  accounts        Account[]\n  sessions        Session[]\n  ticketsAuthored Ticket[]      @relation(\"TicketAuthor\")\n  ticketsAssigned Ticket[]      @relation(\"TicketAssignee\")\n  ticketEntries   TicketEntry[]\n  attachments     Attachment[]\n}\n\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String?\n  access_token             String?\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String?\n  session_state            String?\n  refresh_token_expires_in Int?\n  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\n// ---------------------------------------------------------------------------\n// Domain\n// ---------------------------------------------------------------------------\n\nmodel Client {\n  id        String   @id @default(cuid())\n  name      String\n  email     String?\n  phone     String?\n  vatNumber String? // P.IVA / Codice Fiscale\n  address   String?\n  notes     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  vehicles Vehicle[]\n  tickets  Ticket[]\n}\n\nmodel Vehicle {\n  id        String   @id @default(cuid())\n  plate     String   @unique // targa\n  make      String?\n  model     String?\n  year      Int?\n  notes     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  clientId String\n  client   Client   @relation(fields: [clientId], references: [id])\n  tickets  Ticket[] @relation(\"TicketVehicles\")\n\n  @@index([plate])\n  @@index([clientId])\n}\n\nmodel Ticket {\n  // Small sequential int — shown to users as \"#42\", used in the URL.\n  id   Int      @id @default(autoincrement())\n  date DateTime @default(now()) // \"Data\" — prefilled to today in the form\n\n  // \"OPEN\" | \"IN_PROGRESS\" | \"WAITING_PARTS\" | \"WAITING_CLIENT\" | \"RESOLVED\" | \"CLOSED\"\n  status   String @default(\"OPEN\")\n  // \"LOW\" | \"NORMAL\" | \"HIGH\" | \"URGENT\"\n  priority String @default(\"NORMAL\")\n\n  km              Int? // Km\n  systemModel     String? // \"Modello radio\" — infotainment / multimedia system model\n  softwareVersion String? // firmware / MMI / software version, when known\n\n  complaint      String? // Lamentela cliente\n  diagnosis      String? // Diagnosi\n  resolutionNote String? // Resolution note\n\n  openedAt   DateTime  @default(now())\n  closedAt   DateTime?\n  archivedAt DateTime?\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n\n  clientId   String\n  client     Client  @relation(fields: [clientId], references: [id])\n  authorId   String // \"Autore log\" — defaults to the current user\n  author     User    @relation(\"TicketAuthor\", fields: [authorId], references: [id])\n  assigneeId String?\n  assignee   User?   @relation(\"TicketAssignee\", fields: [assigneeId], references: [id])\n\n  vehicles    Vehicle[]     @relation(\"TicketVehicles\") // a job can cover >1 car\n  tags        Tag[]         @relation(\"TicketTags\")\n  entries     TicketEntry[]\n  attachments Attachment[]\n\n  @@index([status])\n  @@index([clientId])\n}\n\n// Append-only running log for a ticket (\"interfaccia log\").\nmodel TicketEntry {\n  id        String   @id @default(cuid())\n  body      String\n  system    Boolean  @default(false) // true = auto entry (\"status → RESOLVED\")\n  createdAt DateTime @default(now())\n\n  ticketId Int\n  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)\n  authorId String\n  author   User   @relation(fields: [authorId], references: [id])\n\n  @@index([ticketId, createdAt])\n}\n\nmodel Attachment {\n  id         String   @id @default(cuid())\n  kind       String // \"AUDIO\" | \"IMAGE\" | \"OTHER\"\n  filename   String\n  mimeType   String\n  size       Int\n  storageKey String // key/path in object storage (CH-hosted, TBD)\n  createdAt  DateTime @default(now())\n\n  ticketId     Int\n  ticket       Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)\n  uploadedById String\n  uploadedBy   User   @relation(fields: [uploadedById], references: [id])\n\n  @@index([ticketId])\n}\n\nmodel Tag {\n  id      String   @id @default(cuid())\n  name    String   @unique\n  color   String?\n  tickets Ticket[] @relation(\"TicketTags\")\n}\n",
+  "inlineSchemaHash": "7071a3fcf4a1865050fced7fee8216ba8524af555610d5ede2267e39a9b0259d",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PostToUser\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerAccountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"access_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"token_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"id_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session_state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"},{\"name\":\"refresh_token_expires_in\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToUser\"}],\"dbName\":null},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"ticketsAuthored\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"TicketAuthor\"},{\"name\":\"ticketsAssigned\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"TicketAssignee\"},{\"name\":\"ticketEntries\",\"kind\":\"object\",\"type\":\"TicketEntry\",\"relationName\":\"TicketEntryToUser\"},{\"name\":\"attachments\",\"kind\":\"object\",\"type\":\"Attachment\",\"relationName\":\"AttachmentToUser\"}],\"dbName\":null},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerAccountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"access_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"token_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"id_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session_state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token_expires_in\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Client\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"vatNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"vehicles\",\"kind\":\"object\",\"type\":\"Vehicle\",\"relationName\":\"ClientToVehicle\"},{\"name\":\"tickets\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"ClientToTicket\"}],\"dbName\":null},\"Vehicle\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"plate\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"make\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"model\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"clientId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"client\",\"kind\":\"object\",\"type\":\"Client\",\"relationName\":\"ClientToVehicle\"},{\"name\":\"tickets\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"TicketVehicles\"}],\"dbName\":null},\"Ticket\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"priority\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"km\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"systemModel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"softwareVersion\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complaint\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"diagnosis\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"resolutionNote\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"openedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"closedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"archivedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"clientId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"client\",\"kind\":\"object\",\"type\":\"Client\",\"relationName\":\"ClientToTicket\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TicketAuthor\"},{\"name\":\"assigneeId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assignee\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TicketAssignee\"},{\"name\":\"vehicles\",\"kind\":\"object\",\"type\":\"Vehicle\",\"relationName\":\"TicketVehicles\"},{\"name\":\"tags\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"TicketTags\"},{\"name\":\"entries\",\"kind\":\"object\",\"type\":\"TicketEntry\",\"relationName\":\"TicketToTicketEntry\"},{\"name\":\"attachments\",\"kind\":\"object\",\"type\":\"Attachment\",\"relationName\":\"AttachmentToTicket\"}],\"dbName\":null},\"TicketEntry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"body\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"system\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ticketId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"ticket\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"TicketToTicketEntry\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TicketEntryToUser\"}],\"dbName\":null},\"Attachment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"kind\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"filename\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mimeType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"size\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"storageKey\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ticketId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"ticket\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"AttachmentToTicket\"},{\"name\":\"uploadedById\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uploadedBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AttachmentToUser\"}],\"dbName\":null},\"Tag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tickets\",\"kind\":\"object\",\"type\":\"Ticket\",\"relationName\":\"TicketTags\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

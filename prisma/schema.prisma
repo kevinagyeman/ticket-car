@@ -7,42 +7,54 @@ generator client {
 }
 
 datasource db {
+    // SQLite for now. The DB engine (MySQL / Postgres, hosted in CH) is not
+    // decided yet, so this schema deliberately avoids engine-specific features:
+    // - no native `enum` (SQLite has none) — status/priority/kind are String,
+    //   with the allowed values listed in comments and enforced via Zod in app
+    //   code (see src/lib/tickets.ts).
+    // - no @db.* column types.
+    // Switching later = change `provider` + `DATABASE_URL`, then re-migrate.
     provider = "sqlite"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// ---------------------------------------------------------------------------
+// Auth (email + password). Account / Session / VerificationToken are unused
+// today but kept so an OAuth adapter can be dropped in later.
+// ---------------------------------------------------------------------------
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    // bcrypt hash for email + password sign-in
+    password      String?
 
-    @@index([name])
+    accounts        Account[]
+    sessions        Session[]
+    ticketsAuthored Ticket[]      @relation("TicketAuthor")
+    ticketsAssigned Ticket[]      @relation("TicketAssignee")
+    ticketEntries   TicketEntry[]
+    attachments     Attachment[]
 }
 
-// Necessary for Next auth
 model Account {
     id                       String  @id @default(cuid())
     userId                   String
     type                     String
     provider                 String
     providerAccountId        String
-    refresh_token            String? // @db.Text
-    access_token             String? // @db.Text
+    refresh_token            String?
+    access_token             String?
     expires_at               Int?
     token_type               String?
     scope                    String?
-    id_token                 String? // @db.Text
+    id_token                 String?
     session_state            String?
-    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     refresh_token_expires_in Int?
+    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
 }
@@ -55,23 +67,126 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    // bcrypt hash for email + password sign-in
-    password      String?
-    accounts      Account[]
-    sessions      Session[]
-    posts         Post[]
-}
-
 model VerificationToken {
     identifier String
     token      String   @unique
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Domain
+// ---------------------------------------------------------------------------
+
+model Client {
+    id        String   @id @default(cuid())
+    name      String
+    email     String?
+    phone     String?
+    vatNumber String? // P.IVA / Codice Fiscale
+    address   String?
+    notes     String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    vehicles Vehicle[]
+    tickets  Ticket[]
+}
+
+model Vehicle {
+    id        String   @id @default(cuid())
+    plate     String   @unique // targa
+    make      String?
+    model     String?
+    year      Int?
+    notes     String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    clientId String
+    client   Client   @relation(fields: [clientId], references: [id])
+    tickets  Ticket[] @relation("TicketVehicles")
+
+    @@index([plate])
+    @@index([clientId])
+}
+
+model Ticket {
+    // Small sequential int — shown to users as "#42", used in the URL.
+    id   Int      @id @default(autoincrement())
+    date DateTime @default(now()) // "Data" — prefilled to today in the form
+
+    // "OPEN" | "IN_PROGRESS" | "WAITING_PARTS" | "WAITING_CLIENT" | "RESOLVED" | "CLOSED"
+    status String @default("OPEN")
+    // "LOW" | "NORMAL" | "HIGH" | "URGENT"
+    priority String @default("NORMAL")
+
+    km              Int? // Km
+    systemModel     String? // "Modello radio" — infotainment / multimedia system model
+    softwareVersion String? // firmware / MMI / software version, when known
+
+    complaint      String? // Lamentela cliente
+    diagnosis      String? // Diagnosi
+    resolutionNote String? // Resolution note
+
+    openedAt   DateTime  @default(now())
+    closedAt   DateTime?
+    archivedAt DateTime?
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+
+    clientId   String
+    client     Client  @relation(fields: [clientId], references: [id])
+    authorId   String // "Autore log" — defaults to the current user
+    author     User    @relation("TicketAuthor", fields: [authorId], references: [id])
+    assigneeId String?
+    assignee   User?   @relation("TicketAssignee", fields: [assigneeId], references: [id])
+
+    vehicles    Vehicle[]     @relation("TicketVehicles") // a job can cover >1 car
+    tags        Tag[]         @relation("TicketTags")
+    entries     TicketEntry[]
+    attachments Attachment[]
+
+    @@index([status])
+    @@index([clientId])
+}
+
+// Append-only running log for a ticket ("interfaccia log").
+model TicketEntry {
+    id        String   @id @default(cuid())
+    body      String
+    system    Boolean  @default(false) // true = auto entry ("status → RESOLVED")
+    createdAt DateTime @default(now())
+
+    ticketId Int
+    ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+    authorId String
+    author   User   @relation(fields: [authorId], references: [id])
+
+    @@index([ticketId, createdAt])
+}
+
+model Attachment {
+    id         String   @id @default(cuid())
+    kind       String // "AUDIO" | "IMAGE" | "OTHER"
+    filename   String
+    mimeType   String
+    size       Int
+    storageKey String // key/path in object storage (CH-hosted, TBD)
+    createdAt  DateTime @default(now())
+
+    ticketId     Int
+    ticket       Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+    uploadedById String
+    uploadedBy   User   @relation(fields: [uploadedById], references: [id])
+
+    @@index([ticketId])
+}
+
+model Tag {
+    id      String   @id @default(cuid())
+    name    String   @unique
+    color   String?
+    tickets Ticket[] @relation("TicketTags")
 }

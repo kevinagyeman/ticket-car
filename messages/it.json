@@ -16,6 +16,126 @@
 	"auth": {
 		"signOut": "Esci"
 	},
+	"nav": {
+		"tickets": "Ticket",
+		"clients": "Clienti",
+		"newTicket": "Nuovo ticket"
+	},
+	"clients": {
+		"title": "Clienti",
+		"new": "Nuovo cliente",
+		"newTitle": "Nuovo cliente",
+		"search": "Cerca nome, email, targa…",
+		"empty": "Nessun cliente",
+		"cancel": "Annulla",
+		"backToList": "Clienti",
+		"create": "Crea cliente",
+		"save": "Salva",
+		"saved": "Salvato",
+		"delete": "Elimina",
+		"vehicles": "Veicoli",
+		"noVehicles": "Nessun veicolo",
+		"addVehicle": "Aggiungi",
+		"addVehicleRow": "aggiungi un altro veicolo",
+		"vehicleAdded": "Veicolo aggiunto",
+		"vehicleHasTickets": "Ha dei ticket — non eliminabile",
+		"openTickets": "{count} aperti",
+		"ticketHistory": "Storico ticket ({count})",
+		"noTickets": "Ancora nessun ticket",
+		"field": {
+			"name": "Nome",
+			"email": "Email",
+			"phone": "Telefono",
+			"vatNumber": "P.IVA / Cod. Fiscale",
+			"address": "Indirizzo",
+			"notes": "Note",
+			"plate": "Targa",
+			"make": "Marca",
+			"model": "Modello",
+			"year": "Anno"
+		},
+		"error": {
+			"nameRequired": "Il nome è obbligatorio",
+			"plateRequired": "La targa è obbligatoria",
+			"plateExists": "Questa targa esiste già",
+			"duplicatePlate": "La stessa targa è inserita due volte",
+			"invalid": "Qualcosa è andato storto"
+		}
+	},
+	"tickets": {
+		"title": "Ticket",
+		"search": "Cerca targa, cliente, #numero…",
+		"newTicket": "Nuovo ticket",
+		"empty": "Nessun ticket",
+		"selectPrompt": "Seleziona un ticket dalla lista",
+		"backToList": "Lista",
+		"filterActive": "Attivi",
+		"filterAll": "Tutti",
+		"status": {
+			"OPEN": "Aperto",
+			"IN_PROGRESS": "In lavorazione",
+			"WAITING_PARTS": "Attesa ricambi",
+			"WAITING_CLIENT": "Attesa cliente",
+			"RESOLVED": "Risolto",
+			"CLOSED": "Chiuso"
+		},
+		"priority": {
+			"LOW": "Bassa",
+			"NORMAL": "Normale",
+			"HIGH": "Alta",
+			"URGENT": "Urgente"
+		},
+		"field": {
+			"date": "Data",
+			"plate": "Targa",
+			"client": "Cliente",
+			"km": "Km",
+			"systemModel": "Modello radio",
+			"softwareVersion": "Versione software",
+			"complaint": "Lamentela cliente",
+			"diagnosis": "Diagnosi",
+			"resolutionNote": "Resolution note",
+			"author": "Autore log",
+			"assignee": "Assegnatario",
+			"tags": "Tag",
+			"vehicles": "Veicoli",
+			"status": "Stato",
+			"priority": "Priorità"
+		},
+		"detail": {
+			"log": "Log",
+			"addToLog": "Aggiungi al log…",
+			"addToLogAction": "Aggiungi",
+			"attachments": "Allegati",
+			"uploadSoon": "Upload file in arrivo",
+			"save": "Salva",
+			"saved": "Salvato",
+			"systemEntry": "sistema",
+			"noEntries": "Nessuna voce nel log"
+		},
+		"new": {
+			"title": "Nuovo ticket",
+			"plateHint": "Se la targa esiste già, cliente e veicolo vengono collegati in automatico.",
+			"existingClient": "Cliente esistente",
+			"orNewClient": "…oppure nuovo cliente",
+			"clientName": "Nome cliente",
+			"clientEmail": "Email",
+			"clientPhone": "Telefono",
+			"vehicleHint": "Dati veicolo (solo se la targa è nuova)",
+			"make": "Marca",
+			"model": "Modello",
+			"year": "Anno",
+			"create": "Crea ticket",
+			"cancel": "Annulla"
+		},
+		"error": {
+			"plateRequired": "La targa è obbligatoria",
+			"complaintRequired": "La lamentela cliente è obbligatoria",
+			"clientRequired": "Targa nuova: scegli un cliente esistente o inserisci il nome del nuovo cliente",
+			"notFound": "Ticket non trovato",
+			"invalid": "Qualcosa è andato storto"
+		}
+	},
 	"home": {
 		"title": "Tommaso Salvatori",
 		"subtitle": "---",

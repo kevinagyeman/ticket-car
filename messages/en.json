@@ -16,6 +16,126 @@
 	"auth": {
 		"signOut": "Sign out"
 	},
+	"nav": {
+		"tickets": "Tickets",
+		"clients": "Clients",
+		"newTicket": "New ticket"
+	},
+	"clients": {
+		"title": "Clients",
+		"new": "New client",
+		"newTitle": "New client",
+		"search": "Search name, email, plate…",
+		"empty": "No clients",
+		"cancel": "Cancel",
+		"backToList": "Clients",
+		"create": "Create client",
+		"save": "Save",
+		"saved": "Saved",
+		"delete": "Delete",
+		"vehicles": "Vehicles",
+		"noVehicles": "No vehicles",
+		"addVehicle": "Add",
+		"addVehicleRow": "add another vehicle",
+		"vehicleAdded": "Vehicle added",
+		"vehicleHasTickets": "Has tickets — cannot delete",
+		"openTickets": "{count} open",
+		"ticketHistory": "Ticket history ({count})",
+		"noTickets": "No tickets yet",
+		"field": {
+			"name": "Name",
+			"email": "Email",
+			"phone": "Phone",
+			"vatNumber": "VAT / Tax number",
+			"address": "Address",
+			"notes": "Notes",
+			"plate": "Plate",
+			"make": "Make",
+			"model": "Model",
+			"year": "Year"
+		},
+		"error": {
+			"nameRequired": "Name is required",
+			"plateRequired": "Plate is required",
+			"plateExists": "That plate already exists",
+			"duplicatePlate": "The same plate is entered twice",
+			"invalid": "Something went wrong"
+		}
+	},
+	"tickets": {
+		"title": "Tickets",
+		"search": "Search plate, client, #number…",
+		"newTicket": "New ticket",
+		"empty": "No tickets",
+		"selectPrompt": "Select a ticket from the list",
+		"backToList": "List",
+		"filterActive": "Active",
+		"filterAll": "All",
+		"status": {
+			"OPEN": "Open",
+			"IN_PROGRESS": "In progress",
+			"WAITING_PARTS": "Waiting parts",
+			"WAITING_CLIENT": "Waiting client",
+			"RESOLVED": "Resolved",
+			"CLOSED": "Closed"
+		},
+		"priority": {
+			"LOW": "Low",
+			"NORMAL": "Normal",
+			"HIGH": "High",
+			"URGENT": "Urgent"
+		},
+		"field": {
+			"date": "Date",
+			"plate": "Plate",
+			"client": "Client",
+			"km": "Km",
+			"systemModel": "System model",
+			"softwareVersion": "Software version",
+			"complaint": "Customer complaint",
+			"diagnosis": "Diagnosis",
+			"resolutionNote": "Resolution note",
+			"author": "Log author",
+			"assignee": "Assignee",
+			"tags": "Tags",
+			"vehicles": "Vehicles",
+			"status": "Status",
+			"priority": "Priority"
+		},
+		"detail": {
+			"log": "Log",
+			"addToLog": "Add to the log…",
+			"addToLogAction": "Add",
+			"attachments": "Attachments",
+			"uploadSoon": "File upload coming soon",
+			"save": "Save",
+			"saved": "Saved",
+			"systemEntry": "system",
+			"noEntries": "No log entries"
+		},
+		"new": {
+			"title": "New ticket",
+			"plateHint": "If the plate already exists, client and vehicle are linked automatically.",
+			"existingClient": "Existing client",
+			"orNewClient": "…or new client",
+			"clientName": "Client name",
+			"clientEmail": "Email",
+			"clientPhone": "Phone",
+			"vehicleHint": "Vehicle details (only if the plate is new)",
+			"make": "Make",
+			"model": "Model",
+			"year": "Year",
+			"create": "Create ticket",
+			"cancel": "Cancel"
+		},
+		"error": {
+			"plateRequired": "Plate is required",
+			"complaintRequired": "Customer complaint is required",
+			"clientRequired": "New plate: pick an existing client or enter a new client name",
+			"notFound": "Ticket not found",
+			"invalid": "Something went wrong"
+		}
+	},
 	"home": {
 		"title": "Tommaso Salvatori",
 		"subtitle": "---",

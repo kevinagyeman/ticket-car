@@ -1,14 +1,20 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 
-import { LanguageSwitcher } from "@/app/_components/language-switcher";
-import { SignOutButton } from "@/app/_components/sign-out-button";
+import { cn } from "@/lib/utils";
 import { auth } from "@/server/auth";
+import { listTickets } from "@/server/tickets";
+import { AppHeader } from "./_components/app-header";
+import { SearchBar } from "./_components/search-bar";
+import { TicketDetail } from "./_components/ticket-detail";
+import { TicketList } from "./_components/ticket-list";
 
 export default async function HomePage({
 	params,
+	searchParams,
 }: {
 	params: Promise<{ locale: string }>;
+	searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
@@ -16,18 +22,58 @@ export default async function HomePage({
 	const session = await auth();
 	if (!session?.user) redirect("/login");
 
-	const t = await getTranslations("home");
+	const sp = await searchParams;
+	const q = typeof sp.q === "string" && sp.q ? sp.q : undefined;
+	const status =
+		typeof sp.status === "string" && sp.status ? sp.status : undefined;
+	const parsedId =
+		typeof sp.t === "string" ? Number.parseInt(sp.t, 10) : Number.NaN;
+	const activeId = Number.isNaN(parsedId) ? undefined : parsedId;
+
+	const [tickets, t] = await Promise.all([
+		listTickets({ q, status }),
+		getTranslations("tickets"),
+	]);
+
+	const query: Record<string, string> = {};
+	if (q) query.q = q;
+	if (status) query.status = status;
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center gap-2">
-			<div className="absolute top-4 right-4 flex items-center gap-2">
-				<LanguageSwitcher />
-				<SignOutButton />
+		<div className="flex h-dvh flex-col bg-background">
+			<AppHeader active="tickets">
+				<SearchBar />
+			</AppHeader>
+
+			<div className="flex min-h-0 flex-1 flex-col md:grid md:grid-cols-[minmax(280px,340px)_1fr]">
+				<aside
+					className={cn(
+						"min-h-0 overflow-y-auto border-border md:block md:border-r",
+						activeId ? "hidden md:block" : "flex-1 md:flex-none",
+					)}
+				>
+					<TicketList
+						activeId={activeId}
+						now={new Date()}
+						query={query}
+						tickets={tickets}
+					/>
+				</aside>
+				<main
+					className={cn(
+						"min-h-0 flex-1 overflow-hidden md:flex-none",
+						activeId ? "block" : "hidden md:block",
+					)}
+				>
+					{activeId ? (
+						<TicketDetail id={activeId} key={activeId} query={query} />
+					) : (
+						<div className="flex h-full items-center justify-center p-6 text-muted-foreground text-sm">
+							{t("selectPrompt")}
+						</div>
+					)}
+				</main>
 			</div>
-			<h1 className="font-bold text-4xl tracking-tight">{t("title")}</h1>
-			<p className="text-muted-foreground text-sm">{t("subtitle")}</p>
-			<p className="text-muted-foreground text-sm">{t("description")}</p>
-			<p className="mt-4 text-muted-foreground text-xs">{session.user.email}</p>
-		</main>
+		</div>
 	);
 }
