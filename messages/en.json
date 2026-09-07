@@ -1,0 +1,17 @@
+{
+	"languageSwitcher": {
+		"label": "Language",
+		"en": "English",
+		"it": "Italian"
+	},
+	"home": {
+		"title": "Tommaso Salvatori",
+		"subtitle": "---",
+		"description": "Under construction..."
+	},
+	"notFound": {
+		"heading": "Page not found",
+		"description": "The page you are looking for does not exist.",
+		"backHome": "Back to home"
+	}
+}

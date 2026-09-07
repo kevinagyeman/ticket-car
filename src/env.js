@@ -11,8 +11,12 @@ export const env = createEnv({
 			process.env.NODE_ENV === "production"
 				? z.string()
 				: z.string().optional(),
-		AUTH_DISCORD_ID: z.string(),
-		AUTH_DISCORD_SECRET: z.string(),
+		// OAuth creds are optional so the app runs before they're configured.
+		// Auth routes only work once both are set.
+		AUTH_GOOGLE_ID: z.string().optional(),
+		AUTH_GOOGLE_SECRET: z.string().optional(),
+		// Comma-separated list of emails allowed to sign in.
+		ALLOWED_EMAILS: z.string().default(""),
 		DATABASE_URL: z.string().url(),
 		NODE_ENV: z
 			.enum(["development", "test", "production"])
@@ -34,8 +38,9 @@ export const env = createEnv({
 	 */
 	runtimeEnv: {
 		AUTH_SECRET: process.env.AUTH_SECRET,
-		AUTH_DISCORD_ID: process.env.AUTH_DISCORD_ID,
-		AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
+		AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+		AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+		ALLOWED_EMAILS: process.env.ALLOWED_EMAILS,
 		DATABASE_URL: process.env.DATABASE_URL,
 		NODE_ENV: process.env.NODE_ENV,
 	},

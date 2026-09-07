@@ -1,0 +1,17 @@
+{
+	"languageSwitcher": {
+		"label": "Lingua",
+		"en": "Inglese",
+		"it": "Italiano"
+	},
+	"home": {
+		"title": "Tommaso Salvatori",
+		"subtitle": "---",
+		"description": "In costruzione..."
+	},
+	"notFound": {
+		"heading": "Tommaso Salvatori",
+		"description": "La pagina che stai cercando non esiste.",
+		"backHome": "Torna alla home"
+	}
+}
