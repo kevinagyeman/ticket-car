@@ -90,6 +90,7 @@
 			"plate": "Plate",
 			"client": "Client",
 			"km": "Km",
+			"orderNumber": "Order no.",
 			"systemModel": "System model",
 			"softwareVersion": "Software version",
 			"complaint": "Customer complaint",

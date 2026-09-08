@@ -29,6 +29,7 @@ export async function listTickets({ q, status }: ListArgs = {}) {
 			{ vehicles: { some: { plate: { contains: term } } } },
 			{ complaint: { contains: term } },
 			{ systemModel: { contains: term } },
+			{ orderNumber: { contains: term } },
 		];
 		const asNumber = Number.parseInt(term.replace(/^#/, ""), 10);
 		if (!Number.isNaN(asNumber)) or.push({ id: asNumber });

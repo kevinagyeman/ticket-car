@@ -10,6 +10,7 @@
 		"db:push": "prisma db push",
 		"db:studio": "prisma studio",
 		"db:seed": "tsx --env-file=.env prisma/seed.ts",
+		"db:clear": "tsx --env-file=.env scripts/clear-data.ts",
 		"user:create": "tsx --env-file=.env scripts/create-user.ts",
 		"user:delete": "tsx --env-file=.env scripts/delete-user.ts",
 		"dev": "next dev --turbo",

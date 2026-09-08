@@ -90,9 +90,12 @@ export function NewTicketForm({
 				</Field>
 			</fieldset>
 
-			<div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+			<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
 				<Field label={t("field.date")}>
 					<Input defaultValue={today} name="date" type="date" />
+				</Field>
+				<Field label={t("field.orderNumber")}>
+					<Input name="orderNumber" />
 				</Field>
 				<Field label={t("field.km")}>
 					<Input inputMode="numeric" name="km" />

@@ -13,6 +13,7 @@ import { type SaveState, saveTicketFields } from "@/server/ticket-actions";
 type Fields = {
 	id: number;
 	km: number | null;
+	orderNumber: string | null;
 	systemModel: string | null;
 	softwareVersion: string | null;
 	complaint: string | null;
@@ -36,7 +37,10 @@ export function TicketFieldsForm({ ticket }: { ticket: Fields }) {
 		<form action={action} className="flex flex-col gap-3">
 			<input name="ticketId" type="hidden" value={ticket.id} />
 
-			<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+			<div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+				<Small label={t("field.orderNumber")}>
+					<Input defaultValue={ticket.orderNumber ?? ""} name="orderNumber" />
+				</Small>
 				<Small label={t("field.km")}>
 					<Input defaultValue={ticket.km ?? ""} inputMode="numeric" name="km" />
 				</Small>

@@ -90,6 +90,7 @@
 			"plate": "Targa",
 			"client": "Cliente",
 			"km": "Km",
+			"orderNumber": "N° ordine",
 			"systemModel": "Modello radio",
 			"softwareVersion": "Versione software",
 			"complaint": "Lamentela cliente",

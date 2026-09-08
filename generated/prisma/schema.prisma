@@ -7,14 +7,9 @@ generator client {
 }
 
 datasource db {
-  // SQLite for now. The DB engine (MySQL / Postgres, hosted in CH) is not
-  // decided yet, so this schema deliberately avoids engine-specific features:
-  // - no native `enum` (SQLite has none) — status/priority/kind are String,
-  //   with the allowed values listed in comments and enforced via Zod in app
-  //   code (see src/lib/tickets.ts).
-  // - no @db.* column types.
-  // Switching later = change `provider` + `DATABASE_URL`, then re-migrate.
-  provider = "sqlite"
+  // status/priority/kind are String (not native enum) and validated via Zod
+  // in app code (src/lib/tickets.ts) so the schema stays portable.
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -46,12 +41,12 @@ model Account {
   type                     String
   provider                 String
   providerAccountId        String
-  refresh_token            String?
-  access_token             String?
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
   expires_at               Int?
   token_type               String?
   scope                    String?
-  id_token                 String?
+  id_token                 String? @db.Text
   session_state            String?
   refresh_token_expires_in Int?
   user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -85,8 +80,8 @@ model Client {
   email     String?
   phone     String?
   vatNumber String? // P.IVA / Codice Fiscale
-  address   String?
-  notes     String?
+  address   String?  @db.Text
+  notes     String?  @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -100,7 +95,7 @@ model Vehicle {
   make      String?
   model     String?
   year      Int?
-  notes     String?
+  notes     String?  @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -123,12 +118,13 @@ model Ticket {
   priority String @default("NORMAL")
 
   km              Int? // Km
+  orderNumber     String? // free-text reference / ID from an external system
   systemModel     String? // "Modello radio" — infotainment / multimedia system model
   softwareVersion String? // firmware / MMI / software version, when known
 
-  complaint      String? // Lamentela cliente
-  diagnosis      String? // Diagnosi
-  resolutionNote String? // Resolution note
+  complaint      String? @db.Text // Lamentela cliente
+  diagnosis      String? @db.Text // Diagnosi
+  resolutionNote String? @db.Text // Resolution note
 
   openedAt   DateTime  @default(now())
   closedAt   DateTime?
@@ -155,7 +151,7 @@ model Ticket {
 // Append-only running log for a ticket ("interfaccia log").
 model TicketEntry {
   id        String   @id @default(cuid())
-  body      String
+  body      String   @db.Text
   system    Boolean  @default(false) // true = auto entry ("status → RESOLVED")
   createdAt DateTime @default(now())
 
@@ -173,7 +169,7 @@ model Attachment {
   filename   String
   mimeType   String
   size       Int
-  storageKey String // key/path in object storage (CH-hosted, TBD)
+  storageKey String   @db.Text // key/path in object storage
   createdAt  DateTime @default(now())
 
   ticketId     Int

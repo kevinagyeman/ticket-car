@@ -4,50 +4,50 @@ import { PrismaClient } from "../generated/prisma";
 
 const db = new PrismaClient();
 
-/** Dev password for every seeded user. */
+/** Password for the fallback dev user, only created if the DB has no users. */
 const DEV_PASSWORD = "password";
 
 async function reset() {
-	// Children first, then parents.
+	// Children first, then parents. Users are left alone — the seed reuses
+	// whatever accounts already exist (see main()).
 	await db.attachment.deleteMany();
 	await db.ticketEntry.deleteMany();
 	await db.ticket.deleteMany();
 	await db.tag.deleteMany();
 	await db.vehicle.deleteMany();
 	await db.client.deleteMany();
-	// Keep users you created manually; only drop the seeded ones.
-	await db.user.deleteMany({ where: { email: { endsWith: "@ticket-car.ch" } } });
 
-	// Make ticket numbers restart at 1 on every re-seed (SQLite only).
-	try {
-		await db.$executeRawUnsafe(
-			"DELETE FROM sqlite_sequence WHERE name = 'Ticket'",
-		);
-	} catch {
-		// table doesn't exist yet on first run — fine
+	// Make ticket numbers restart at 1 on every re-seed.
+	for (const sql of [
+		"DELETE FROM sqlite_sequence WHERE name = 'Ticket'", // SQLite
+		"ALTER TABLE `Ticket` AUTO_INCREMENT = 1", // MySQL / MariaDB
+	]) {
+		try {
+			await db.$executeRawUnsafe(sql);
+		} catch {
+			// wrong engine / table not there yet — ignore
+		}
 	}
 }
 
 async function main() {
 	await reset();
 
-	const passwordHash = await hash(DEV_PASSWORD, 12);
-
-	const [tom, luca, sara] = await Promise.all([
-		db.user.create({
-			data: {
-				name: "Tommaso",
-				email: "tom@ticket-car.ch",
-				password: passwordHash,
-			},
-		}),
-		db.user.create({
-			data: { name: "Luca", email: "luca@ticket-car.ch", password: passwordHash },
-		}),
-		db.user.create({
-			data: { name: "Sara", email: "sara@ticket-car.ch", password: passwordHash },
-		}),
-	]);
+	// Reuse existing accounts; only create a dev user if there are none.
+	let users = await db.user.findMany({ orderBy: { email: "asc" } });
+	if (users.length === 0) {
+		users = [
+			await db.user.create({
+				data: {
+					name: "Dev",
+					email: "dev@ticket-car.ch",
+					password: await hash(DEV_PASSWORD, 12),
+				},
+			}),
+		];
+	}
+	const pick = (i: number) => users[i % users.length] as (typeof users)[number];
+	const [tom, luca, sara] = [pick(0), pick(1), pick(2)];
 
 	const tagData = [
 		{ name: "garanzia", color: "#f59e0b" },
@@ -486,7 +486,9 @@ async function main() {
 		entries: await db.ticketEntry.count(),
 		attachments: await db.attachment.count(),
 	});
-	console.log(`\nLogin: tom@ticket-car.ch / ${DEV_PASSWORD} (also luca@, sara@)`);
+	console.log(
+		`\nTickets assigned to: ${users.map((u) => u.email).join(", ")}`,
+	);
 }
 
 main()

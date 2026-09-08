@@ -86,6 +86,7 @@ export async function TicketDetail({
 					ticket={{
 						id: ticket.id,
 						km: ticket.km,
+						orderNumber: ticket.orderNumber,
 						systemModel: ticket.systemModel,
 						softwareVersion: ticket.softwareVersion,
 						complaint: ticket.complaint,
