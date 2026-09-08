@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 import { cn } from "@/lib/utils";
 import { auth } from "@/server/auth";
@@ -7,6 +8,7 @@ import { listTickets } from "@/server/tickets";
 import { AppHeader } from "./_components/app-header";
 import { SearchBar } from "./_components/search-bar";
 import { TicketDetail } from "./_components/ticket-detail";
+import { TicketDetailSkeleton } from "./_components/ticket-detail-skeleton";
 import { TicketList } from "./_components/ticket-list";
 
 export default async function HomePage({
@@ -66,7 +68,9 @@ export default async function HomePage({
 					)}
 				>
 					{activeId ? (
-						<TicketDetail id={activeId} key={activeId} query={query} />
+						<Suspense fallback={<TicketDetailSkeleton />} key={activeId}>
+							<TicketDetail id={activeId} query={query} />
+						</Suspense>
 					) : (
 						<div className="flex h-full items-center justify-center p-6 text-muted-foreground text-sm">
 							{t("selectPrompt")}

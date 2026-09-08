@@ -3,6 +3,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { TicketListItem } from "@/server/tickets";
+import { LinkSpinner } from "./link-spinner";
 import { PriorityMark, StatusBadge } from "./ticket-badges";
 
 export function TicketList({
@@ -40,7 +41,10 @@ export function TicketList({
 							}}
 						>
 							<div className="flex items-center justify-between gap-2">
-								<span className="font-medium">#{ticket.id}</span>
+								<span className="flex items-center gap-1.5 font-medium">
+									#{ticket.id}
+									<LinkSpinner />
+								</span>
 								<span className="flex items-center gap-2">
 									<PriorityMark priority={ticket.priority} />
 									<StatusBadge status={ticket.status} />
