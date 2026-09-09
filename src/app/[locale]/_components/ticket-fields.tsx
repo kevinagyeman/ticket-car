@@ -84,6 +84,18 @@ export function TicketFormFields({
 
 	return (
 		<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+			<Field label={t("date")}>
+				<Input
+					defaultValue={date}
+					disabled={!isNew}
+					name="date"
+					readOnly={!isNew}
+					type="date"
+				/>
+			</Field>
+			<Field label={t("ol")}>
+				<Input defaultValue={values?.ol ?? ""} name="ol" />
+			</Field>
 			<Field label={t("plate")}>
 				<Input
 					className="uppercase"
@@ -104,9 +116,6 @@ export function TicketFormFields({
 			<Field label={t("km")}>
 				<Input defaultValue={values?.km ?? ""} inputMode="numeric" name="km" />
 			</Field>
-			<Field label={t("ol")}>
-				<Input defaultValue={values?.ol ?? ""} name="ol" />
-			</Field>
 			<Field label={t("systemModel")}>
 				<Input defaultValue={values?.systemModel ?? ""} name="systemModel" />
 			</Field>
@@ -114,15 +123,6 @@ export function TicketFormFields({
 				<Input
 					defaultValue={values?.softwareVersion ?? ""}
 					name="softwareVersion"
-				/>
-			</Field>
-			<Field label={t("date")}>
-				<Input
-					defaultValue={date}
-					disabled={!isNew}
-					name="date"
-					readOnly={!isNew}
-					type="date"
 				/>
 			</Field>
 			<Field label={t("status")}>
