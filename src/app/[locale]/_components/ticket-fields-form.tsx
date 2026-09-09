@@ -12,8 +12,12 @@ import { type SaveState, saveTicketFields } from "@/server/ticket-actions";
 
 type Fields = {
 	id: number;
+	client: string | null;
+	plate: string | null;
+	make: string | null;
+	model: string | null;
 	km: number | null;
-	orderNumber: string | null;
+	ol: string | null;
 	systemModel: string | null;
 	softwareVersion: string | null;
 	complaint: string | null;
@@ -37,9 +41,25 @@ export function TicketFieldsForm({ ticket }: { ticket: Fields }) {
 		<form action={action} className="flex flex-col gap-3">
 			<input name="ticketId" type="hidden" value={ticket.id} />
 
-			<div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-				<Small label={t("field.orderNumber")}>
-					<Input defaultValue={ticket.orderNumber ?? ""} name="orderNumber" />
+			<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+				<Small label={t("field.client")}>
+					<Input defaultValue={ticket.client ?? ""} name="client" />
+				</Small>
+				<Small label={t("field.plate")}>
+					<Input
+						className="uppercase"
+						defaultValue={ticket.plate ?? ""}
+						name="plate"
+					/>
+				</Small>
+				<Small label={t("field.ol")}>
+					<Input defaultValue={ticket.ol ?? ""} name="ol" />
+				</Small>
+				<Small label={t("field.make")}>
+					<Input defaultValue={ticket.make ?? ""} name="make" />
+				</Small>
+				<Small label={t("field.model")}>
+					<Input defaultValue={ticket.model ?? ""} name="model" />
 				</Small>
 				<Small label={t("field.km")}>
 					<Input defaultValue={ticket.km ?? ""} inputMode="numeric" name="km" />

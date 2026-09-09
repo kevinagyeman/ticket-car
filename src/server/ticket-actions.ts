@@ -14,6 +14,8 @@ async function requireUserId() {
 	return session.user.id;
 }
 
+const nullify = (v?: string | null) => (v && v.trim() !== "" ? v.trim() : null);
+
 // --- mutations on an existing ticket -----------------------------------------
 
 export async function setTicketStatus(ticketId: number, value: string) {
@@ -50,15 +52,22 @@ export async function setTicketPriority(ticketId: number, value: string) {
 	revalidatePath("/");
 }
 
+const text = z.string().max(10_000).optional();
+const short = z.string().max(200).optional();
+
 const fieldsSchema = z.object({
 	ticketId: z.coerce.number().int(),
-	complaint: z.string().max(10_000),
-	diagnosis: z.string().max(10_000),
-	resolutionNote: z.string().max(10_000),
+	client: short,
+	plate: short,
+	make: short,
+	model: short,
 	km: z.string().optional(),
-	orderNumber: z.string().max(200).optional(),
-	systemModel: z.string().max(200).optional(),
-	softwareVersion: z.string().max(200).optional(),
+	ol: short,
+	systemModel: short,
+	softwareVersion: short,
+	complaint: text,
+	diagnosis: text,
+	resolutionNote: text,
 });
 
 export type SaveState = { ok: boolean; error?: string } | undefined;
@@ -70,18 +79,22 @@ export async function saveTicketFields(
 	await requireUserId();
 	const parsed = fieldsSchema.safeParse(Object.fromEntries(formData));
 	if (!parsed.success) return { ok: false, error: "invalid" };
+	const d = parsed.data;
 
-	const { ticketId, km, complaint, diagnosis, resolutionNote } = parsed.data;
 	await db.ticket.update({
-		where: { id: ticketId },
+		where: { id: d.ticketId },
 		data: {
-			complaint: complaint.trim() || null,
-			diagnosis: diagnosis.trim() || null,
-			resolutionNote: resolutionNote.trim() || null,
-			orderNumber: parsed.data.orderNumber?.trim() || null,
-			systemModel: parsed.data.systemModel?.trim() || null,
-			softwareVersion: parsed.data.softwareVersion?.trim() || null,
-			km: km && km.trim() !== "" ? Number.parseInt(km, 10) : null,
+			client: nullify(d.client),
+			plate: nullify(d.plate)?.toUpperCase() ?? null,
+			make: nullify(d.make),
+			model: nullify(d.model),
+			ol: nullify(d.ol),
+			systemModel: nullify(d.systemModel),
+			softwareVersion: nullify(d.softwareVersion),
+			complaint: nullify(d.complaint),
+			diagnosis: nullify(d.diagnosis),
+			resolutionNote: nullify(d.resolutionNote),
+			km: d.km && d.km.trim() !== "" ? Number.parseInt(d.km, 10) : null,
 		},
 	});
 
@@ -110,19 +123,15 @@ export async function addTicketEntry(
 // --- create ----------------------------------------------------------------
 
 const createSchema = z.object({
+	client: short,
 	plate: z.string().trim().min(1),
-	date: z.string().optional(),
-	clientId: z.string().optional(),
-	newClientName: z.string().trim().optional(),
-	newClientEmail: z.string().trim().optional(),
-	newClientPhone: z.string().trim().optional(),
-	make: z.string().trim().optional(),
-	model: z.string().trim().optional(),
-	year: z.string().trim().optional(),
+	make: short,
+	model: short,
 	km: z.string().trim().optional(),
-	orderNumber: z.string().trim().optional(),
-	systemModel: z.string().trim().optional(),
-	softwareVersion: z.string().trim().optional(),
+	ol: short,
+	date: z.string().optional(),
+	systemModel: short,
+	softwareVersion: short,
 	complaint: z.string().trim().min(1),
 	diagnosis: z.string().trim().optional(),
 	resolutionNote: z.string().trim().optional(),
@@ -146,64 +155,29 @@ export async function createTicket(
 		return { error: "invalid" };
 	}
 	const d = parsed.data;
-	const plate = d.plate.toUpperCase();
-	const tagIds = formData.getAll("tagIds").map(String).filter(Boolean);
-
-	const existingVehicle = await db.vehicle.findUnique({ where: { plate } });
-	if (!existingVehicle && !d.clientId?.trim() && !d.newClientName) {
-		return { error: "clientRequired" };
-	}
-
 	const date = d.date ? new Date(d.date) : new Date();
 
-	const newId = await db.$transaction(async (tx) => {
-		let vehicle = existingVehicle;
-
-		if (!vehicle) {
-			let clientId = d.clientId?.trim() || undefined;
-			if (!clientId) {
-				const client = await tx.client.create({
-					data: {
-						name: d.newClientName ?? plate,
-						email: d.newClientEmail || null,
-						phone: d.newClientPhone || null,
-					},
-				});
-				clientId = client.id;
-			}
-			vehicle = await tx.vehicle.create({
-				data: {
-					plate,
-					make: d.make || null,
-					model: d.model || null,
-					year: d.year ? Number.parseInt(d.year, 10) : null,
-					clientId,
-				},
-			});
-		}
-
-		const ticket = await tx.ticket.create({
-			data: {
-				date,
-				openedAt: date,
-				status: d.status,
-				priority: d.priority,
-				km: d.km ? Number.parseInt(d.km, 10) : null,
-				orderNumber: d.orderNumber || null,
-				systemModel: d.systemModel || null,
-				softwareVersion: d.softwareVersion || null,
-				complaint: d.complaint,
-				diagnosis: d.diagnosis || null,
-				resolutionNote: d.resolutionNote || null,
-				clientId: vehicle.clientId,
-				authorId,
-				vehicles: { connect: { id: vehicle.id } },
-				tags: { connect: tagIds.map((id) => ({ id })) },
-			},
-		});
-		return ticket.id;
+	const ticket = await db.ticket.create({
+		data: {
+			date,
+			openedAt: date,
+			status: d.status,
+			priority: d.priority,
+			client: nullify(d.client),
+			plate: d.plate.toUpperCase(),
+			make: nullify(d.make),
+			model: nullify(d.model),
+			km: d.km ? Number.parseInt(d.km, 10) : null,
+			ol: nullify(d.ol),
+			systemModel: nullify(d.systemModel),
+			softwareVersion: nullify(d.softwareVersion),
+			complaint: d.complaint,
+			diagnosis: nullify(d.diagnosis),
+			resolutionNote: nullify(d.resolutionNote),
+			authorId,
+		},
 	});
 
 	revalidatePath("/");
-	redirect(`/?t=${newId}`);
+	redirect(`/?t=${ticket.id}`);
 }

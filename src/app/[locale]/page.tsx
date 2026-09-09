@@ -43,7 +43,7 @@ export default async function HomePage({
 
 	return (
 		<div className="flex h-dvh flex-col bg-background">
-			<AppHeader active="tickets">
+			<AppHeader>
 				<SearchBar />
 			</AppHeader>
 

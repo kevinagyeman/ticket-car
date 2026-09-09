@@ -51,8 +51,8 @@ export function TicketList({
 								</span>
 							</div>
 							<div className="mt-0.5 truncate text-muted-foreground">
-								{ticket.client.name} ·{" "}
-								{ticket.vehicles.map((v) => v.plate).join(", ")}
+								{[ticket.plate, ticket.client].filter(Boolean).join(" · ") ||
+									"—"}
 							</div>
 							{ticket.complaint ? (
 								<div className="mt-0.5 line-clamp-1 text-muted-foreground/80 text-xs">

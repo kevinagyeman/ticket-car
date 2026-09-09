@@ -53,7 +53,7 @@
 }
 
 :root {
-	--background: oklch(1 0 0);
+	--background: #d3d3d3;
 	--foreground: oklch(0.145 0 0);
 	--card: oklch(1 0 0);
 	--card-foreground: oklch(0.145 0 0);
@@ -142,5 +142,16 @@
 [class*="rounded-full"]::after,
 [class*="rounded-full"]::before {
 	border-radius: 0 !important;
+}
+
+/*
+ * The page ground is grey (--background); keep editable form controls white so
+ * they still read as inputs. Unlayered so it beats the components' bg-transparent.
+ */
+[data-slot="input"],
+[data-slot="textarea"],
+[data-slot="select-trigger"],
+select {
+	background-color: var(--card);
 }
 

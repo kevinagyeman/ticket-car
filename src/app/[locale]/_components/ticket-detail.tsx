@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { getTicket } from "@/server/tickets";
 import { AddEntryForm } from "./add-entry-form";
 import { PrioritySelect, StatusSelect } from "./status-select";
-import { TagChip } from "./ticket-badges";
 import { TicketFieldsForm } from "./ticket-fields-form";
 
 export async function TicketDetail({
@@ -52,17 +51,6 @@ export async function TicketDetail({
 
 			<div className="flex-1 space-y-5 overflow-y-auto p-4">
 				<dl className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm sm:grid-cols-3">
-					<Meta label={t("field.client")}>
-						<Link
-							className="underline-offset-2 hover:underline"
-							href={`/clients/${ticket.client.id}`}
-						>
-							{ticket.client.name}
-						</Link>
-					</Meta>
-					<Meta label={t("field.vehicles")}>
-						{ticket.vehicles.map((v) => v.plate).join(", ")}
-					</Meta>
 					<Meta label={t("field.author")}>
 						{ticket.author.name ?? ticket.author.email}
 					</Meta>
@@ -73,20 +61,16 @@ export async function TicketDetail({
 					) : null}
 				</dl>
 
-				{ticket.tags.length > 0 ? (
-					<div className="flex flex-wrap gap-1">
-						{ticket.tags.map((tag) => (
-							<TagChip color={tag.color} key={tag.id} name={tag.name} />
-						))}
-					</div>
-				) : null}
-
 				<TicketFieldsForm
 					key={ticket.updatedAt.getTime()}
 					ticket={{
 						id: ticket.id,
+						client: ticket.client,
+						plate: ticket.plate,
+						make: ticket.make,
+						model: ticket.model,
 						km: ticket.km,
-						orderNumber: ticket.orderNumber,
+						ol: ticket.ol,
 						systemModel: ticket.systemModel,
 						softwareVersion: ticket.softwareVersion,
 						complaint: ticket.complaint,

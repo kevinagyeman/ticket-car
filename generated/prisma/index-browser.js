@@ -159,37 +159,17 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
-exports.Prisma.ClientScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  vatNumber: 'vatNumber',
-  address: 'address',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.VehicleScalarFieldEnum = {
-  id: 'id',
-  plate: 'plate',
-  make: 'make',
-  model: 'model',
-  year: 'year',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  clientId: 'clientId'
-};
-
 exports.Prisma.TicketScalarFieldEnum = {
   id: 'id',
   date: 'date',
   status: 'status',
   priority: 'priority',
+  client: 'client',
+  plate: 'plate',
+  make: 'make',
+  model: 'model',
   km: 'km',
-  orderNumber: 'orderNumber',
+  ol: 'ol',
   systemModel: 'systemModel',
   softwareVersion: 'softwareVersion',
   complaint: 'complaint',
@@ -200,7 +180,6 @@ exports.Prisma.TicketScalarFieldEnum = {
   archivedAt: 'archivedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  clientId: 'clientId',
   authorId: 'authorId',
   assigneeId: 'assigneeId'
 };
@@ -224,12 +203,6 @@ exports.Prisma.AttachmentScalarFieldEnum = {
   createdAt: 'createdAt',
   ticketId: 'ticketId',
   uploadedById: 'uploadedById'
-};
-
-exports.Prisma.TagScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color'
 };
 
 exports.Prisma.SortOrder = {
@@ -275,35 +248,19 @@ exports.Prisma.VerificationTokenOrderByRelevanceFieldEnum = {
   token: 'token'
 };
 
-exports.Prisma.ClientOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  vatNumber: 'vatNumber',
-  address: 'address',
-  notes: 'notes'
-};
-
-exports.Prisma.VehicleOrderByRelevanceFieldEnum = {
-  id: 'id',
-  plate: 'plate',
-  make: 'make',
-  model: 'model',
-  notes: 'notes',
-  clientId: 'clientId'
-};
-
 exports.Prisma.TicketOrderByRelevanceFieldEnum = {
   status: 'status',
   priority: 'priority',
-  orderNumber: 'orderNumber',
+  client: 'client',
+  plate: 'plate',
+  make: 'make',
+  model: 'model',
+  ol: 'ol',
   systemModel: 'systemModel',
   softwareVersion: 'softwareVersion',
   complaint: 'complaint',
   diagnosis: 'diagnosis',
   resolutionNote: 'resolutionNote',
-  clientId: 'clientId',
   authorId: 'authorId',
   assigneeId: 'assigneeId'
 };
@@ -323,24 +280,15 @@ exports.Prisma.AttachmentOrderByRelevanceFieldEnum = {
   uploadedById: 'uploadedById'
 };
 
-exports.Prisma.TagOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color'
-};
-
 
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Client: 'Client',
-  Vehicle: 'Vehicle',
   Ticket: 'Ticket',
   TicketEntry: 'TicketEntry',
-  Attachment: 'Attachment',
-  Tag: 'Tag'
+  Attachment: 'Attachment'
 };
 
 /**

@@ -6,34 +6,14 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export async function AppHeader({
-	active,
-	children,
-}: {
-	active: "tickets" | "clients";
-	children?: React.ReactNode;
-}) {
+export async function AppHeader({ children }: { children?: React.ReactNode }) {
 	const t = await getTranslations("nav");
-
-	const link = (isActive: boolean) =>
-		cn(
-			"px-2 py-1",
-			isActive ? "font-medium" : "text-muted-foreground hover:text-foreground",
-		);
 
 	return (
 		<header className="flex flex-wrap items-center gap-x-4 gap-y-2 border-border border-b px-3 py-2.5 sm:px-4">
-			<nav className="flex items-center gap-1 text-sm">
-				<Link className="mr-1 font-semibold" href="/">
-					ticket-car
-				</Link>
-				<Link className={link(active === "tickets")} href="/">
-					{t("tickets")}
-				</Link>
-				<Link className={link(active === "clients")} href="/clients">
-					{t("clients")}
-				</Link>
-			</nav>
+			<Link className="font-semibold" href="/">
+				ticket-car
+			</Link>
 
 			<div className="ml-auto flex items-center gap-2">
 				<Link

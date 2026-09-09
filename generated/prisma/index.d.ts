@@ -34,16 +34,6 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
 /**
- * Model Client
- * 
- */
-export type Client = $Result.DefaultSelection<Prisma.$ClientPayload>
-/**
- * Model Vehicle
- * 
- */
-export type Vehicle = $Result.DefaultSelection<Prisma.$VehiclePayload>
-/**
  * Model Ticket
  * 
  */
@@ -58,11 +48,6 @@ export type TicketEntry = $Result.DefaultSelection<Prisma.$TicketEntryPayload>
  * 
  */
 export type Attachment = $Result.DefaultSelection<Prisma.$AttachmentPayload>
-/**
- * Model Tag
- * 
- */
-export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -223,26 +208,6 @@ export class PrismaClient<
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.client`: Exposes CRUD operations for the **Client** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Clients
-    * const clients = await prisma.client.findMany()
-    * ```
-    */
-  get client(): Prisma.ClientDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.vehicle`: Exposes CRUD operations for the **Vehicle** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Vehicles
-    * const vehicles = await prisma.vehicle.findMany()
-    * ```
-    */
-  get vehicle(): Prisma.VehicleDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.ticket`: Exposes CRUD operations for the **Ticket** model.
     * Example usage:
     * ```ts
@@ -271,16 +236,6 @@ export class PrismaClient<
     * ```
     */
   get attachment(): Prisma.AttachmentDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.tag`: Exposes CRUD operations for the **Tag** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Tags
-    * const tags = await prisma.tag.findMany()
-    * ```
-    */
-  get tag(): Prisma.TagDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -726,12 +681,9 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken',
-    Client: 'Client',
-    Vehicle: 'Vehicle',
     Ticket: 'Ticket',
     TicketEntry: 'TicketEntry',
-    Attachment: 'Attachment',
-    Tag: 'Tag'
+    Attachment: 'Attachment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -750,7 +702,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "client" | "vehicle" | "ticket" | "ticketEntry" | "attachment" | "tag"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "ticket" | "ticketEntry" | "attachment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1018,138 +970,6 @@ export namespace Prisma {
           }
         }
       }
-      Client: {
-        payload: Prisma.$ClientPayload<ExtArgs>
-        fields: Prisma.ClientFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ClientFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ClientFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
-          }
-          findFirst: {
-            args: Prisma.ClientFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ClientFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
-          }
-          findMany: {
-            args: Prisma.ClientFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>[]
-          }
-          create: {
-            args: Prisma.ClientCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
-          }
-          createMany: {
-            args: Prisma.ClientCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.ClientDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
-          }
-          update: {
-            args: Prisma.ClientUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
-          }
-          deleteMany: {
-            args: Prisma.ClientDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ClientUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.ClientUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ClientPayload>
-          }
-          aggregate: {
-            args: Prisma.ClientAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateClient>
-          }
-          groupBy: {
-            args: Prisma.ClientGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ClientGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ClientCountArgs<ExtArgs>
-            result: $Utils.Optional<ClientCountAggregateOutputType> | number
-          }
-        }
-      }
-      Vehicle: {
-        payload: Prisma.$VehiclePayload<ExtArgs>
-        fields: Prisma.VehicleFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VehicleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VehicleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>
-          }
-          findFirst: {
-            args: Prisma.VehicleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VehicleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>
-          }
-          findMany: {
-            args: Prisma.VehicleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>[]
-          }
-          create: {
-            args: Prisma.VehicleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>
-          }
-          createMany: {
-            args: Prisma.VehicleCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.VehicleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>
-          }
-          update: {
-            args: Prisma.VehicleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>
-          }
-          deleteMany: {
-            args: Prisma.VehicleDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VehicleUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.VehicleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VehiclePayload>
-          }
-          aggregate: {
-            args: Prisma.VehicleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateVehicle>
-          }
-          groupBy: {
-            args: Prisma.VehicleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<VehicleGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VehicleCountArgs<ExtArgs>
-            result: $Utils.Optional<VehicleCountAggregateOutputType> | number
-          }
-        }
-      }
       Ticket: {
         payload: Prisma.$TicketPayload<ExtArgs>
         fields: Prisma.TicketFieldRefs
@@ -1348,72 +1168,6 @@ export namespace Prisma {
           }
         }
       }
-      Tag: {
-        payload: Prisma.$TagPayload<ExtArgs>
-        fields: Prisma.TagFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TagFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TagFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          findFirst: {
-            args: Prisma.TagFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TagFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          findMany: {
-            args: Prisma.TagFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
-          }
-          create: {
-            args: Prisma.TagCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          createMany: {
-            args: Prisma.TagCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.TagDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          update: {
-            args: Prisma.TagUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          deleteMany: {
-            args: Prisma.TagDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TagUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.TagUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          aggregate: {
-            args: Prisma.TagAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTag>
-          }
-          groupBy: {
-            args: Prisma.TagGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TagGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TagCountArgs<ExtArgs>
-            result: $Utils.Optional<TagCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1514,12 +1268,9 @@ export namespace Prisma {
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
-    client?: ClientOmit
-    vehicle?: VehicleOmit
     ticket?: TicketOmit
     ticketEntry?: TicketEntryOmit
     attachment?: AttachmentOmit
-    tag?: TagOmit
   }
 
   /* Types for Logging */
@@ -1672,90 +1423,15 @@ export namespace Prisma {
 
 
   /**
-   * Count Type ClientCountOutputType
-   */
-
-  export type ClientCountOutputType = {
-    vehicles: number
-    tickets: number
-  }
-
-  export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vehicles?: boolean | ClientCountOutputTypeCountVehiclesArgs
-    tickets?: boolean | ClientCountOutputTypeCountTicketsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ClientCountOutputType without action
-   */
-  export type ClientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ClientCountOutputType
-     */
-    select?: ClientCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ClientCountOutputType without action
-   */
-  export type ClientCountOutputTypeCountVehiclesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VehicleWhereInput
-  }
-
-  /**
-   * ClientCountOutputType without action
-   */
-  export type ClientCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketWhereInput
-  }
-
-
-  /**
-   * Count Type VehicleCountOutputType
-   */
-
-  export type VehicleCountOutputType = {
-    tickets: number
-  }
-
-  export type VehicleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tickets?: boolean | VehicleCountOutputTypeCountTicketsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * VehicleCountOutputType without action
-   */
-  export type VehicleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VehicleCountOutputType
-     */
-    select?: VehicleCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * VehicleCountOutputType without action
-   */
-  export type VehicleCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketWhereInput
-  }
-
-
-  /**
    * Count Type TicketCountOutputType
    */
 
   export type TicketCountOutputType = {
-    vehicles: number
-    tags: number
     entries: number
     attachments: number
   }
 
   export type TicketCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vehicles?: boolean | TicketCountOutputTypeCountVehiclesArgs
-    tags?: boolean | TicketCountOutputTypeCountTagsArgs
     entries?: boolean | TicketCountOutputTypeCountEntriesArgs
     attachments?: boolean | TicketCountOutputTypeCountAttachmentsArgs
   }
@@ -1774,20 +1450,6 @@ export namespace Prisma {
   /**
    * TicketCountOutputType without action
    */
-  export type TicketCountOutputTypeCountVehiclesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VehicleWhereInput
-  }
-
-  /**
-   * TicketCountOutputType without action
-   */
-  export type TicketCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagWhereInput
-  }
-
-  /**
-   * TicketCountOutputType without action
-   */
   export type TicketCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TicketEntryWhereInput
   }
@@ -1797,37 +1459,6 @@ export namespace Prisma {
    */
   export type TicketCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AttachmentWhereInput
-  }
-
-
-  /**
-   * Count Type TagCountOutputType
-   */
-
-  export type TagCountOutputType = {
-    tickets: number
-  }
-
-  export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tickets?: boolean | TagCountOutputTypeCountTicketsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * TagCountOutputType without action
-   */
-  export type TagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagCountOutputType
-     */
-    select?: TagCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TagCountOutputType without action
-   */
-  export type TagCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketWhereInput
   }
 
 
@@ -5775,2070 +5406,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Client
-   */
-
-  export type AggregateClient = {
-    _count: ClientCountAggregateOutputType | null
-    _min: ClientMinAggregateOutputType | null
-    _max: ClientMaxAggregateOutputType | null
-  }
-
-  export type ClientMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    phone: string | null
-    vatNumber: string | null
-    address: string | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ClientMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    phone: string | null
-    vatNumber: string | null
-    address: string | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ClientCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    phone: number
-    vatNumber: number
-    address: number
-    notes: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type ClientMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    phone?: true
-    vatNumber?: true
-    address?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ClientMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    phone?: true
-    vatNumber?: true
-    address?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ClientCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    phone?: true
-    vatNumber?: true
-    address?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type ClientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Client to aggregate.
-     */
-    where?: ClientWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Clients to fetch.
-     */
-    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ClientWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Clients from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Clients.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Clients
-    **/
-    _count?: true | ClientCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ClientMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ClientMaxAggregateInputType
-  }
-
-  export type GetClientAggregateType<T extends ClientAggregateArgs> = {
-        [P in keyof T & keyof AggregateClient]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateClient[P]>
-      : GetScalarType<T[P], AggregateClient[P]>
-  }
-
-
-
-
-  export type ClientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ClientWhereInput
-    orderBy?: ClientOrderByWithAggregationInput | ClientOrderByWithAggregationInput[]
-    by: ClientScalarFieldEnum[] | ClientScalarFieldEnum
-    having?: ClientScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ClientCountAggregateInputType | true
-    _min?: ClientMinAggregateInputType
-    _max?: ClientMaxAggregateInputType
-  }
-
-  export type ClientGroupByOutputType = {
-    id: string
-    name: string
-    email: string | null
-    phone: string | null
-    vatNumber: string | null
-    address: string | null
-    notes: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: ClientCountAggregateOutputType | null
-    _min: ClientMinAggregateOutputType | null
-    _max: ClientMaxAggregateOutputType | null
-  }
-
-  type GetClientGroupByPayload<T extends ClientGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ClientGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ClientGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ClientGroupByOutputType[P]>
-            : GetScalarType<T[P], ClientGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    phone?: boolean
-    vatNumber?: boolean
-    address?: boolean
-    notes?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    vehicles?: boolean | Client$vehiclesArgs<ExtArgs>
-    tickets?: boolean | Client$ticketsArgs<ExtArgs>
-    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["client"]>
-
-
-
-  export type ClientSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    phone?: boolean
-    vatNumber?: boolean
-    address?: boolean
-    notes?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "vatNumber" | "address" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
-  export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vehicles?: boolean | Client$vehiclesArgs<ExtArgs>
-    tickets?: boolean | Client$ticketsArgs<ExtArgs>
-    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $ClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Client"
-    objects: {
-      vehicles: Prisma.$VehiclePayload<ExtArgs>[]
-      tickets: Prisma.$TicketPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      email: string | null
-      phone: string | null
-      vatNumber: string | null
-      address: string | null
-      notes: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["client"]>
-    composites: {}
-  }
-
-  type ClientGetPayload<S extends boolean | null | undefined | ClientDefaultArgs> = $Result.GetResult<Prisma.$ClientPayload, S>
-
-  type ClientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ClientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ClientCountAggregateInputType | true
-    }
-
-  export interface ClientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Client'], meta: { name: 'Client' } }
-    /**
-     * Find zero or one Client that matches the filter.
-     * @param {ClientFindUniqueArgs} args - Arguments to find a Client
-     * @example
-     * // Get one Client
-     * const client = await prisma.client.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ClientFindUniqueArgs>(args: SelectSubset<T, ClientFindUniqueArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Client that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ClientFindUniqueOrThrowArgs} args - Arguments to find a Client
-     * @example
-     * // Get one Client
-     * const client = await prisma.client.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ClientFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Client that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientFindFirstArgs} args - Arguments to find a Client
-     * @example
-     * // Get one Client
-     * const client = await prisma.client.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ClientFindFirstArgs>(args?: SelectSubset<T, ClientFindFirstArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Client that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientFindFirstOrThrowArgs} args - Arguments to find a Client
-     * @example
-     * // Get one Client
-     * const client = await prisma.client.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ClientFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Clients that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Clients
-     * const clients = await prisma.client.findMany()
-     * 
-     * // Get first 10 Clients
-     * const clients = await prisma.client.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const clientWithIdOnly = await prisma.client.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ClientFindManyArgs>(args?: SelectSubset<T, ClientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Client.
-     * @param {ClientCreateArgs} args - Arguments to create a Client.
-     * @example
-     * // Create one Client
-     * const Client = await prisma.client.create({
-     *   data: {
-     *     // ... data to create a Client
-     *   }
-     * })
-     * 
-     */
-    create<T extends ClientCreateArgs>(args: SelectSubset<T, ClientCreateArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Clients.
-     * @param {ClientCreateManyArgs} args - Arguments to create many Clients.
-     * @example
-     * // Create many Clients
-     * const client = await prisma.client.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ClientCreateManyArgs>(args?: SelectSubset<T, ClientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Client.
-     * @param {ClientDeleteArgs} args - Arguments to delete one Client.
-     * @example
-     * // Delete one Client
-     * const Client = await prisma.client.delete({
-     *   where: {
-     *     // ... filter to delete one Client
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ClientDeleteArgs>(args: SelectSubset<T, ClientDeleteArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Client.
-     * @param {ClientUpdateArgs} args - Arguments to update one Client.
-     * @example
-     * // Update one Client
-     * const client = await prisma.client.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ClientUpdateArgs>(args: SelectSubset<T, ClientUpdateArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Clients.
-     * @param {ClientDeleteManyArgs} args - Arguments to filter Clients to delete.
-     * @example
-     * // Delete a few Clients
-     * const { count } = await prisma.client.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ClientDeleteManyArgs>(args?: SelectSubset<T, ClientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Clients.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Clients
-     * const client = await prisma.client.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ClientUpdateManyArgs>(args: SelectSubset<T, ClientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Client.
-     * @param {ClientUpsertArgs} args - Arguments to update or create a Client.
-     * @example
-     * // Update or create a Client
-     * const client = await prisma.client.upsert({
-     *   create: {
-     *     // ... data to create a Client
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Client we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ClientUpsertArgs>(args: SelectSubset<T, ClientUpsertArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Clients.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientCountArgs} args - Arguments to filter Clients to count.
-     * @example
-     * // Count the number of Clients
-     * const count = await prisma.client.count({
-     *   where: {
-     *     // ... the filter for the Clients we want to count
-     *   }
-     * })
-    **/
-    count<T extends ClientCountArgs>(
-      args?: Subset<T, ClientCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ClientCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Client.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ClientAggregateArgs>(args: Subset<T, ClientAggregateArgs>): Prisma.PrismaPromise<GetClientAggregateType<T>>
-
-    /**
-     * Group by Client.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ClientGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ClientGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ClientGroupByArgs['orderBy'] }
-        : { orderBy?: ClientGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ClientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Client model
-   */
-  readonly fields: ClientFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Client.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    vehicles<T extends Client$vehiclesArgs<ExtArgs> = {}>(args?: Subset<T, Client$vehiclesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    tickets<T extends Client$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Client$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Client model
-   */
-  interface ClientFieldRefs {
-    readonly id: FieldRef<"Client", 'String'>
-    readonly name: FieldRef<"Client", 'String'>
-    readonly email: FieldRef<"Client", 'String'>
-    readonly phone: FieldRef<"Client", 'String'>
-    readonly vatNumber: FieldRef<"Client", 'String'>
-    readonly address: FieldRef<"Client", 'String'>
-    readonly notes: FieldRef<"Client", 'String'>
-    readonly createdAt: FieldRef<"Client", 'DateTime'>
-    readonly updatedAt: FieldRef<"Client", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Client findUnique
-   */
-  export type ClientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * Filter, which Client to fetch.
-     */
-    where: ClientWhereUniqueInput
-  }
-
-  /**
-   * Client findUniqueOrThrow
-   */
-  export type ClientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * Filter, which Client to fetch.
-     */
-    where: ClientWhereUniqueInput
-  }
-
-  /**
-   * Client findFirst
-   */
-  export type ClientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * Filter, which Client to fetch.
-     */
-    where?: ClientWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Clients to fetch.
-     */
-    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Clients.
-     */
-    cursor?: ClientWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Clients from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Clients.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Clients.
-     */
-    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
-  }
-
-  /**
-   * Client findFirstOrThrow
-   */
-  export type ClientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * Filter, which Client to fetch.
-     */
-    where?: ClientWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Clients to fetch.
-     */
-    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Clients.
-     */
-    cursor?: ClientWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Clients from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Clients.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Clients.
-     */
-    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
-  }
-
-  /**
-   * Client findMany
-   */
-  export type ClientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * Filter, which Clients to fetch.
-     */
-    where?: ClientWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Clients to fetch.
-     */
-    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Clients.
-     */
-    cursor?: ClientWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Clients from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Clients.
-     */
-    skip?: number
-    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
-  }
-
-  /**
-   * Client create
-   */
-  export type ClientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Client.
-     */
-    data: XOR<ClientCreateInput, ClientUncheckedCreateInput>
-  }
-
-  /**
-   * Client createMany
-   */
-  export type ClientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Clients.
-     */
-    data: ClientCreateManyInput | ClientCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Client update
-   */
-  export type ClientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Client.
-     */
-    data: XOR<ClientUpdateInput, ClientUncheckedUpdateInput>
-    /**
-     * Choose, which Client to update.
-     */
-    where: ClientWhereUniqueInput
-  }
-
-  /**
-   * Client updateMany
-   */
-  export type ClientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Clients.
-     */
-    data: XOR<ClientUpdateManyMutationInput, ClientUncheckedUpdateManyInput>
-    /**
-     * Filter which Clients to update
-     */
-    where?: ClientWhereInput
-    /**
-     * Limit how many Clients to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Client upsert
-   */
-  export type ClientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Client to update in case it exists.
-     */
-    where: ClientWhereUniqueInput
-    /**
-     * In case the Client found by the `where` argument doesn't exist, create a new Client with this data.
-     */
-    create: XOR<ClientCreateInput, ClientUncheckedCreateInput>
-    /**
-     * In case the Client was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ClientUpdateInput, ClientUncheckedUpdateInput>
-  }
-
-  /**
-   * Client delete
-   */
-  export type ClientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    /**
-     * Filter which Client to delete.
-     */
-    where: ClientWhereUniqueInput
-  }
-
-  /**
-   * Client deleteMany
-   */
-  export type ClientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Clients to delete
-     */
-    where?: ClientWhereInput
-    /**
-     * Limit how many Clients to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Client.vehicles
-   */
-  export type Client$vehiclesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    where?: VehicleWhereInput
-    orderBy?: VehicleOrderByWithRelationInput | VehicleOrderByWithRelationInput[]
-    cursor?: VehicleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VehicleScalarFieldEnum | VehicleScalarFieldEnum[]
-  }
-
-  /**
-   * Client.tickets
-   */
-  export type Client$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ticket
-     */
-    select?: TicketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ticket
-     */
-    omit?: TicketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketInclude<ExtArgs> | null
-    where?: TicketWhereInput
-    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
-    cursor?: TicketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
-  }
-
-  /**
-   * Client without action
-   */
-  export type ClientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Vehicle
-   */
-
-  export type AggregateVehicle = {
-    _count: VehicleCountAggregateOutputType | null
-    _avg: VehicleAvgAggregateOutputType | null
-    _sum: VehicleSumAggregateOutputType | null
-    _min: VehicleMinAggregateOutputType | null
-    _max: VehicleMaxAggregateOutputType | null
-  }
-
-  export type VehicleAvgAggregateOutputType = {
-    year: number | null
-  }
-
-  export type VehicleSumAggregateOutputType = {
-    year: number | null
-  }
-
-  export type VehicleMinAggregateOutputType = {
-    id: string | null
-    plate: string | null
-    make: string | null
-    model: string | null
-    year: number | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    clientId: string | null
-  }
-
-  export type VehicleMaxAggregateOutputType = {
-    id: string | null
-    plate: string | null
-    make: string | null
-    model: string | null
-    year: number | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    clientId: string | null
-  }
-
-  export type VehicleCountAggregateOutputType = {
-    id: number
-    plate: number
-    make: number
-    model: number
-    year: number
-    notes: number
-    createdAt: number
-    updatedAt: number
-    clientId: number
-    _all: number
-  }
-
-
-  export type VehicleAvgAggregateInputType = {
-    year?: true
-  }
-
-  export type VehicleSumAggregateInputType = {
-    year?: true
-  }
-
-  export type VehicleMinAggregateInputType = {
-    id?: true
-    plate?: true
-    make?: true
-    model?: true
-    year?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    clientId?: true
-  }
-
-  export type VehicleMaxAggregateInputType = {
-    id?: true
-    plate?: true
-    make?: true
-    model?: true
-    year?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    clientId?: true
-  }
-
-  export type VehicleCountAggregateInputType = {
-    id?: true
-    plate?: true
-    make?: true
-    model?: true
-    year?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    clientId?: true
-    _all?: true
-  }
-
-  export type VehicleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Vehicle to aggregate.
-     */
-    where?: VehicleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vehicles to fetch.
-     */
-    orderBy?: VehicleOrderByWithRelationInput | VehicleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VehicleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vehicles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vehicles.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Vehicles
-    **/
-    _count?: true | VehicleCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: VehicleAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VehicleSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VehicleMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VehicleMaxAggregateInputType
-  }
-
-  export type GetVehicleAggregateType<T extends VehicleAggregateArgs> = {
-        [P in keyof T & keyof AggregateVehicle]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVehicle[P]>
-      : GetScalarType<T[P], AggregateVehicle[P]>
-  }
-
-
-
-
-  export type VehicleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VehicleWhereInput
-    orderBy?: VehicleOrderByWithAggregationInput | VehicleOrderByWithAggregationInput[]
-    by: VehicleScalarFieldEnum[] | VehicleScalarFieldEnum
-    having?: VehicleScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VehicleCountAggregateInputType | true
-    _avg?: VehicleAvgAggregateInputType
-    _sum?: VehicleSumAggregateInputType
-    _min?: VehicleMinAggregateInputType
-    _max?: VehicleMaxAggregateInputType
-  }
-
-  export type VehicleGroupByOutputType = {
-    id: string
-    plate: string
-    make: string | null
-    model: string | null
-    year: number | null
-    notes: string | null
-    createdAt: Date
-    updatedAt: Date
-    clientId: string
-    _count: VehicleCountAggregateOutputType | null
-    _avg: VehicleAvgAggregateOutputType | null
-    _sum: VehicleSumAggregateOutputType | null
-    _min: VehicleMinAggregateOutputType | null
-    _max: VehicleMaxAggregateOutputType | null
-  }
-
-  type GetVehicleGroupByPayload<T extends VehicleGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VehicleGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VehicleGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VehicleGroupByOutputType[P]>
-            : GetScalarType<T[P], VehicleGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VehicleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    plate?: boolean
-    make?: boolean
-    model?: boolean
-    year?: boolean
-    notes?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    clientId?: boolean
-    client?: boolean | ClientDefaultArgs<ExtArgs>
-    tickets?: boolean | Vehicle$ticketsArgs<ExtArgs>
-    _count?: boolean | VehicleCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["vehicle"]>
-
-
-
-  export type VehicleSelectScalar = {
-    id?: boolean
-    plate?: boolean
-    make?: boolean
-    model?: boolean
-    year?: boolean
-    notes?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    clientId?: boolean
-  }
-
-  export type VehicleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "plate" | "make" | "model" | "year" | "notes" | "createdAt" | "updatedAt" | "clientId", ExtArgs["result"]["vehicle"]>
-  export type VehicleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    client?: boolean | ClientDefaultArgs<ExtArgs>
-    tickets?: boolean | Vehicle$ticketsArgs<ExtArgs>
-    _count?: boolean | VehicleCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $VehiclePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Vehicle"
-    objects: {
-      client: Prisma.$ClientPayload<ExtArgs>
-      tickets: Prisma.$TicketPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      plate: string
-      make: string | null
-      model: string | null
-      year: number | null
-      notes: string | null
-      createdAt: Date
-      updatedAt: Date
-      clientId: string
-    }, ExtArgs["result"]["vehicle"]>
-    composites: {}
-  }
-
-  type VehicleGetPayload<S extends boolean | null | undefined | VehicleDefaultArgs> = $Result.GetResult<Prisma.$VehiclePayload, S>
-
-  type VehicleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VehicleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: VehicleCountAggregateInputType | true
-    }
-
-  export interface VehicleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vehicle'], meta: { name: 'Vehicle' } }
-    /**
-     * Find zero or one Vehicle that matches the filter.
-     * @param {VehicleFindUniqueArgs} args - Arguments to find a Vehicle
-     * @example
-     * // Get one Vehicle
-     * const vehicle = await prisma.vehicle.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends VehicleFindUniqueArgs>(args: SelectSubset<T, VehicleFindUniqueArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Vehicle that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {VehicleFindUniqueOrThrowArgs} args - Arguments to find a Vehicle
-     * @example
-     * // Get one Vehicle
-     * const vehicle = await prisma.vehicle.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends VehicleFindUniqueOrThrowArgs>(args: SelectSubset<T, VehicleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Vehicle that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleFindFirstArgs} args - Arguments to find a Vehicle
-     * @example
-     * // Get one Vehicle
-     * const vehicle = await prisma.vehicle.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends VehicleFindFirstArgs>(args?: SelectSubset<T, VehicleFindFirstArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Vehicle that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleFindFirstOrThrowArgs} args - Arguments to find a Vehicle
-     * @example
-     * // Get one Vehicle
-     * const vehicle = await prisma.vehicle.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends VehicleFindFirstOrThrowArgs>(args?: SelectSubset<T, VehicleFindFirstOrThrowArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Vehicles that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Vehicles
-     * const vehicles = await prisma.vehicle.findMany()
-     * 
-     * // Get first 10 Vehicles
-     * const vehicles = await prisma.vehicle.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const vehicleWithIdOnly = await prisma.vehicle.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends VehicleFindManyArgs>(args?: SelectSubset<T, VehicleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Vehicle.
-     * @param {VehicleCreateArgs} args - Arguments to create a Vehicle.
-     * @example
-     * // Create one Vehicle
-     * const Vehicle = await prisma.vehicle.create({
-     *   data: {
-     *     // ... data to create a Vehicle
-     *   }
-     * })
-     * 
-     */
-    create<T extends VehicleCreateArgs>(args: SelectSubset<T, VehicleCreateArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Vehicles.
-     * @param {VehicleCreateManyArgs} args - Arguments to create many Vehicles.
-     * @example
-     * // Create many Vehicles
-     * const vehicle = await prisma.vehicle.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends VehicleCreateManyArgs>(args?: SelectSubset<T, VehicleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Vehicle.
-     * @param {VehicleDeleteArgs} args - Arguments to delete one Vehicle.
-     * @example
-     * // Delete one Vehicle
-     * const Vehicle = await prisma.vehicle.delete({
-     *   where: {
-     *     // ... filter to delete one Vehicle
-     *   }
-     * })
-     * 
-     */
-    delete<T extends VehicleDeleteArgs>(args: SelectSubset<T, VehicleDeleteArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Vehicle.
-     * @param {VehicleUpdateArgs} args - Arguments to update one Vehicle.
-     * @example
-     * // Update one Vehicle
-     * const vehicle = await prisma.vehicle.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends VehicleUpdateArgs>(args: SelectSubset<T, VehicleUpdateArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Vehicles.
-     * @param {VehicleDeleteManyArgs} args - Arguments to filter Vehicles to delete.
-     * @example
-     * // Delete a few Vehicles
-     * const { count } = await prisma.vehicle.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends VehicleDeleteManyArgs>(args?: SelectSubset<T, VehicleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Vehicles.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Vehicles
-     * const vehicle = await prisma.vehicle.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends VehicleUpdateManyArgs>(args: SelectSubset<T, VehicleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Vehicle.
-     * @param {VehicleUpsertArgs} args - Arguments to update or create a Vehicle.
-     * @example
-     * // Update or create a Vehicle
-     * const vehicle = await prisma.vehicle.upsert({
-     *   create: {
-     *     // ... data to create a Vehicle
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Vehicle we want to update
-     *   }
-     * })
-     */
-    upsert<T extends VehicleUpsertArgs>(args: SelectSubset<T, VehicleUpsertArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Vehicles.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleCountArgs} args - Arguments to filter Vehicles to count.
-     * @example
-     * // Count the number of Vehicles
-     * const count = await prisma.vehicle.count({
-     *   where: {
-     *     // ... the filter for the Vehicles we want to count
-     *   }
-     * })
-    **/
-    count<T extends VehicleCountArgs>(
-      args?: Subset<T, VehicleCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VehicleCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Vehicle.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VehicleAggregateArgs>(args: Subset<T, VehicleAggregateArgs>): Prisma.PrismaPromise<GetVehicleAggregateType<T>>
-
-    /**
-     * Group by Vehicle.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VehicleGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VehicleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VehicleGroupByArgs['orderBy'] }
-        : { orderBy?: VehicleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VehicleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVehicleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Vehicle model
-   */
-  readonly fields: VehicleFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Vehicle.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    tickets<T extends Vehicle$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Vehicle$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Vehicle model
-   */
-  interface VehicleFieldRefs {
-    readonly id: FieldRef<"Vehicle", 'String'>
-    readonly plate: FieldRef<"Vehicle", 'String'>
-    readonly make: FieldRef<"Vehicle", 'String'>
-    readonly model: FieldRef<"Vehicle", 'String'>
-    readonly year: FieldRef<"Vehicle", 'Int'>
-    readonly notes: FieldRef<"Vehicle", 'String'>
-    readonly createdAt: FieldRef<"Vehicle", 'DateTime'>
-    readonly updatedAt: FieldRef<"Vehicle", 'DateTime'>
-    readonly clientId: FieldRef<"Vehicle", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Vehicle findUnique
-   */
-  export type VehicleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * Filter, which Vehicle to fetch.
-     */
-    where: VehicleWhereUniqueInput
-  }
-
-  /**
-   * Vehicle findUniqueOrThrow
-   */
-  export type VehicleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * Filter, which Vehicle to fetch.
-     */
-    where: VehicleWhereUniqueInput
-  }
-
-  /**
-   * Vehicle findFirst
-   */
-  export type VehicleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * Filter, which Vehicle to fetch.
-     */
-    where?: VehicleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vehicles to fetch.
-     */
-    orderBy?: VehicleOrderByWithRelationInput | VehicleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Vehicles.
-     */
-    cursor?: VehicleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vehicles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vehicles.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Vehicles.
-     */
-    distinct?: VehicleScalarFieldEnum | VehicleScalarFieldEnum[]
-  }
-
-  /**
-   * Vehicle findFirstOrThrow
-   */
-  export type VehicleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * Filter, which Vehicle to fetch.
-     */
-    where?: VehicleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vehicles to fetch.
-     */
-    orderBy?: VehicleOrderByWithRelationInput | VehicleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Vehicles.
-     */
-    cursor?: VehicleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vehicles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vehicles.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Vehicles.
-     */
-    distinct?: VehicleScalarFieldEnum | VehicleScalarFieldEnum[]
-  }
-
-  /**
-   * Vehicle findMany
-   */
-  export type VehicleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * Filter, which Vehicles to fetch.
-     */
-    where?: VehicleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vehicles to fetch.
-     */
-    orderBy?: VehicleOrderByWithRelationInput | VehicleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Vehicles.
-     */
-    cursor?: VehicleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vehicles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vehicles.
-     */
-    skip?: number
-    distinct?: VehicleScalarFieldEnum | VehicleScalarFieldEnum[]
-  }
-
-  /**
-   * Vehicle create
-   */
-  export type VehicleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Vehicle.
-     */
-    data: XOR<VehicleCreateInput, VehicleUncheckedCreateInput>
-  }
-
-  /**
-   * Vehicle createMany
-   */
-  export type VehicleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Vehicles.
-     */
-    data: VehicleCreateManyInput | VehicleCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Vehicle update
-   */
-  export type VehicleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Vehicle.
-     */
-    data: XOR<VehicleUpdateInput, VehicleUncheckedUpdateInput>
-    /**
-     * Choose, which Vehicle to update.
-     */
-    where: VehicleWhereUniqueInput
-  }
-
-  /**
-   * Vehicle updateMany
-   */
-  export type VehicleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Vehicles.
-     */
-    data: XOR<VehicleUpdateManyMutationInput, VehicleUncheckedUpdateManyInput>
-    /**
-     * Filter which Vehicles to update
-     */
-    where?: VehicleWhereInput
-    /**
-     * Limit how many Vehicles to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Vehicle upsert
-   */
-  export type VehicleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Vehicle to update in case it exists.
-     */
-    where: VehicleWhereUniqueInput
-    /**
-     * In case the Vehicle found by the `where` argument doesn't exist, create a new Vehicle with this data.
-     */
-    create: XOR<VehicleCreateInput, VehicleUncheckedCreateInput>
-    /**
-     * In case the Vehicle was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VehicleUpdateInput, VehicleUncheckedUpdateInput>
-  }
-
-  /**
-   * Vehicle delete
-   */
-  export type VehicleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    /**
-     * Filter which Vehicle to delete.
-     */
-    where: VehicleWhereUniqueInput
-  }
-
-  /**
-   * Vehicle deleteMany
-   */
-  export type VehicleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Vehicles to delete
-     */
-    where?: VehicleWhereInput
-    /**
-     * Limit how many Vehicles to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Vehicle.tickets
-   */
-  export type Vehicle$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ticket
-     */
-    select?: TicketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ticket
-     */
-    omit?: TicketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketInclude<ExtArgs> | null
-    where?: TicketWhereInput
-    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
-    cursor?: TicketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
-  }
-
-  /**
-   * Vehicle without action
-   */
-  export type VehicleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Ticket
    */
 
@@ -7865,8 +5432,12 @@ export namespace Prisma {
     date: Date | null
     status: string | null
     priority: string | null
+    client: string | null
+    plate: string | null
+    make: string | null
+    model: string | null
     km: number | null
-    orderNumber: string | null
+    ol: string | null
     systemModel: string | null
     softwareVersion: string | null
     complaint: string | null
@@ -7877,7 +5448,6 @@ export namespace Prisma {
     archivedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
-    clientId: string | null
     authorId: string | null
     assigneeId: string | null
   }
@@ -7887,8 +5457,12 @@ export namespace Prisma {
     date: Date | null
     status: string | null
     priority: string | null
+    client: string | null
+    plate: string | null
+    make: string | null
+    model: string | null
     km: number | null
-    orderNumber: string | null
+    ol: string | null
     systemModel: string | null
     softwareVersion: string | null
     complaint: string | null
@@ -7899,7 +5473,6 @@ export namespace Prisma {
     archivedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
-    clientId: string | null
     authorId: string | null
     assigneeId: string | null
   }
@@ -7909,8 +5482,12 @@ export namespace Prisma {
     date: number
     status: number
     priority: number
+    client: number
+    plate: number
+    make: number
+    model: number
     km: number
-    orderNumber: number
+    ol: number
     systemModel: number
     softwareVersion: number
     complaint: number
@@ -7921,7 +5498,6 @@ export namespace Prisma {
     archivedAt: number
     createdAt: number
     updatedAt: number
-    clientId: number
     authorId: number
     assigneeId: number
     _all: number
@@ -7943,8 +5519,12 @@ export namespace Prisma {
     date?: true
     status?: true
     priority?: true
+    client?: true
+    plate?: true
+    make?: true
+    model?: true
     km?: true
-    orderNumber?: true
+    ol?: true
     systemModel?: true
     softwareVersion?: true
     complaint?: true
@@ -7955,7 +5535,6 @@ export namespace Prisma {
     archivedAt?: true
     createdAt?: true
     updatedAt?: true
-    clientId?: true
     authorId?: true
     assigneeId?: true
   }
@@ -7965,8 +5544,12 @@ export namespace Prisma {
     date?: true
     status?: true
     priority?: true
+    client?: true
+    plate?: true
+    make?: true
+    model?: true
     km?: true
-    orderNumber?: true
+    ol?: true
     systemModel?: true
     softwareVersion?: true
     complaint?: true
@@ -7977,7 +5560,6 @@ export namespace Prisma {
     archivedAt?: true
     createdAt?: true
     updatedAt?: true
-    clientId?: true
     authorId?: true
     assigneeId?: true
   }
@@ -7987,8 +5569,12 @@ export namespace Prisma {
     date?: true
     status?: true
     priority?: true
+    client?: true
+    plate?: true
+    make?: true
+    model?: true
     km?: true
-    orderNumber?: true
+    ol?: true
     systemModel?: true
     softwareVersion?: true
     complaint?: true
@@ -7999,7 +5585,6 @@ export namespace Prisma {
     archivedAt?: true
     createdAt?: true
     updatedAt?: true
-    clientId?: true
     authorId?: true
     assigneeId?: true
     _all?: true
@@ -8096,8 +5681,12 @@ export namespace Prisma {
     date: Date
     status: string
     priority: string
+    client: string | null
+    plate: string | null
+    make: string | null
+    model: string | null
     km: number | null
-    orderNumber: string | null
+    ol: string | null
     systemModel: string | null
     softwareVersion: string | null
     complaint: string | null
@@ -8108,7 +5697,6 @@ export namespace Prisma {
     archivedAt: Date | null
     createdAt: Date
     updatedAt: Date
-    clientId: string
     authorId: string
     assigneeId: string | null
     _count: TicketCountAggregateOutputType | null
@@ -8137,8 +5725,12 @@ export namespace Prisma {
     date?: boolean
     status?: boolean
     priority?: boolean
+    client?: boolean
+    plate?: boolean
+    make?: boolean
+    model?: boolean
     km?: boolean
-    orderNumber?: boolean
+    ol?: boolean
     systemModel?: boolean
     softwareVersion?: boolean
     complaint?: boolean
@@ -8149,14 +5741,10 @@ export namespace Prisma {
     archivedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    clientId?: boolean
     authorId?: boolean
     assigneeId?: boolean
-    client?: boolean | ClientDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Ticket$assigneeArgs<ExtArgs>
-    vehicles?: boolean | Ticket$vehiclesArgs<ExtArgs>
-    tags?: boolean | Ticket$tagsArgs<ExtArgs>
     entries?: boolean | Ticket$entriesArgs<ExtArgs>
     attachments?: boolean | Ticket$attachmentsArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
@@ -8169,8 +5757,12 @@ export namespace Prisma {
     date?: boolean
     status?: boolean
     priority?: boolean
+    client?: boolean
+    plate?: boolean
+    make?: boolean
+    model?: boolean
     km?: boolean
-    orderNumber?: boolean
+    ol?: boolean
     systemModel?: boolean
     softwareVersion?: boolean
     complaint?: boolean
@@ -8181,18 +5773,14 @@ export namespace Prisma {
     archivedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    clientId?: boolean
     authorId?: boolean
     assigneeId?: boolean
   }
 
-  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "status" | "priority" | "km" | "orderNumber" | "systemModel" | "softwareVersion" | "complaint" | "diagnosis" | "resolutionNote" | "openedAt" | "closedAt" | "archivedAt" | "createdAt" | "updatedAt" | "clientId" | "authorId" | "assigneeId", ExtArgs["result"]["ticket"]>
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "status" | "priority" | "client" | "plate" | "make" | "model" | "km" | "ol" | "systemModel" | "softwareVersion" | "complaint" | "diagnosis" | "resolutionNote" | "openedAt" | "closedAt" | "archivedAt" | "createdAt" | "updatedAt" | "authorId" | "assigneeId", ExtArgs["result"]["ticket"]>
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    client?: boolean | ClientDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Ticket$assigneeArgs<ExtArgs>
-    vehicles?: boolean | Ticket$vehiclesArgs<ExtArgs>
-    tags?: boolean | Ticket$tagsArgs<ExtArgs>
     entries?: boolean | Ticket$entriesArgs<ExtArgs>
     attachments?: boolean | Ticket$attachmentsArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
@@ -8201,11 +5789,8 @@ export namespace Prisma {
   export type $TicketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ticket"
     objects: {
-      client: Prisma.$ClientPayload<ExtArgs>
       author: Prisma.$UserPayload<ExtArgs>
       assignee: Prisma.$UserPayload<ExtArgs> | null
-      vehicles: Prisma.$VehiclePayload<ExtArgs>[]
-      tags: Prisma.$TagPayload<ExtArgs>[]
       entries: Prisma.$TicketEntryPayload<ExtArgs>[]
       attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     }
@@ -8214,8 +5799,12 @@ export namespace Prisma {
       date: Date
       status: string
       priority: string
+      client: string | null
+      plate: string | null
+      make: string | null
+      model: string | null
       km: number | null
-      orderNumber: string | null
+      ol: string | null
       systemModel: string | null
       softwareVersion: string | null
       complaint: string | null
@@ -8226,7 +5815,6 @@ export namespace Prisma {
       archivedAt: Date | null
       createdAt: Date
       updatedAt: Date
-      clientId: string
       authorId: string
       assigneeId: string | null
     }, ExtArgs["result"]["ticket"]>
@@ -8569,11 +6157,8 @@ export namespace Prisma {
    */
   export interface Prisma__TicketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assignee<T extends Ticket$assigneeArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$assigneeArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    vehicles<T extends Ticket$vehiclesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$vehiclesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    tags<T extends Ticket$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     entries<T extends Ticket$entriesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     attachments<T extends Ticket$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -8609,8 +6194,12 @@ export namespace Prisma {
     readonly date: FieldRef<"Ticket", 'DateTime'>
     readonly status: FieldRef<"Ticket", 'String'>
     readonly priority: FieldRef<"Ticket", 'String'>
+    readonly client: FieldRef<"Ticket", 'String'>
+    readonly plate: FieldRef<"Ticket", 'String'>
+    readonly make: FieldRef<"Ticket", 'String'>
+    readonly model: FieldRef<"Ticket", 'String'>
     readonly km: FieldRef<"Ticket", 'Int'>
-    readonly orderNumber: FieldRef<"Ticket", 'String'>
+    readonly ol: FieldRef<"Ticket", 'String'>
     readonly systemModel: FieldRef<"Ticket", 'String'>
     readonly softwareVersion: FieldRef<"Ticket", 'String'>
     readonly complaint: FieldRef<"Ticket", 'String'>
@@ -8621,7 +6210,6 @@ export namespace Prisma {
     readonly archivedAt: FieldRef<"Ticket", 'DateTime'>
     readonly createdAt: FieldRef<"Ticket", 'DateTime'>
     readonly updatedAt: FieldRef<"Ticket", 'DateTime'>
-    readonly clientId: FieldRef<"Ticket", 'String'>
     readonly authorId: FieldRef<"Ticket", 'String'>
     readonly assigneeId: FieldRef<"Ticket", 'String'>
   }
@@ -8983,54 +6571,6 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
-  }
-
-  /**
-   * Ticket.vehicles
-   */
-  export type Ticket$vehiclesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vehicle
-     */
-    omit?: VehicleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    where?: VehicleWhereInput
-    orderBy?: VehicleOrderByWithRelationInput | VehicleOrderByWithRelationInput[]
-    cursor?: VehicleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VehicleScalarFieldEnum | VehicleScalarFieldEnum[]
-  }
-
-  /**
-   * Ticket.tags
-   */
-  export type Ticket$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    where?: TagWhereInput
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    cursor?: TagWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
   }
 
   /**
@@ -11094,939 +8634,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Tag
-   */
-
-  export type AggregateTag = {
-    _count: TagCountAggregateOutputType | null
-    _min: TagMinAggregateOutputType | null
-    _max: TagMaxAggregateOutputType | null
-  }
-
-  export type TagMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    color: string | null
-  }
-
-  export type TagMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    color: string | null
-  }
-
-  export type TagCountAggregateOutputType = {
-    id: number
-    name: number
-    color: number
-    _all: number
-  }
-
-
-  export type TagMinAggregateInputType = {
-    id?: true
-    name?: true
-    color?: true
-  }
-
-  export type TagMaxAggregateInputType = {
-    id?: true
-    name?: true
-    color?: true
-  }
-
-  export type TagCountAggregateInputType = {
-    id?: true
-    name?: true
-    color?: true
-    _all?: true
-  }
-
-  export type TagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Tag to aggregate.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Tags
-    **/
-    _count?: true | TagCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TagMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TagMaxAggregateInputType
-  }
-
-  export type GetTagAggregateType<T extends TagAggregateArgs> = {
-        [P in keyof T & keyof AggregateTag]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTag[P]>
-      : GetScalarType<T[P], AggregateTag[P]>
-  }
-
-
-
-
-  export type TagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagWhereInput
-    orderBy?: TagOrderByWithAggregationInput | TagOrderByWithAggregationInput[]
-    by: TagScalarFieldEnum[] | TagScalarFieldEnum
-    having?: TagScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TagCountAggregateInputType | true
-    _min?: TagMinAggregateInputType
-    _max?: TagMaxAggregateInputType
-  }
-
-  export type TagGroupByOutputType = {
-    id: string
-    name: string
-    color: string | null
-    _count: TagCountAggregateOutputType | null
-    _min: TagMinAggregateOutputType | null
-    _max: TagMaxAggregateOutputType | null
-  }
-
-  type GetTagGroupByPayload<T extends TagGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TagGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TagGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TagGroupByOutputType[P]>
-            : GetScalarType<T[P], TagGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    color?: boolean
-    tickets?: boolean | Tag$ticketsArgs<ExtArgs>
-    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tag"]>
-
-
-
-  export type TagSelectScalar = {
-    id?: boolean
-    name?: boolean
-    color?: boolean
-  }
-
-  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color", ExtArgs["result"]["tag"]>
-  export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tickets?: boolean | Tag$ticketsArgs<ExtArgs>
-    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Tag"
-    objects: {
-      tickets: Prisma.$TicketPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      color: string | null
-    }, ExtArgs["result"]["tag"]>
-    composites: {}
-  }
-
-  type TagGetPayload<S extends boolean | null | undefined | TagDefaultArgs> = $Result.GetResult<Prisma.$TagPayload, S>
-
-  type TagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TagCountAggregateInputType | true
-    }
-
-  export interface TagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tag'], meta: { name: 'Tag' } }
-    /**
-     * Find zero or one Tag that matches the filter.
-     * @param {TagFindUniqueArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TagFindUniqueArgs>(args: SelectSubset<T, TagFindUniqueArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Tag that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TagFindUniqueOrThrowArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TagFindUniqueOrThrowArgs>(args: SelectSubset<T, TagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Tag that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagFindFirstArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TagFindFirstArgs>(args?: SelectSubset<T, TagFindFirstArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Tag that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagFindFirstOrThrowArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TagFindFirstOrThrowArgs>(args?: SelectSubset<T, TagFindFirstOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Tags that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Tags
-     * const tags = await prisma.tag.findMany()
-     * 
-     * // Get first 10 Tags
-     * const tags = await prisma.tag.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TagFindManyArgs>(args?: SelectSubset<T, TagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Tag.
-     * @param {TagCreateArgs} args - Arguments to create a Tag.
-     * @example
-     * // Create one Tag
-     * const Tag = await prisma.tag.create({
-     *   data: {
-     *     // ... data to create a Tag
-     *   }
-     * })
-     * 
-     */
-    create<T extends TagCreateArgs>(args: SelectSubset<T, TagCreateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Tags.
-     * @param {TagCreateManyArgs} args - Arguments to create many Tags.
-     * @example
-     * // Create many Tags
-     * const tag = await prisma.tag.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TagCreateManyArgs>(args?: SelectSubset<T, TagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Tag.
-     * @param {TagDeleteArgs} args - Arguments to delete one Tag.
-     * @example
-     * // Delete one Tag
-     * const Tag = await prisma.tag.delete({
-     *   where: {
-     *     // ... filter to delete one Tag
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TagDeleteArgs>(args: SelectSubset<T, TagDeleteArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Tag.
-     * @param {TagUpdateArgs} args - Arguments to update one Tag.
-     * @example
-     * // Update one Tag
-     * const tag = await prisma.tag.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TagUpdateArgs>(args: SelectSubset<T, TagUpdateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Tags.
-     * @param {TagDeleteManyArgs} args - Arguments to filter Tags to delete.
-     * @example
-     * // Delete a few Tags
-     * const { count } = await prisma.tag.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TagDeleteManyArgs>(args?: SelectSubset<T, TagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Tags.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Tags
-     * const tag = await prisma.tag.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TagUpdateManyArgs>(args: SelectSubset<T, TagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Tag.
-     * @param {TagUpsertArgs} args - Arguments to update or create a Tag.
-     * @example
-     * // Update or create a Tag
-     * const tag = await prisma.tag.upsert({
-     *   create: {
-     *     // ... data to create a Tag
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Tag we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TagUpsertArgs>(args: SelectSubset<T, TagUpsertArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Tags.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagCountArgs} args - Arguments to filter Tags to count.
-     * @example
-     * // Count the number of Tags
-     * const count = await prisma.tag.count({
-     *   where: {
-     *     // ... the filter for the Tags we want to count
-     *   }
-     * })
-    **/
-    count<T extends TagCountArgs>(
-      args?: Subset<T, TagCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TagCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Tag.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TagAggregateArgs>(args: Subset<T, TagAggregateArgs>): Prisma.PrismaPromise<GetTagAggregateType<T>>
-
-    /**
-     * Group by Tag.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TagGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TagGroupByArgs['orderBy'] }
-        : { orderBy?: TagGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Tag model
-   */
-  readonly fields: TagFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Tag.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    tickets<T extends Tag$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Tag model
-   */
-  interface TagFieldRefs {
-    readonly id: FieldRef<"Tag", 'String'>
-    readonly name: FieldRef<"Tag", 'String'>
-    readonly color: FieldRef<"Tag", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Tag findUnique
-   */
-  export type TagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag findUniqueOrThrow
-   */
-  export type TagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag findFirst
-   */
-  export type TagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Tags.
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Tags.
-     */
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Tag findFirstOrThrow
-   */
-  export type TagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Tags.
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Tags.
-     */
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Tag findMany
-   */
-  export type TagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tags to fetch.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Tags.
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Tag create
-   */
-  export type TagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Tag.
-     */
-    data: XOR<TagCreateInput, TagUncheckedCreateInput>
-  }
-
-  /**
-   * Tag createMany
-   */
-  export type TagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Tags.
-     */
-    data: TagCreateManyInput | TagCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Tag update
-   */
-  export type TagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Tag.
-     */
-    data: XOR<TagUpdateInput, TagUncheckedUpdateInput>
-    /**
-     * Choose, which Tag to update.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag updateMany
-   */
-  export type TagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Tags.
-     */
-    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
-    /**
-     * Filter which Tags to update
-     */
-    where?: TagWhereInput
-    /**
-     * Limit how many Tags to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Tag upsert
-   */
-  export type TagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Tag to update in case it exists.
-     */
-    where: TagWhereUniqueInput
-    /**
-     * In case the Tag found by the `where` argument doesn't exist, create a new Tag with this data.
-     */
-    create: XOR<TagCreateInput, TagUncheckedCreateInput>
-    /**
-     * In case the Tag was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TagUpdateInput, TagUncheckedUpdateInput>
-  }
-
-  /**
-   * Tag delete
-   */
-  export type TagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter which Tag to delete.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag deleteMany
-   */
-  export type TagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Tags to delete
-     */
-    where?: TagWhereInput
-    /**
-     * Limit how many Tags to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Tag.tickets
-   */
-  export type Tag$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ticket
-     */
-    select?: TicketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ticket
-     */
-    omit?: TicketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketInclude<ExtArgs> | null
-    where?: TicketWhereInput
-    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
-    cursor?: TicketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
-  }
-
-  /**
-   * Tag without action
-   */
-  export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -12090,43 +8697,17 @@ export namespace Prisma {
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
-  export const ClientScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email',
-    phone: 'phone',
-    vatNumber: 'vatNumber',
-    address: 'address',
-    notes: 'notes',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
-
-
-  export const VehicleScalarFieldEnum: {
-    id: 'id',
-    plate: 'plate',
-    make: 'make',
-    model: 'model',
-    year: 'year',
-    notes: 'notes',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    clientId: 'clientId'
-  };
-
-  export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
-
-
   export const TicketScalarFieldEnum: {
     id: 'id',
     date: 'date',
     status: 'status',
     priority: 'priority',
+    client: 'client',
+    plate: 'plate',
+    make: 'make',
+    model: 'model',
     km: 'km',
-    orderNumber: 'orderNumber',
+    ol: 'ol',
     systemModel: 'systemModel',
     softwareVersion: 'softwareVersion',
     complaint: 'complaint',
@@ -12137,7 +8718,6 @@ export namespace Prisma {
     archivedAt: 'archivedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    clientId: 'clientId',
     authorId: 'authorId',
     assigneeId: 'assigneeId'
   };
@@ -12170,15 +8750,6 @@ export namespace Prisma {
   };
 
   export type AttachmentScalarFieldEnum = (typeof AttachmentScalarFieldEnum)[keyof typeof AttachmentScalarFieldEnum]
-
-
-  export const TagScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    color: 'color'
-  };
-
-  export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12242,41 +8813,19 @@ export namespace Prisma {
   export type VerificationTokenOrderByRelevanceFieldEnum = (typeof VerificationTokenOrderByRelevanceFieldEnum)[keyof typeof VerificationTokenOrderByRelevanceFieldEnum]
 
 
-  export const ClientOrderByRelevanceFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email',
-    phone: 'phone',
-    vatNumber: 'vatNumber',
-    address: 'address',
-    notes: 'notes'
-  };
-
-  export type ClientOrderByRelevanceFieldEnum = (typeof ClientOrderByRelevanceFieldEnum)[keyof typeof ClientOrderByRelevanceFieldEnum]
-
-
-  export const VehicleOrderByRelevanceFieldEnum: {
-    id: 'id',
-    plate: 'plate',
-    make: 'make',
-    model: 'model',
-    notes: 'notes',
-    clientId: 'clientId'
-  };
-
-  export type VehicleOrderByRelevanceFieldEnum = (typeof VehicleOrderByRelevanceFieldEnum)[keyof typeof VehicleOrderByRelevanceFieldEnum]
-
-
   export const TicketOrderByRelevanceFieldEnum: {
     status: 'status',
     priority: 'priority',
-    orderNumber: 'orderNumber',
+    client: 'client',
+    plate: 'plate',
+    make: 'make',
+    model: 'model',
+    ol: 'ol',
     systemModel: 'systemModel',
     softwareVersion: 'softwareVersion',
     complaint: 'complaint',
     diagnosis: 'diagnosis',
     resolutionNote: 'resolutionNote',
-    clientId: 'clientId',
     authorId: 'authorId',
     assigneeId: 'assigneeId'
   };
@@ -12303,15 +8852,6 @@ export namespace Prisma {
   };
 
   export type AttachmentOrderByRelevanceFieldEnum = (typeof AttachmentOrderByRelevanceFieldEnum)[keyof typeof AttachmentOrderByRelevanceFieldEnum]
-
-
-  export const TagOrderByRelevanceFieldEnum: {
-    id: 'id',
-    name: 'name',
-    color: 'color'
-  };
-
-  export type TagOrderByRelevanceFieldEnum = (typeof TagOrderByRelevanceFieldEnum)[keyof typeof TagOrderByRelevanceFieldEnum]
 
 
   /**
@@ -12627,166 +9167,6 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
-  export type ClientWhereInput = {
-    AND?: ClientWhereInput | ClientWhereInput[]
-    OR?: ClientWhereInput[]
-    NOT?: ClientWhereInput | ClientWhereInput[]
-    id?: StringFilter<"Client"> | string
-    name?: StringFilter<"Client"> | string
-    email?: StringNullableFilter<"Client"> | string | null
-    phone?: StringNullableFilter<"Client"> | string | null
-    vatNumber?: StringNullableFilter<"Client"> | string | null
-    address?: StringNullableFilter<"Client"> | string | null
-    notes?: StringNullableFilter<"Client"> | string | null
-    createdAt?: DateTimeFilter<"Client"> | Date | string
-    updatedAt?: DateTimeFilter<"Client"> | Date | string
-    vehicles?: VehicleListRelationFilter
-    tickets?: TicketListRelationFilter
-  }
-
-  export type ClientOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
-    vatNumber?: SortOrderInput | SortOrder
-    address?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    vehicles?: VehicleOrderByRelationAggregateInput
-    tickets?: TicketOrderByRelationAggregateInput
-    _relevance?: ClientOrderByRelevanceInput
-  }
-
-  export type ClientWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ClientWhereInput | ClientWhereInput[]
-    OR?: ClientWhereInput[]
-    NOT?: ClientWhereInput | ClientWhereInput[]
-    name?: StringFilter<"Client"> | string
-    email?: StringNullableFilter<"Client"> | string | null
-    phone?: StringNullableFilter<"Client"> | string | null
-    vatNumber?: StringNullableFilter<"Client"> | string | null
-    address?: StringNullableFilter<"Client"> | string | null
-    notes?: StringNullableFilter<"Client"> | string | null
-    createdAt?: DateTimeFilter<"Client"> | Date | string
-    updatedAt?: DateTimeFilter<"Client"> | Date | string
-    vehicles?: VehicleListRelationFilter
-    tickets?: TicketListRelationFilter
-  }, "id">
-
-  export type ClientOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
-    vatNumber?: SortOrderInput | SortOrder
-    address?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ClientCountOrderByAggregateInput
-    _max?: ClientMaxOrderByAggregateInput
-    _min?: ClientMinOrderByAggregateInput
-  }
-
-  export type ClientScalarWhereWithAggregatesInput = {
-    AND?: ClientScalarWhereWithAggregatesInput | ClientScalarWhereWithAggregatesInput[]
-    OR?: ClientScalarWhereWithAggregatesInput[]
-    NOT?: ClientScalarWhereWithAggregatesInput | ClientScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Client"> | string
-    name?: StringWithAggregatesFilter<"Client"> | string
-    email?: StringNullableWithAggregatesFilter<"Client"> | string | null
-    phone?: StringNullableWithAggregatesFilter<"Client"> | string | null
-    vatNumber?: StringNullableWithAggregatesFilter<"Client"> | string | null
-    address?: StringNullableWithAggregatesFilter<"Client"> | string | null
-    notes?: StringNullableWithAggregatesFilter<"Client"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
-  }
-
-  export type VehicleWhereInput = {
-    AND?: VehicleWhereInput | VehicleWhereInput[]
-    OR?: VehicleWhereInput[]
-    NOT?: VehicleWhereInput | VehicleWhereInput[]
-    id?: StringFilter<"Vehicle"> | string
-    plate?: StringFilter<"Vehicle"> | string
-    make?: StringNullableFilter<"Vehicle"> | string | null
-    model?: StringNullableFilter<"Vehicle"> | string | null
-    year?: IntNullableFilter<"Vehicle"> | number | null
-    notes?: StringNullableFilter<"Vehicle"> | string | null
-    createdAt?: DateTimeFilter<"Vehicle"> | Date | string
-    updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
-    clientId?: StringFilter<"Vehicle"> | string
-    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
-    tickets?: TicketListRelationFilter
-  }
-
-  export type VehicleOrderByWithRelationInput = {
-    id?: SortOrder
-    plate?: SortOrder
-    make?: SortOrderInput | SortOrder
-    model?: SortOrderInput | SortOrder
-    year?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    clientId?: SortOrder
-    client?: ClientOrderByWithRelationInput
-    tickets?: TicketOrderByRelationAggregateInput
-    _relevance?: VehicleOrderByRelevanceInput
-  }
-
-  export type VehicleWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    plate?: string
-    AND?: VehicleWhereInput | VehicleWhereInput[]
-    OR?: VehicleWhereInput[]
-    NOT?: VehicleWhereInput | VehicleWhereInput[]
-    make?: StringNullableFilter<"Vehicle"> | string | null
-    model?: StringNullableFilter<"Vehicle"> | string | null
-    year?: IntNullableFilter<"Vehicle"> | number | null
-    notes?: StringNullableFilter<"Vehicle"> | string | null
-    createdAt?: DateTimeFilter<"Vehicle"> | Date | string
-    updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
-    clientId?: StringFilter<"Vehicle"> | string
-    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
-    tickets?: TicketListRelationFilter
-  }, "id" | "plate">
-
-  export type VehicleOrderByWithAggregationInput = {
-    id?: SortOrder
-    plate?: SortOrder
-    make?: SortOrderInput | SortOrder
-    model?: SortOrderInput | SortOrder
-    year?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    clientId?: SortOrder
-    _count?: VehicleCountOrderByAggregateInput
-    _avg?: VehicleAvgOrderByAggregateInput
-    _max?: VehicleMaxOrderByAggregateInput
-    _min?: VehicleMinOrderByAggregateInput
-    _sum?: VehicleSumOrderByAggregateInput
-  }
-
-  export type VehicleScalarWhereWithAggregatesInput = {
-    AND?: VehicleScalarWhereWithAggregatesInput | VehicleScalarWhereWithAggregatesInput[]
-    OR?: VehicleScalarWhereWithAggregatesInput[]
-    NOT?: VehicleScalarWhereWithAggregatesInput | VehicleScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Vehicle"> | string
-    plate?: StringWithAggregatesFilter<"Vehicle"> | string
-    make?: StringNullableWithAggregatesFilter<"Vehicle"> | string | null
-    model?: StringNullableWithAggregatesFilter<"Vehicle"> | string | null
-    year?: IntNullableWithAggregatesFilter<"Vehicle"> | number | null
-    notes?: StringNullableWithAggregatesFilter<"Vehicle"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
-    clientId?: StringWithAggregatesFilter<"Vehicle"> | string
-  }
-
   export type TicketWhereInput = {
     AND?: TicketWhereInput | TicketWhereInput[]
     OR?: TicketWhereInput[]
@@ -12795,8 +9175,12 @@ export namespace Prisma {
     date?: DateTimeFilter<"Ticket"> | Date | string
     status?: StringFilter<"Ticket"> | string
     priority?: StringFilter<"Ticket"> | string
+    client?: StringNullableFilter<"Ticket"> | string | null
+    plate?: StringNullableFilter<"Ticket"> | string | null
+    make?: StringNullableFilter<"Ticket"> | string | null
+    model?: StringNullableFilter<"Ticket"> | string | null
     km?: IntNullableFilter<"Ticket"> | number | null
-    orderNumber?: StringNullableFilter<"Ticket"> | string | null
+    ol?: StringNullableFilter<"Ticket"> | string | null
     systemModel?: StringNullableFilter<"Ticket"> | string | null
     softwareVersion?: StringNullableFilter<"Ticket"> | string | null
     complaint?: StringNullableFilter<"Ticket"> | string | null
@@ -12807,14 +9191,10 @@ export namespace Prisma {
     archivedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
-    clientId?: StringFilter<"Ticket"> | string
     authorId?: StringFilter<"Ticket"> | string
     assigneeId?: StringNullableFilter<"Ticket"> | string | null
-    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    vehicles?: VehicleListRelationFilter
-    tags?: TagListRelationFilter
     entries?: TicketEntryListRelationFilter
     attachments?: AttachmentListRelationFilter
   }
@@ -12824,8 +9204,12 @@ export namespace Prisma {
     date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    client?: SortOrderInput | SortOrder
+    plate?: SortOrderInput | SortOrder
+    make?: SortOrderInput | SortOrder
+    model?: SortOrderInput | SortOrder
     km?: SortOrderInput | SortOrder
-    orderNumber?: SortOrderInput | SortOrder
+    ol?: SortOrderInput | SortOrder
     systemModel?: SortOrderInput | SortOrder
     softwareVersion?: SortOrderInput | SortOrder
     complaint?: SortOrderInput | SortOrder
@@ -12836,14 +9220,10 @@ export namespace Prisma {
     archivedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    clientId?: SortOrder
     authorId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
-    client?: ClientOrderByWithRelationInput
     author?: UserOrderByWithRelationInput
     assignee?: UserOrderByWithRelationInput
-    vehicles?: VehicleOrderByRelationAggregateInput
-    tags?: TagOrderByRelationAggregateInput
     entries?: TicketEntryOrderByRelationAggregateInput
     attachments?: AttachmentOrderByRelationAggregateInput
     _relevance?: TicketOrderByRelevanceInput
@@ -12857,8 +9237,12 @@ export namespace Prisma {
     date?: DateTimeFilter<"Ticket"> | Date | string
     status?: StringFilter<"Ticket"> | string
     priority?: StringFilter<"Ticket"> | string
+    client?: StringNullableFilter<"Ticket"> | string | null
+    plate?: StringNullableFilter<"Ticket"> | string | null
+    make?: StringNullableFilter<"Ticket"> | string | null
+    model?: StringNullableFilter<"Ticket"> | string | null
     km?: IntNullableFilter<"Ticket"> | number | null
-    orderNumber?: StringNullableFilter<"Ticket"> | string | null
+    ol?: StringNullableFilter<"Ticket"> | string | null
     systemModel?: StringNullableFilter<"Ticket"> | string | null
     softwareVersion?: StringNullableFilter<"Ticket"> | string | null
     complaint?: StringNullableFilter<"Ticket"> | string | null
@@ -12869,14 +9253,10 @@ export namespace Prisma {
     archivedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
-    clientId?: StringFilter<"Ticket"> | string
     authorId?: StringFilter<"Ticket"> | string
     assigneeId?: StringNullableFilter<"Ticket"> | string | null
-    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    vehicles?: VehicleListRelationFilter
-    tags?: TagListRelationFilter
     entries?: TicketEntryListRelationFilter
     attachments?: AttachmentListRelationFilter
   }, "id">
@@ -12886,8 +9266,12 @@ export namespace Prisma {
     date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    client?: SortOrderInput | SortOrder
+    plate?: SortOrderInput | SortOrder
+    make?: SortOrderInput | SortOrder
+    model?: SortOrderInput | SortOrder
     km?: SortOrderInput | SortOrder
-    orderNumber?: SortOrderInput | SortOrder
+    ol?: SortOrderInput | SortOrder
     systemModel?: SortOrderInput | SortOrder
     softwareVersion?: SortOrderInput | SortOrder
     complaint?: SortOrderInput | SortOrder
@@ -12898,7 +9282,6 @@ export namespace Prisma {
     archivedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    clientId?: SortOrder
     authorId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     _count?: TicketCountOrderByAggregateInput
@@ -12916,8 +9299,12 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     status?: StringWithAggregatesFilter<"Ticket"> | string
     priority?: StringWithAggregatesFilter<"Ticket"> | string
+    client?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    plate?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    make?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    model?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     km?: IntNullableWithAggregatesFilter<"Ticket"> | number | null
-    orderNumber?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    ol?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     systemModel?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     softwareVersion?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     complaint?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
@@ -12928,7 +9315,6 @@ export namespace Prisma {
     archivedAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
-    clientId?: StringWithAggregatesFilter<"Ticket"> | string
     authorId?: StringWithAggregatesFilter<"Ticket"> | string
     assigneeId?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
   }
@@ -13078,52 +9464,6 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Attachment"> | Date | string
     ticketId?: IntWithAggregatesFilter<"Attachment"> | number
     uploadedById?: StringWithAggregatesFilter<"Attachment"> | string
-  }
-
-  export type TagWhereInput = {
-    AND?: TagWhereInput | TagWhereInput[]
-    OR?: TagWhereInput[]
-    NOT?: TagWhereInput | TagWhereInput[]
-    id?: StringFilter<"Tag"> | string
-    name?: StringFilter<"Tag"> | string
-    color?: StringNullableFilter<"Tag"> | string | null
-    tickets?: TicketListRelationFilter
-  }
-
-  export type TagOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    color?: SortOrderInput | SortOrder
-    tickets?: TicketOrderByRelationAggregateInput
-    _relevance?: TagOrderByRelevanceInput
-  }
-
-  export type TagWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    name?: string
-    AND?: TagWhereInput | TagWhereInput[]
-    OR?: TagWhereInput[]
-    NOT?: TagWhereInput | TagWhereInput[]
-    color?: StringNullableFilter<"Tag"> | string | null
-    tickets?: TicketListRelationFilter
-  }, "id" | "name">
-
-  export type TagOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    color?: SortOrderInput | SortOrder
-    _count?: TagCountOrderByAggregateInput
-    _max?: TagMaxOrderByAggregateInput
-    _min?: TagMinOrderByAggregateInput
-  }
-
-  export type TagScalarWhereWithAggregatesInput = {
-    AND?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
-    OR?: TagScalarWhereWithAggregatesInput[]
-    NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Tag"> | string
-    name?: StringWithAggregatesFilter<"Tag"> | string
-    color?: StringNullableWithAggregatesFilter<"Tag"> | string | null
   }
 
   export type UserCreateInput = {
@@ -13414,191 +9754,16 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ClientCreateInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicles?: VehicleCreateNestedManyWithoutClientInput
-    tickets?: TicketCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientUncheckedCreateInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutClientInput
-    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicles?: VehicleUpdateManyWithoutClientNestedInput
-    tickets?: TicketUpdateManyWithoutClientNestedInput
-  }
-
-  export type ClientUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicles?: VehicleUncheckedUpdateManyWithoutClientNestedInput
-    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-  }
-
-  export type ClientCreateManyInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ClientUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClientUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VehicleCreateInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutVehiclesInput
-    tickets?: TicketCreateNestedManyWithoutVehiclesInput
-  }
-
-  export type VehicleUncheckedCreateInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clientId: string
-    tickets?: TicketUncheckedCreateNestedManyWithoutVehiclesInput
-  }
-
-  export type VehicleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutVehiclesNestedInput
-    tickets?: TicketUpdateManyWithoutVehiclesNestedInput
-  }
-
-  export type VehicleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    tickets?: TicketUncheckedUpdateManyWithoutVehiclesNestedInput
-  }
-
-  export type VehicleCreateManyInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clientId: string
-  }
-
-  export type VehicleUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VehicleUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-  }
-
   export type TicketCreateInput = {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -13609,11 +9774,8 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryCreateNestedManyWithoutTicketInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
@@ -13623,8 +9785,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -13635,11 +9801,8 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     authorId: string
     assigneeId?: string | null
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -13648,8 +9811,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13660,11 +9827,8 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
@@ -13674,8 +9838,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13686,11 +9854,8 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -13700,8 +9865,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -13712,7 +9881,6 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     authorId: string
     assigneeId?: string | null
   }
@@ -13721,8 +9889,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13740,8 +9912,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13752,7 +9928,6 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -13898,52 +10073,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: IntFieldUpdateOperationsInput | number
     uploadedById?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagCreateInput = {
-    id?: string
-    name: string
-    color?: string | null
-    tickets?: TicketCreateNestedManyWithoutTagsInput
-  }
-
-  export type TagUncheckedCreateInput = {
-    id?: string
-    name: string
-    color?: string | null
-    tickets?: TicketUncheckedCreateNestedManyWithoutTagsInput
-  }
-
-  export type TagUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    tickets?: TicketUpdateManyWithoutTagsNestedInput
-  }
-
-  export type TagUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    tickets?: TicketUncheckedUpdateManyWithoutTagsNestedInput
-  }
-
-  export type TagCreateManyInput = {
-    id?: string
-    name: string
-    color?: string | null
-  }
-
-  export type TagUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TagUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -14307,113 +10436,6 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type VehicleListRelationFilter = {
-    every?: VehicleWhereInput
-    some?: VehicleWhereInput
-    none?: VehicleWhereInput
-  }
-
-  export type VehicleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ClientOrderByRelevanceInput = {
-    fields: ClientOrderByRelevanceFieldEnum | ClientOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type ClientCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    phone?: SortOrder
-    vatNumber?: SortOrder
-    address?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ClientMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    phone?: SortOrder
-    vatNumber?: SortOrder
-    address?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ClientMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    phone?: SortOrder
-    vatNumber?: SortOrder
-    address?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ClientScalarRelationFilter = {
-    is?: ClientWhereInput
-    isNot?: ClientWhereInput
-  }
-
-  export type VehicleOrderByRelevanceInput = {
-    fields: VehicleOrderByRelevanceFieldEnum | VehicleOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type VehicleCountOrderByAggregateInput = {
-    id?: SortOrder
-    plate?: SortOrder
-    make?: SortOrder
-    model?: SortOrder
-    year?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    clientId?: SortOrder
-  }
-
-  export type VehicleAvgOrderByAggregateInput = {
-    year?: SortOrder
-  }
-
-  export type VehicleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    plate?: SortOrder
-    make?: SortOrder
-    model?: SortOrder
-    year?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    clientId?: SortOrder
-  }
-
-  export type VehicleMinOrderByAggregateInput = {
-    id?: SortOrder
-    plate?: SortOrder
-    make?: SortOrder
-    model?: SortOrder
-    year?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    clientId?: SortOrder
-  }
-
-  export type VehicleSumOrderByAggregateInput = {
-    year?: SortOrder
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -14430,16 +10452,6 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
-  export type TagListRelationFilter = {
-    every?: TagWhereInput
-    some?: TagWhereInput
-    none?: TagWhereInput
-  }
-
-  export type TagOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type TicketOrderByRelevanceInput = {
     fields: TicketOrderByRelevanceFieldEnum | TicketOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -14451,8 +10463,12 @@ export namespace Prisma {
     date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    client?: SortOrder
+    plate?: SortOrder
+    make?: SortOrder
+    model?: SortOrder
     km?: SortOrder
-    orderNumber?: SortOrder
+    ol?: SortOrder
     systemModel?: SortOrder
     softwareVersion?: SortOrder
     complaint?: SortOrder
@@ -14463,7 +10479,6 @@ export namespace Prisma {
     archivedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    clientId?: SortOrder
     authorId?: SortOrder
     assigneeId?: SortOrder
   }
@@ -14478,8 +10493,12 @@ export namespace Prisma {
     date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    client?: SortOrder
+    plate?: SortOrder
+    make?: SortOrder
+    model?: SortOrder
     km?: SortOrder
-    orderNumber?: SortOrder
+    ol?: SortOrder
     systemModel?: SortOrder
     softwareVersion?: SortOrder
     complaint?: SortOrder
@@ -14490,7 +10509,6 @@ export namespace Prisma {
     archivedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    clientId?: SortOrder
     authorId?: SortOrder
     assigneeId?: SortOrder
   }
@@ -14500,8 +10518,12 @@ export namespace Prisma {
     date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    client?: SortOrder
+    plate?: SortOrder
+    make?: SortOrder
+    model?: SortOrder
     km?: SortOrder
-    orderNumber?: SortOrder
+    ol?: SortOrder
     systemModel?: SortOrder
     softwareVersion?: SortOrder
     complaint?: SortOrder
@@ -14512,7 +10534,6 @@ export namespace Prisma {
     archivedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    clientId?: SortOrder
     authorId?: SortOrder
     assigneeId?: SortOrder
   }
@@ -14647,30 +10668,6 @@ export namespace Prisma {
   export type AttachmentSumOrderByAggregateInput = {
     size?: SortOrder
     ticketId?: SortOrder
-  }
-
-  export type TagOrderByRelevanceInput = {
-    fields: TagOrderByRelevanceFieldEnum | TagOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type TagCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    color?: SortOrder
-  }
-
-  export type TagMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    color?: SortOrder
-  }
-
-  export type TagMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    color?: SortOrder
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -14977,148 +10974,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type VehicleCreateNestedManyWithoutClientInput = {
-    create?: XOR<VehicleCreateWithoutClientInput, VehicleUncheckedCreateWithoutClientInput> | VehicleCreateWithoutClientInput[] | VehicleUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutClientInput | VehicleCreateOrConnectWithoutClientInput[]
-    createMany?: VehicleCreateManyClientInputEnvelope
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-  }
-
-  export type TicketCreateNestedManyWithoutClientInput = {
-    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
-    createMany?: TicketCreateManyClientInputEnvelope
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type VehicleUncheckedCreateNestedManyWithoutClientInput = {
-    create?: XOR<VehicleCreateWithoutClientInput, VehicleUncheckedCreateWithoutClientInput> | VehicleCreateWithoutClientInput[] | VehicleUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutClientInput | VehicleCreateOrConnectWithoutClientInput[]
-    createMany?: VehicleCreateManyClientInputEnvelope
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-  }
-
-  export type TicketUncheckedCreateNestedManyWithoutClientInput = {
-    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
-    createMany?: TicketCreateManyClientInputEnvelope
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type VehicleUpdateManyWithoutClientNestedInput = {
-    create?: XOR<VehicleCreateWithoutClientInput, VehicleUncheckedCreateWithoutClientInput> | VehicleCreateWithoutClientInput[] | VehicleUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutClientInput | VehicleCreateOrConnectWithoutClientInput[]
-    upsert?: VehicleUpsertWithWhereUniqueWithoutClientInput | VehicleUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: VehicleCreateManyClientInputEnvelope
-    set?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    disconnect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    delete?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    update?: VehicleUpdateWithWhereUniqueWithoutClientInput | VehicleUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: VehicleUpdateManyWithWhereWithoutClientInput | VehicleUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: VehicleScalarWhereInput | VehicleScalarWhereInput[]
-  }
-
-  export type TicketUpdateManyWithoutClientNestedInput = {
-    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutClientInput | TicketUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: TicketCreateManyClientInputEnvelope
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutClientInput | TicketUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutClientInput | TicketUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type VehicleUncheckedUpdateManyWithoutClientNestedInput = {
-    create?: XOR<VehicleCreateWithoutClientInput, VehicleUncheckedCreateWithoutClientInput> | VehicleCreateWithoutClientInput[] | VehicleUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutClientInput | VehicleCreateOrConnectWithoutClientInput[]
-    upsert?: VehicleUpsertWithWhereUniqueWithoutClientInput | VehicleUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: VehicleCreateManyClientInputEnvelope
-    set?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    disconnect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    delete?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    update?: VehicleUpdateWithWhereUniqueWithoutClientInput | VehicleUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: VehicleUpdateManyWithWhereWithoutClientInput | VehicleUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: VehicleScalarWhereInput | VehicleScalarWhereInput[]
-  }
-
-  export type TicketUncheckedUpdateManyWithoutClientNestedInput = {
-    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutClientInput | TicketUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: TicketCreateManyClientInputEnvelope
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutClientInput | TicketUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutClientInput | TicketUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type ClientCreateNestedOneWithoutVehiclesInput = {
-    create?: XOR<ClientCreateWithoutVehiclesInput, ClientUncheckedCreateWithoutVehiclesInput>
-    connectOrCreate?: ClientCreateOrConnectWithoutVehiclesInput
-    connect?: ClientWhereUniqueInput
-  }
-
-  export type TicketCreateNestedManyWithoutVehiclesInput = {
-    create?: XOR<TicketCreateWithoutVehiclesInput, TicketUncheckedCreateWithoutVehiclesInput> | TicketCreateWithoutVehiclesInput[] | TicketUncheckedCreateWithoutVehiclesInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutVehiclesInput | TicketCreateOrConnectWithoutVehiclesInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type TicketUncheckedCreateNestedManyWithoutVehiclesInput = {
-    create?: XOR<TicketCreateWithoutVehiclesInput, TicketUncheckedCreateWithoutVehiclesInput> | TicketCreateWithoutVehiclesInput[] | TicketUncheckedCreateWithoutVehiclesInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutVehiclesInput | TicketCreateOrConnectWithoutVehiclesInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type ClientUpdateOneRequiredWithoutVehiclesNestedInput = {
-    create?: XOR<ClientCreateWithoutVehiclesInput, ClientUncheckedCreateWithoutVehiclesInput>
-    connectOrCreate?: ClientCreateOrConnectWithoutVehiclesInput
-    upsert?: ClientUpsertWithoutVehiclesInput
-    connect?: ClientWhereUniqueInput
-    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutVehiclesInput, ClientUpdateWithoutVehiclesInput>, ClientUncheckedUpdateWithoutVehiclesInput>
-  }
-
-  export type TicketUpdateManyWithoutVehiclesNestedInput = {
-    create?: XOR<TicketCreateWithoutVehiclesInput, TicketUncheckedCreateWithoutVehiclesInput> | TicketCreateWithoutVehiclesInput[] | TicketUncheckedCreateWithoutVehiclesInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutVehiclesInput | TicketCreateOrConnectWithoutVehiclesInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutVehiclesInput | TicketUpsertWithWhereUniqueWithoutVehiclesInput[]
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutVehiclesInput | TicketUpdateWithWhereUniqueWithoutVehiclesInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutVehiclesInput | TicketUpdateManyWithWhereWithoutVehiclesInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type TicketUncheckedUpdateManyWithoutVehiclesNestedInput = {
-    create?: XOR<TicketCreateWithoutVehiclesInput, TicketUncheckedCreateWithoutVehiclesInput> | TicketCreateWithoutVehiclesInput[] | TicketUncheckedCreateWithoutVehiclesInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutVehiclesInput | TicketCreateOrConnectWithoutVehiclesInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutVehiclesInput | TicketUpsertWithWhereUniqueWithoutVehiclesInput[]
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutVehiclesInput | TicketUpdateWithWhereUniqueWithoutVehiclesInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutVehiclesInput | TicketUpdateManyWithWhereWithoutVehiclesInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type ClientCreateNestedOneWithoutTicketsInput = {
-    create?: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
-    connectOrCreate?: ClientCreateOrConnectWithoutTicketsInput
-    connect?: ClientWhereUniqueInput
-  }
-
   export type UserCreateNestedOneWithoutTicketsAuthoredInput = {
     create?: XOR<UserCreateWithoutTicketsAuthoredInput, UserUncheckedCreateWithoutTicketsAuthoredInput>
     connectOrCreate?: UserCreateOrConnectWithoutTicketsAuthoredInput
@@ -15129,18 +10984,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutTicketsAssignedInput, UserUncheckedCreateWithoutTicketsAssignedInput>
     connectOrCreate?: UserCreateOrConnectWithoutTicketsAssignedInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type VehicleCreateNestedManyWithoutTicketsInput = {
-    create?: XOR<VehicleCreateWithoutTicketsInput, VehicleUncheckedCreateWithoutTicketsInput> | VehicleCreateWithoutTicketsInput[] | VehicleUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutTicketsInput | VehicleCreateOrConnectWithoutTicketsInput[]
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-  }
-
-  export type TagCreateNestedManyWithoutTicketsInput = {
-    create?: XOR<TagCreateWithoutTicketsInput, TagUncheckedCreateWithoutTicketsInput> | TagCreateWithoutTicketsInput[] | TagUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutTicketsInput | TagCreateOrConnectWithoutTicketsInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
   }
 
   export type TicketEntryCreateNestedManyWithoutTicketInput = {
@@ -15157,18 +11000,6 @@ export namespace Prisma {
     connect?: AttachmentWhereUniqueInput | AttachmentWhereUniqueInput[]
   }
 
-  export type VehicleUncheckedCreateNestedManyWithoutTicketsInput = {
-    create?: XOR<VehicleCreateWithoutTicketsInput, VehicleUncheckedCreateWithoutTicketsInput> | VehicleCreateWithoutTicketsInput[] | VehicleUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutTicketsInput | VehicleCreateOrConnectWithoutTicketsInput[]
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-  }
-
-  export type TagUncheckedCreateNestedManyWithoutTicketsInput = {
-    create?: XOR<TagCreateWithoutTicketsInput, TagUncheckedCreateWithoutTicketsInput> | TagCreateWithoutTicketsInput[] | TagUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutTicketsInput | TagCreateOrConnectWithoutTicketsInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-  }
-
   export type TicketEntryUncheckedCreateNestedManyWithoutTicketInput = {
     create?: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput> | TicketEntryCreateWithoutTicketInput[] | TicketEntryUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: TicketEntryCreateOrConnectWithoutTicketInput | TicketEntryCreateOrConnectWithoutTicketInput[]
@@ -15181,14 +11012,6 @@ export namespace Prisma {
     connectOrCreate?: AttachmentCreateOrConnectWithoutTicketInput | AttachmentCreateOrConnectWithoutTicketInput[]
     createMany?: AttachmentCreateManyTicketInputEnvelope
     connect?: AttachmentWhereUniqueInput | AttachmentWhereUniqueInput[]
-  }
-
-  export type ClientUpdateOneRequiredWithoutTicketsNestedInput = {
-    create?: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
-    connectOrCreate?: ClientCreateOrConnectWithoutTicketsInput
-    upsert?: ClientUpsertWithoutTicketsInput
-    connect?: ClientWhereUniqueInput
-    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutTicketsInput, ClientUpdateWithoutTicketsInput>, ClientUncheckedUpdateWithoutTicketsInput>
   }
 
   export type UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput = {
@@ -15207,32 +11030,6 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTicketsAssignedInput, UserUpdateWithoutTicketsAssignedInput>, UserUncheckedUpdateWithoutTicketsAssignedInput>
-  }
-
-  export type VehicleUpdateManyWithoutTicketsNestedInput = {
-    create?: XOR<VehicleCreateWithoutTicketsInput, VehicleUncheckedCreateWithoutTicketsInput> | VehicleCreateWithoutTicketsInput[] | VehicleUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutTicketsInput | VehicleCreateOrConnectWithoutTicketsInput[]
-    upsert?: VehicleUpsertWithWhereUniqueWithoutTicketsInput | VehicleUpsertWithWhereUniqueWithoutTicketsInput[]
-    set?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    disconnect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    delete?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    update?: VehicleUpdateWithWhereUniqueWithoutTicketsInput | VehicleUpdateWithWhereUniqueWithoutTicketsInput[]
-    updateMany?: VehicleUpdateManyWithWhereWithoutTicketsInput | VehicleUpdateManyWithWhereWithoutTicketsInput[]
-    deleteMany?: VehicleScalarWhereInput | VehicleScalarWhereInput[]
-  }
-
-  export type TagUpdateManyWithoutTicketsNestedInput = {
-    create?: XOR<TagCreateWithoutTicketsInput, TagUncheckedCreateWithoutTicketsInput> | TagCreateWithoutTicketsInput[] | TagUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutTicketsInput | TagCreateOrConnectWithoutTicketsInput[]
-    upsert?: TagUpsertWithWhereUniqueWithoutTicketsInput | TagUpsertWithWhereUniqueWithoutTicketsInput[]
-    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    update?: TagUpdateWithWhereUniqueWithoutTicketsInput | TagUpdateWithWhereUniqueWithoutTicketsInput[]
-    updateMany?: TagUpdateManyWithWhereWithoutTicketsInput | TagUpdateManyWithWhereWithoutTicketsInput[]
-    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type TicketEntryUpdateManyWithoutTicketNestedInput = {
@@ -15269,32 +11066,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type VehicleUncheckedUpdateManyWithoutTicketsNestedInput = {
-    create?: XOR<VehicleCreateWithoutTicketsInput, VehicleUncheckedCreateWithoutTicketsInput> | VehicleCreateWithoutTicketsInput[] | VehicleUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: VehicleCreateOrConnectWithoutTicketsInput | VehicleCreateOrConnectWithoutTicketsInput[]
-    upsert?: VehicleUpsertWithWhereUniqueWithoutTicketsInput | VehicleUpsertWithWhereUniqueWithoutTicketsInput[]
-    set?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    disconnect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    delete?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    connect?: VehicleWhereUniqueInput | VehicleWhereUniqueInput[]
-    update?: VehicleUpdateWithWhereUniqueWithoutTicketsInput | VehicleUpdateWithWhereUniqueWithoutTicketsInput[]
-    updateMany?: VehicleUpdateManyWithWhereWithoutTicketsInput | VehicleUpdateManyWithWhereWithoutTicketsInput[]
-    deleteMany?: VehicleScalarWhereInput | VehicleScalarWhereInput[]
-  }
-
-  export type TagUncheckedUpdateManyWithoutTicketsNestedInput = {
-    create?: XOR<TagCreateWithoutTicketsInput, TagUncheckedCreateWithoutTicketsInput> | TagCreateWithoutTicketsInput[] | TagUncheckedCreateWithoutTicketsInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutTicketsInput | TagCreateOrConnectWithoutTicketsInput[]
-    upsert?: TagUpsertWithWhereUniqueWithoutTicketsInput | TagUpsertWithWhereUniqueWithoutTicketsInput[]
-    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    update?: TagUpdateWithWhereUniqueWithoutTicketsInput | TagUpdateWithWhereUniqueWithoutTicketsInput[]
-    updateMany?: TagUpdateManyWithWhereWithoutTicketsInput | TagUpdateManyWithWhereWithoutTicketsInput[]
-    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type TicketEntryUncheckedUpdateManyWithoutTicketNestedInput = {
@@ -15383,44 +11154,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAttachmentsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAttachmentsInput, UserUpdateWithoutAttachmentsInput>, UserUncheckedUpdateWithoutAttachmentsInput>
-  }
-
-  export type TicketCreateNestedManyWithoutTagsInput = {
-    create?: XOR<TicketCreateWithoutTagsInput, TicketUncheckedCreateWithoutTagsInput> | TicketCreateWithoutTagsInput[] | TicketUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutTagsInput | TicketCreateOrConnectWithoutTagsInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type TicketUncheckedCreateNestedManyWithoutTagsInput = {
-    create?: XOR<TicketCreateWithoutTagsInput, TicketUncheckedCreateWithoutTagsInput> | TicketCreateWithoutTagsInput[] | TicketUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutTagsInput | TicketCreateOrConnectWithoutTagsInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type TicketUpdateManyWithoutTagsNestedInput = {
-    create?: XOR<TicketCreateWithoutTagsInput, TicketUncheckedCreateWithoutTagsInput> | TicketCreateWithoutTagsInput[] | TicketUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutTagsInput | TicketCreateOrConnectWithoutTagsInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutTagsInput | TicketUpsertWithWhereUniqueWithoutTagsInput[]
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutTagsInput | TicketUpdateWithWhereUniqueWithoutTagsInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutTagsInput | TicketUpdateManyWithWhereWithoutTagsInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type TicketUncheckedUpdateManyWithoutTagsNestedInput = {
-    create?: XOR<TicketCreateWithoutTagsInput, TicketUncheckedCreateWithoutTagsInput> | TicketCreateWithoutTagsInput[] | TicketUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutTagsInput | TicketCreateOrConnectWithoutTagsInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutTagsInput | TicketUpsertWithWhereUniqueWithoutTagsInput[]
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutTagsInput | TicketUpdateWithWhereUniqueWithoutTagsInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutTagsInput | TicketUpdateManyWithWhereWithoutTagsInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15694,8 +11427,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -15706,10 +11443,7 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryCreateNestedManyWithoutTicketInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
@@ -15719,8 +11453,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -15731,10 +11469,7 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     assigneeId?: string | null
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -15753,8 +11488,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -15765,10 +11504,7 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryCreateNestedManyWithoutTicketInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
@@ -15778,8 +11514,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -15790,10 +11530,7 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     authorId: string
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -15951,8 +11688,12 @@ export namespace Prisma {
     date?: DateTimeFilter<"Ticket"> | Date | string
     status?: StringFilter<"Ticket"> | string
     priority?: StringFilter<"Ticket"> | string
+    client?: StringNullableFilter<"Ticket"> | string | null
+    plate?: StringNullableFilter<"Ticket"> | string | null
+    make?: StringNullableFilter<"Ticket"> | string | null
+    model?: StringNullableFilter<"Ticket"> | string | null
     km?: IntNullableFilter<"Ticket"> | number | null
-    orderNumber?: StringNullableFilter<"Ticket"> | string | null
+    ol?: StringNullableFilter<"Ticket"> | string | null
     systemModel?: StringNullableFilter<"Ticket"> | string | null
     softwareVersion?: StringNullableFilter<"Ticket"> | string | null
     complaint?: StringNullableFilter<"Ticket"> | string | null
@@ -15963,7 +11704,6 @@ export namespace Prisma {
     archivedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
-    clientId?: StringFilter<"Ticket"> | string
     authorId?: StringFilter<"Ticket"> | string
     assigneeId?: StringNullableFilter<"Ticket"> | string | null
   }
@@ -16187,315 +11927,6 @@ export namespace Prisma {
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
-  export type VehicleCreateWithoutClientInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tickets?: TicketCreateNestedManyWithoutVehiclesInput
-  }
-
-  export type VehicleUncheckedCreateWithoutClientInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tickets?: TicketUncheckedCreateNestedManyWithoutVehiclesInput
-  }
-
-  export type VehicleCreateOrConnectWithoutClientInput = {
-    where: VehicleWhereUniqueInput
-    create: XOR<VehicleCreateWithoutClientInput, VehicleUncheckedCreateWithoutClientInput>
-  }
-
-  export type VehicleCreateManyClientInputEnvelope = {
-    data: VehicleCreateManyClientInput | VehicleCreateManyClientInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TicketCreateWithoutClientInput = {
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutTicketsAuthoredInput
-    assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
-    attachments?: AttachmentCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketUncheckedCreateWithoutClientInput = {
-    id?: number
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    assigneeId?: string | null
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
-    attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketCreateOrConnectWithoutClientInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput>
-  }
-
-  export type TicketCreateManyClientInputEnvelope = {
-    data: TicketCreateManyClientInput | TicketCreateManyClientInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type VehicleUpsertWithWhereUniqueWithoutClientInput = {
-    where: VehicleWhereUniqueInput
-    update: XOR<VehicleUpdateWithoutClientInput, VehicleUncheckedUpdateWithoutClientInput>
-    create: XOR<VehicleCreateWithoutClientInput, VehicleUncheckedCreateWithoutClientInput>
-  }
-
-  export type VehicleUpdateWithWhereUniqueWithoutClientInput = {
-    where: VehicleWhereUniqueInput
-    data: XOR<VehicleUpdateWithoutClientInput, VehicleUncheckedUpdateWithoutClientInput>
-  }
-
-  export type VehicleUpdateManyWithWhereWithoutClientInput = {
-    where: VehicleScalarWhereInput
-    data: XOR<VehicleUpdateManyMutationInput, VehicleUncheckedUpdateManyWithoutClientInput>
-  }
-
-  export type VehicleScalarWhereInput = {
-    AND?: VehicleScalarWhereInput | VehicleScalarWhereInput[]
-    OR?: VehicleScalarWhereInput[]
-    NOT?: VehicleScalarWhereInput | VehicleScalarWhereInput[]
-    id?: StringFilter<"Vehicle"> | string
-    plate?: StringFilter<"Vehicle"> | string
-    make?: StringNullableFilter<"Vehicle"> | string | null
-    model?: StringNullableFilter<"Vehicle"> | string | null
-    year?: IntNullableFilter<"Vehicle"> | number | null
-    notes?: StringNullableFilter<"Vehicle"> | string | null
-    createdAt?: DateTimeFilter<"Vehicle"> | Date | string
-    updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
-    clientId?: StringFilter<"Vehicle"> | string
-  }
-
-  export type TicketUpsertWithWhereUniqueWithoutClientInput = {
-    where: TicketWhereUniqueInput
-    update: XOR<TicketUpdateWithoutClientInput, TicketUncheckedUpdateWithoutClientInput>
-    create: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput>
-  }
-
-  export type TicketUpdateWithWhereUniqueWithoutClientInput = {
-    where: TicketWhereUniqueInput
-    data: XOR<TicketUpdateWithoutClientInput, TicketUncheckedUpdateWithoutClientInput>
-  }
-
-  export type TicketUpdateManyWithWhereWithoutClientInput = {
-    where: TicketScalarWhereInput
-    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutClientInput>
-  }
-
-  export type ClientCreateWithoutVehiclesInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tickets?: TicketCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientUncheckedCreateWithoutVehiclesInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientCreateOrConnectWithoutVehiclesInput = {
-    where: ClientWhereUniqueInput
-    create: XOR<ClientCreateWithoutVehiclesInput, ClientUncheckedCreateWithoutVehiclesInput>
-  }
-
-  export type TicketCreateWithoutVehiclesInput = {
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
-    author: UserCreateNestedOneWithoutTicketsAuthoredInput
-    assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
-    attachments?: AttachmentCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketUncheckedCreateWithoutVehiclesInput = {
-    id?: number
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clientId: string
-    authorId: string
-    assigneeId?: string | null
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
-    attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketCreateOrConnectWithoutVehiclesInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutVehiclesInput, TicketUncheckedCreateWithoutVehiclesInput>
-  }
-
-  export type ClientUpsertWithoutVehiclesInput = {
-    update: XOR<ClientUpdateWithoutVehiclesInput, ClientUncheckedUpdateWithoutVehiclesInput>
-    create: XOR<ClientCreateWithoutVehiclesInput, ClientUncheckedCreateWithoutVehiclesInput>
-    where?: ClientWhereInput
-  }
-
-  export type ClientUpdateToOneWithWhereWithoutVehiclesInput = {
-    where?: ClientWhereInput
-    data: XOR<ClientUpdateWithoutVehiclesInput, ClientUncheckedUpdateWithoutVehiclesInput>
-  }
-
-  export type ClientUpdateWithoutVehiclesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tickets?: TicketUpdateManyWithoutClientNestedInput
-  }
-
-  export type ClientUncheckedUpdateWithoutVehiclesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-  }
-
-  export type TicketUpsertWithWhereUniqueWithoutVehiclesInput = {
-    where: TicketWhereUniqueInput
-    update: XOR<TicketUpdateWithoutVehiclesInput, TicketUncheckedUpdateWithoutVehiclesInput>
-    create: XOR<TicketCreateWithoutVehiclesInput, TicketUncheckedCreateWithoutVehiclesInput>
-  }
-
-  export type TicketUpdateWithWhereUniqueWithoutVehiclesInput = {
-    where: TicketWhereUniqueInput
-    data: XOR<TicketUpdateWithoutVehiclesInput, TicketUncheckedUpdateWithoutVehiclesInput>
-  }
-
-  export type TicketUpdateManyWithWhereWithoutVehiclesInput = {
-    where: TicketScalarWhereInput
-    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutVehiclesInput>
-  }
-
-  export type ClientCreateWithoutTicketsInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicles?: VehicleCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientUncheckedCreateWithoutTicketsInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    vatNumber?: string | null
-    address?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientCreateOrConnectWithoutTicketsInput = {
-    where: ClientWhereUniqueInput
-    create: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
-  }
-
   export type UserCreateWithoutTicketsAuthoredInput = {
     id?: string
     name?: string | null
@@ -16562,52 +11993,6 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutTicketsAssignedInput, UserUncheckedCreateWithoutTicketsAssignedInput>
   }
 
-  export type VehicleCreateWithoutTicketsInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutVehiclesInput
-  }
-
-  export type VehicleUncheckedCreateWithoutTicketsInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clientId: string
-  }
-
-  export type VehicleCreateOrConnectWithoutTicketsInput = {
-    where: VehicleWhereUniqueInput
-    create: XOR<VehicleCreateWithoutTicketsInput, VehicleUncheckedCreateWithoutTicketsInput>
-  }
-
-  export type TagCreateWithoutTicketsInput = {
-    id?: string
-    name: string
-    color?: string | null
-  }
-
-  export type TagUncheckedCreateWithoutTicketsInput = {
-    id?: string
-    name: string
-    color?: string | null
-  }
-
-  export type TagCreateOrConnectWithoutTicketsInput = {
-    where: TagWhereUniqueInput
-    create: XOR<TagCreateWithoutTicketsInput, TagUncheckedCreateWithoutTicketsInput>
-  }
-
   export type TicketEntryCreateWithoutTicketInput = {
     id?: string
     body: string
@@ -16664,43 +12049,6 @@ export namespace Prisma {
   export type AttachmentCreateManyTicketInputEnvelope = {
     data: AttachmentCreateManyTicketInput | AttachmentCreateManyTicketInput[]
     skipDuplicates?: boolean
-  }
-
-  export type ClientUpsertWithoutTicketsInput = {
-    update: XOR<ClientUpdateWithoutTicketsInput, ClientUncheckedUpdateWithoutTicketsInput>
-    create: XOR<ClientCreateWithoutTicketsInput, ClientUncheckedCreateWithoutTicketsInput>
-    where?: ClientWhereInput
-  }
-
-  export type ClientUpdateToOneWithWhereWithoutTicketsInput = {
-    where?: ClientWhereInput
-    data: XOR<ClientUpdateWithoutTicketsInput, ClientUncheckedUpdateWithoutTicketsInput>
-  }
-
-  export type ClientUpdateWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicles?: VehicleUpdateManyWithoutClientNestedInput
-  }
-
-  export type ClientUncheckedUpdateWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicles?: VehicleUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UserUpsertWithoutTicketsAuthoredInput = {
@@ -16781,47 +12129,6 @@ export namespace Prisma {
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
-  export type VehicleUpsertWithWhereUniqueWithoutTicketsInput = {
-    where: VehicleWhereUniqueInput
-    update: XOR<VehicleUpdateWithoutTicketsInput, VehicleUncheckedUpdateWithoutTicketsInput>
-    create: XOR<VehicleCreateWithoutTicketsInput, VehicleUncheckedCreateWithoutTicketsInput>
-  }
-
-  export type VehicleUpdateWithWhereUniqueWithoutTicketsInput = {
-    where: VehicleWhereUniqueInput
-    data: XOR<VehicleUpdateWithoutTicketsInput, VehicleUncheckedUpdateWithoutTicketsInput>
-  }
-
-  export type VehicleUpdateManyWithWhereWithoutTicketsInput = {
-    where: VehicleScalarWhereInput
-    data: XOR<VehicleUpdateManyMutationInput, VehicleUncheckedUpdateManyWithoutTicketsInput>
-  }
-
-  export type TagUpsertWithWhereUniqueWithoutTicketsInput = {
-    where: TagWhereUniqueInput
-    update: XOR<TagUpdateWithoutTicketsInput, TagUncheckedUpdateWithoutTicketsInput>
-    create: XOR<TagCreateWithoutTicketsInput, TagUncheckedCreateWithoutTicketsInput>
-  }
-
-  export type TagUpdateWithWhereUniqueWithoutTicketsInput = {
-    where: TagWhereUniqueInput
-    data: XOR<TagUpdateWithoutTicketsInput, TagUncheckedUpdateWithoutTicketsInput>
-  }
-
-  export type TagUpdateManyWithWhereWithoutTicketsInput = {
-    where: TagScalarWhereInput
-    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutTicketsInput>
-  }
-
-  export type TagScalarWhereInput = {
-    AND?: TagScalarWhereInput | TagScalarWhereInput[]
-    OR?: TagScalarWhereInput[]
-    NOT?: TagScalarWhereInput | TagScalarWhereInput[]
-    id?: StringFilter<"Tag"> | string
-    name?: StringFilter<"Tag"> | string
-    color?: StringNullableFilter<"Tag"> | string | null
-  }
-
   export type TicketEntryUpsertWithWhereUniqueWithoutTicketInput = {
     where: TicketEntryWhereUniqueInput
     update: XOR<TicketEntryUpdateWithoutTicketInput, TicketEntryUncheckedUpdateWithoutTicketInput>
@@ -16858,8 +12165,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -16870,11 +12181,8 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
 
@@ -16883,8 +12191,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -16895,11 +12207,8 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     authorId: string
     assigneeId?: string | null
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -16956,8 +12265,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16968,11 +12281,8 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
 
@@ -16981,8 +12291,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16993,11 +12307,8 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -17044,8 +12355,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -17056,11 +12371,8 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    tags?: TagCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryCreateNestedManyWithoutTicketInput
   }
 
@@ -17069,8 +12381,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -17081,11 +12397,8 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     authorId: string
     assigneeId?: string | null
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    tags?: TagUncheckedCreateNestedManyWithoutTicketsInput
     entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -17142,8 +12455,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17154,11 +12471,8 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUpdateManyWithoutTicketNestedInput
   }
 
@@ -17167,8 +12481,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17179,11 +12497,8 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -17226,76 +12541,6 @@ export namespace Prisma {
     ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
-  export type TicketCreateWithoutTagsInput = {
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    client: ClientCreateNestedOneWithoutTicketsInput
-    author: UserCreateNestedOneWithoutTicketsAuthoredInput
-    assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    vehicles?: VehicleCreateNestedManyWithoutTicketsInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
-    attachments?: AttachmentCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketUncheckedCreateWithoutTagsInput = {
-    id?: number
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clientId: string
-    authorId: string
-    assigneeId?: string | null
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutTicketsInput
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
-    attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketCreateOrConnectWithoutTagsInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutTagsInput, TicketUncheckedCreateWithoutTagsInput>
-  }
-
-  export type TicketUpsertWithWhereUniqueWithoutTagsInput = {
-    where: TicketWhereUniqueInput
-    update: XOR<TicketUpdateWithoutTagsInput, TicketUncheckedUpdateWithoutTagsInput>
-    create: XOR<TicketCreateWithoutTagsInput, TicketUncheckedCreateWithoutTagsInput>
-  }
-
-  export type TicketUpdateWithWhereUniqueWithoutTagsInput = {
-    where: TicketWhereUniqueInput
-    data: XOR<TicketUpdateWithoutTagsInput, TicketUncheckedUpdateWithoutTagsInput>
-  }
-
-  export type TicketUpdateManyWithWhereWithoutTagsInput = {
-    where: TicketScalarWhereInput
-    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutTagsInput>
-  }
-
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -17322,8 +12567,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -17334,7 +12583,6 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     assigneeId?: string | null
   }
 
@@ -17343,8 +12591,12 @@ export namespace Prisma {
     date?: Date | string
     status?: string
     priority?: string
+    client?: string | null
+    plate?: string | null
+    make?: string | null
+    model?: string | null
     km?: number | null
-    orderNumber?: string | null
+    ol?: string | null
     systemModel?: string | null
     softwareVersion?: string | null
     complaint?: string | null
@@ -17355,7 +12607,6 @@ export namespace Prisma {
     archivedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
     authorId: string
   }
 
@@ -17445,8 +12696,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17457,10 +12712,7 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
@@ -17470,8 +12722,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17482,10 +12738,7 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -17495,8 +12748,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17507,7 +12764,6 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -17515,8 +12771,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17527,10 +12787,7 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
@@ -17540,8 +12797,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17552,10 +12813,7 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
     entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -17565,8 +12823,12 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
+    client?: NullableStringFieldUpdateOperationsInput | string | null
+    plate?: NullableStringFieldUpdateOperationsInput | string | null
+    make?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
     km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    ol?: NullableStringFieldUpdateOperationsInput | string | null
     systemModel?: NullableStringFieldUpdateOperationsInput | string | null
     softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
     complaint?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17577,7 +12839,6 @@ export namespace Prisma {
     archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -17638,214 +12899,6 @@ export namespace Prisma {
     ticketId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type VehicleCreateManyClientInput = {
-    id?: string
-    plate: string
-    make?: string | null
-    model?: string | null
-    year?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TicketCreateManyClientInput = {
-    id?: number
-    date?: Date | string
-    status?: string
-    priority?: string
-    km?: number | null
-    orderNumber?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    assigneeId?: string | null
-  }
-
-  export type VehicleUpdateWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tickets?: TicketUpdateManyWithoutVehiclesNestedInput
-  }
-
-  export type VehicleUncheckedUpdateWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tickets?: TicketUncheckedUpdateManyWithoutVehiclesNestedInput
-  }
-
-  export type VehicleUncheckedUpdateManyWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TicketUpdateWithoutClientInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
-    assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
-    attachments?: AttachmentUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateWithoutClientInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
-    attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateManyWithoutClientInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TicketUpdateWithoutVehiclesInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
-    author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
-    assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    tags?: TagUpdateManyWithoutTicketsNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
-    attachments?: AttachmentUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateWithoutVehiclesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    tags?: TagUncheckedUpdateManyWithoutTicketsNestedInput
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
-    attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateManyWithoutVehiclesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type TicketEntryCreateManyTicketInput = {
     id?: string
     body: string
@@ -17863,60 +12916,6 @@ export namespace Prisma {
     storageKey: string
     createdAt?: Date | string
     uploadedById: string
-  }
-
-  export type VehicleUpdateWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutVehiclesNestedInput
-  }
-
-  export type VehicleUncheckedUpdateWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type VehicleUncheckedUpdateManyWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagUpdateWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TagUncheckedUpdateWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TagUncheckedUpdateManyWithoutTicketsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketEntryUpdateWithoutTicketInput = {
@@ -17974,77 +12973,6 @@ export namespace Prisma {
     storageKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedById?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TicketUpdateWithoutTagsInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: ClientUpdateOneRequiredWithoutTicketsNestedInput
-    author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
-    assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    vehicles?: VehicleUpdateManyWithoutTicketsNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
-    attachments?: AttachmentUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateWithoutTagsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    vehicles?: VehicleUncheckedUpdateManyWithoutTicketsNestedInput
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
-    attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateManyWithoutTagsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    orderNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

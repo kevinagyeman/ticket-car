@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 
 import { Link } from "@/i18n/navigation";
 import { auth } from "@/server/auth";
-import { listClients, listTags } from "@/server/tickets";
 import { NewTicketForm } from "./new-ticket-form";
 
 export default async function NewTicketPage({
@@ -17,11 +16,7 @@ export default async function NewTicketPage({
 	const session = await auth();
 	if (!session?.user) redirect("/login");
 
-	const [clients, tags, t] = await Promise.all([
-		listClients(),
-		listTags(),
-		getTranslations("tickets"),
-	]);
+	const t = await getTranslations("tickets");
 
 	return (
 		<div className="min-h-dvh bg-background px-3 py-6 sm:px-6 sm:py-10">
@@ -37,8 +32,6 @@ export default async function NewTicketPage({
 				</div>
 				<NewTicketForm
 					authorName={session.user.name ?? session.user.email ?? ""}
-					clients={clients}
-					tags={tags}
 				/>
 			</div>
 		</div>

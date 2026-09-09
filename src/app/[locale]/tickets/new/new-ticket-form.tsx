@@ -10,20 +10,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { TICKET_PRIORITIES, TICKET_STATUSES } from "@/lib/tickets";
 import { type CreateTicketState, createTicket } from "@/server/ticket-actions";
 
-type Option = { id: string; name: string };
-
 const selectClass =
 	"h-8 w-full border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring";
 
-export function NewTicketForm({
-	clients,
-	tags,
-	authorName,
-}: {
-	clients: Option[];
-	tags: { id: string; name: string; color: string | null }[];
-	authorName: string;
-}) {
+export function NewTicketForm({ authorName }: { authorName: string }) {
 	const t = useTranslations("tickets");
 	const tStatus = useTranslations("tickets.status");
 	const tPriority = useTranslations("tickets.priority");
@@ -42,63 +32,32 @@ export function NewTicketForm({
 				</p>
 			) : null}
 
-			<Field label={t("field.plate")}>
-				<Input autoComplete="off" className="uppercase" name="plate" required />
-				<p className="mt-1 text-muted-foreground text-xs">
-					{t("new.plateHint")}
-				</p>
-			</Field>
-
-			<Field label={t("new.existingClient")}>
-				<select className={selectClass} defaultValue="" name="clientId">
-					<option value="">—</option>
-					{clients.map((c) => (
-						<option key={c.id} value={c.id}>
-							{c.name}
-						</option>
-					))}
-				</select>
-			</Field>
-
-			<fieldset className="grid grid-cols-1 gap-2 border border-border p-3 sm:grid-cols-3">
-				<legend className="px-1 text-muted-foreground text-xs">
-					{t("new.orNewClient")}
-				</legend>
-				<Field label={t("new.clientName")}>
-					<Input name="newClientName" />
-				</Field>
-				<Field label={t("new.clientEmail")}>
-					<Input name="newClientEmail" type="email" />
-				</Field>
-				<Field label={t("new.clientPhone")}>
-					<Input name="newClientPhone" />
-				</Field>
-			</fieldset>
-
-			<fieldset className="grid grid-cols-1 gap-2 border border-border p-3 sm:grid-cols-3">
-				<legend className="px-1 text-muted-foreground text-xs">
-					{t("new.vehicleHint")}
-				</legend>
-				<Field label={t("new.make")}>
-					<Input name="make" />
-				</Field>
-				<Field label={t("new.model")}>
-					<Input name="model" />
-				</Field>
-				<Field label={t("new.year")}>
-					<Input inputMode="numeric" name="year" />
-				</Field>
-			</fieldset>
-
 			<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+				<Field label={t("field.plate")}>
+					<Input
+						autoComplete="off"
+						className="uppercase"
+						name="plate"
+						required
+					/>
+				</Field>
+				<Field label={t("field.client")}>
+					<Input name="client" />
+				</Field>
 				<Field label={t("field.date")}>
 					<Input defaultValue={today} name="date" type="date" />
 				</Field>
-				<Field label={t("field.orderNumber")}>
-					<Input name="orderNumber" />
+				<Field label={t("field.make")}>
+					<Input defaultValue="TOYOTA" name="make" />
+				</Field>
+				<Field label={t("field.model")}>
+					<Input name="model" />
 				</Field>
 				<Field label={t("field.km")}>
 					<Input inputMode="numeric" name="km" />
+				</Field>
+				<Field label={t("field.ol")}>
+					<Input name="ol" />
 				</Field>
 				<Field label={t("field.systemModel")}>
 					<Input name="systemModel" />
@@ -138,22 +97,6 @@ export function NewTicketForm({
 					</select>
 				</Field>
 			</div>
-
-			{tags.length > 0 ? (
-				<Field label={t("field.tags")}>
-					<div className="flex flex-wrap gap-2">
-						{tags.map((tag) => (
-							<label
-								className="flex items-center gap-1.5 border border-border px-2 py-1 text-xs"
-								key={tag.id}
-							>
-								<input name="tagIds" type="checkbox" value={tag.id} />
-								{tag.name}
-							</label>
-						))}
-					</div>
-				</Field>
-			) : null}
 
 			<Field label={t("field.author")}>
 				<Input defaultValue={authorName} disabled readOnly />

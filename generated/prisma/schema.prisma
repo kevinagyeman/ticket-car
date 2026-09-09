@@ -71,41 +71,9 @@ model VerificationToken {
 }
 
 // ---------------------------------------------------------------------------
-// Domain
+// Tickets — self-contained: client / vehicle details are plain free-text
+// fields, no separate tables.
 // ---------------------------------------------------------------------------
-
-model Client {
-  id        String   @id @default(cuid())
-  name      String
-  email     String?
-  phone     String?
-  vatNumber String? // P.IVA / Codice Fiscale
-  address   String?  @db.Text
-  notes     String?  @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  vehicles Vehicle[]
-  tickets  Ticket[]
-}
-
-model Vehicle {
-  id        String   @id @default(cuid())
-  plate     String   @unique // targa
-  make      String?
-  model     String?
-  year      Int?
-  notes     String?  @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  clientId String
-  client   Client   @relation(fields: [clientId], references: [id])
-  tickets  Ticket[] @relation("TicketVehicles")
-
-  @@index([plate])
-  @@index([clientId])
-}
 
 model Ticket {
   // Small sequential int — shown to users as "#42", used in the URL.
@@ -117,8 +85,13 @@ model Ticket {
   // "LOW" | "NORMAL" | "HIGH" | "URGENT"
   priority String @default("NORMAL")
 
-  km              Int? // Km
-  orderNumber     String? // free-text reference / ID from an external system
+  client String? // client name + surname, free text ("just a note")
+  plate  String? // targa
+  make   String? @default("TOYOTA") // brand
+  model  String?
+  km     Int?
+  ol     String? // OL / order number — reference / ID from an external system
+
   systemModel     String? // "Modello radio" — infotainment / multimedia system model
   softwareVersion String? // firmware / MMI / software version, when known
 
@@ -132,20 +105,16 @@ model Ticket {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 
-  clientId   String
-  client     Client  @relation(fields: [clientId], references: [id])
   authorId   String // "Autore log" — defaults to the current user
   author     User    @relation("TicketAuthor", fields: [authorId], references: [id])
   assigneeId String?
   assignee   User?   @relation("TicketAssignee", fields: [assigneeId], references: [id])
 
-  vehicles    Vehicle[]     @relation("TicketVehicles") // a job can cover >1 car
-  tags        Tag[]         @relation("TicketTags")
   entries     TicketEntry[]
   attachments Attachment[]
 
   @@index([status])
-  @@index([clientId])
+  @@index([plate])
 }
 
 // Append-only running log for a ticket ("interfaccia log").
@@ -178,11 +147,4 @@ model Attachment {
   uploadedBy   User   @relation(fields: [uploadedById], references: [id])
 
   @@index([ticketId])
-}
-
-model Tag {
-  id      String   @id @default(cuid())
-  name    String   @unique
-  color   String?
-  tickets Ticket[] @relation("TicketTags")
 }
