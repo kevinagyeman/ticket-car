@@ -25,14 +25,15 @@ export function NewTicketForm({ authorName }: { authorName: string }) {
 	const today = new Date().toISOString().slice(0, 10);
 
 	return (
-		<form action={action} className="flex flex-col gap-4 text-sm">
+		<form action={action} className="flex flex-col gap-5 text-sm">
 			{state?.error ? (
 				<p className="border border-destructive/40 bg-destructive/5 px-3 py-2 text-destructive">
 					{t(`error.${state.error}`)}
 				</p>
 			) : null}
 
-			<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+			{/* one wrapping row of inputs */}
+			<div className="flex flex-wrap gap-3">
 				<Field label={t("field.plate")}>
 					<Input
 						autoComplete="off"
@@ -65,19 +66,6 @@ export function NewTicketForm({ authorName }: { authorName: string }) {
 				<Field label={t("field.softwareVersion")}>
 					<Input name="softwareVersion" />
 				</Field>
-			</div>
-
-			<Field label={t("field.complaint")}>
-				<Textarea name="complaint" required rows={3} />
-			</Field>
-			<Field label={t("field.diagnosis")}>
-				<Textarea name="diagnosis" rows={2} />
-			</Field>
-			<Field label={t("field.resolutionNote")}>
-				<Textarea name="resolutionNote" rows={2} />
-			</Field>
-
-			<div className="grid grid-cols-2 gap-2">
 				<Field label={t("field.status")}>
 					<select className={selectClass} defaultValue="OPEN" name="status">
 						{TICKET_STATUSES.map((s) => (
@@ -96,13 +84,25 @@ export function NewTicketForm({ authorName }: { authorName: string }) {
 						))}
 					</select>
 				</Field>
+				<Field label={t("field.author")}>
+					<Input defaultValue={authorName} disabled readOnly />
+				</Field>
 			</div>
 
-			<Field label={t("field.author")}>
-				<Input defaultValue={authorName} disabled readOnly />
-			</Field>
+			{/* text areas: side by side on wide screens, wrap on mobile */}
+			<div className="flex flex-wrap gap-3">
+				<TextField label={t("field.complaint")}>
+					<Textarea className="h-40 resize-y" name="complaint" required />
+				</TextField>
+				<TextField label={t("field.diagnosis")}>
+					<Textarea className="h-40 resize-y" name="diagnosis" />
+				</TextField>
+				<TextField label={t("field.resolutionNote")}>
+					<Textarea className="h-40 resize-y" name="resolutionNote" />
+				</TextField>
+			</div>
 
-			<div className="flex gap-2">
+			<div>
 				<Button disabled={pending} type="submit">
 					{pending ? "…" : t("new.create")}
 				</Button>
@@ -119,7 +119,22 @@ function Field({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="flex flex-col gap-1">
+		<div className="flex w-full flex-col gap-1 sm:min-w-[150px] sm:flex-1 sm:basis-40">
+			<Label className="text-muted-foreground text-xs">{label}</Label>
+			{children}
+		</div>
+	);
+}
+
+function TextField({
+	label,
+	children,
+}: {
+	label: string;
+	children: React.ReactNode;
+}) {
+	return (
+		<div className="flex w-full flex-col gap-1 sm:min-w-[280px] sm:flex-1 sm:basis-80">
 			<Label className="text-muted-foreground text-xs">{label}</Label>
 			{children}
 		</div>
