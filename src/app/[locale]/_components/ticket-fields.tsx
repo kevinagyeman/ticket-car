@@ -31,8 +31,8 @@ export type TicketTextValues = {
 const selectClass =
 	"h-8 w-full border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring";
 
-/** Field wrapper: full width on mobile, wrapping flex item from `sm` up. */
-export function Field({
+/** One cell in the fields grid. */
+function Field({
 	label,
 	children,
 }: {
@@ -40,7 +40,7 @@ export function Field({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="flex w-full flex-col gap-1 sm:min-w-[150px] sm:flex-1 sm:basis-40">
+		<div className="flex w-full flex-col gap-1">
 			<Label className="text-muted-foreground text-xs">{label}</Label>
 			{children}
 		</div>
@@ -83,7 +83,7 @@ export function TicketFormFields({
 	const isNew = !values;
 
 	return (
-		<div className="flex flex-wrap gap-3">
+		<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
 			<Field label={t("plate")}>
 				<Input
 					className="uppercase"
