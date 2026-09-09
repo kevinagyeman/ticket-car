@@ -2,10 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useRef, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { Input } from "@/components/ui/input";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { TICKET_STATUSES } from "@/lib/tickets";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +18,14 @@ export function SearchBar() {
 	const [pending, startTransition] = useTransition();
 	const debounce = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-	function apply(next: URLSearchParams) {
+	// controlled from local state — seeded once from the URL
+	const [q, setQ] = useState(() => params.get("q") ?? "");
+	const [status, setStatus] = useState(() => params.get("status") ?? "");
+
+	function apply(key: string, value: string) {
+		const next = new URLSearchParams(params);
+		if (value) next.set(key, value);
+		else next.delete(key);
 		startTransition(() => {
 			router.replace(
 				{ pathname, query: Object.fromEntries(next) },
@@ -27,31 +34,28 @@ export function SearchBar() {
 		});
 	}
 
-	function setParam(key: string, value: string) {
-		const next = new URLSearchParams(params);
-		if (value) next.set(key, value);
-		else next.delete(key);
-		apply(next);
-	}
-
 	return (
-		<div className="flex items-center gap-2">
+		<div className="flex w-full items-center gap-2">
 			<Input
 				aria-label={t("search")}
-				className={cn("h-8 w-full sm:w-72", pending && "opacity-70")}
-				defaultValue={params.get("q") ?? ""}
+				className={cn("h-8 min-w-0 flex-1", pending && "opacity-70")}
 				onChange={(e) => {
 					const value = e.target.value;
+					setQ(value);
 					clearTimeout(debounce.current);
-					debounce.current = setTimeout(() => setParam("q", value), 250);
+					debounce.current = setTimeout(() => apply("q", value), 250);
 				}}
 				placeholder={t("search")}
 				type="search"
+				value={q}
 			/>
 			<select
-				className="h-8 border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring"
-				defaultValue={params.get("status") ?? ""}
-				onChange={(e) => setParam("status", e.target.value)}
+				className="h-8 shrink-0 border border-input px-2 text-sm outline-none focus-visible:border-ring"
+				onChange={(e) => {
+					setStatus(e.target.value);
+					apply("status", e.target.value);
+				}}
+				value={status}
 			>
 				<option value="">{t("filterActive")}</option>
 				<option value="all">{t("filterAll")}</option>

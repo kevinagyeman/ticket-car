@@ -19,28 +19,17 @@ const nullify = (v?: string | null) => (v && v.trim() !== "" ? v.trim() : null);
 // --- mutations on an existing ticket -----------------------------------------
 
 export async function setTicketStatus(ticketId: number, value: string) {
-	const authorId = await requireUserId();
+	await requireUserId();
 	const status = ticketStatusSchema.parse(value);
 
-	const current = await db.ticket.findUnique({
+	await db.ticket.update({
 		where: { id: ticketId },
-		select: { status: true },
+		data: {
+			status,
+			closedAt:
+				status === "CLOSED" || status === "RESOLVED" ? new Date() : null,
+		},
 	});
-	if (!current || current.status === status) return;
-
-	await db.$transaction([
-		db.ticket.update({
-			where: { id: ticketId },
-			data: {
-				status,
-				closedAt:
-					status === "CLOSED" || status === "RESOLVED" ? new Date() : null,
-			},
-		}),
-		db.ticketEntry.create({
-			data: { ticketId, authorId, system: true, body: `status → ${status}` },
-		}),
-	]);
 
 	revalidatePath("/");
 }
@@ -98,24 +87,6 @@ export async function saveTicketFields(
 		},
 	});
 
-	revalidatePath("/");
-	return { ok: true };
-}
-
-const entrySchema = z.object({
-	ticketId: z.coerce.number().int(),
-	body: z.string().trim().min(1).max(10_000),
-});
-
-export async function addTicketEntry(
-	_prev: SaveState,
-	formData: FormData,
-): Promise<SaveState> {
-	const authorId = await requireUserId();
-	const parsed = entrySchema.safeParse(Object.fromEntries(formData));
-	if (!parsed.success) return { ok: false, error: "invalid" };
-
-	await db.ticketEntry.create({ data: { ...parsed.data, authorId } });
 	revalidatePath("/");
 	return { ok: true };
 }

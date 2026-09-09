@@ -61,9 +61,6 @@ export function TicketList({
 							) : null}
 							<div className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
 								<span>{format.relativeTime(ticket.updatedAt, now)}</span>
-								{ticket._count.entries > 0 ? (
-									<span>· {ticket._count.entries} log</span>
-								) : null}
 								{ticket._count.attachments > 0 ? (
 									<span>· {ticket._count.attachments} file</span>
 								) : null}

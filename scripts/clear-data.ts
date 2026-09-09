@@ -1,9 +1,8 @@
 import { db } from "../src/server/db";
 
-/** Wipes all tickets + log entries + attachments. Keeps user accounts. */
+/** Wipes all tickets + attachments. Keeps user accounts. */
 async function main() {
 	await db.attachment.deleteMany();
-	await db.ticketEntry.deleteMany();
 	await db.ticket.deleteMany();
 
 	try {
@@ -15,7 +14,6 @@ async function main() {
 	console.table({
 		users: await db.user.count(),
 		tickets: await db.ticket.count(),
-		entries: await db.ticketEntry.count(),
 		attachments: await db.attachment.count(),
 	});
 }

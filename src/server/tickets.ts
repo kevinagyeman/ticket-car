@@ -40,7 +40,7 @@ export async function listTickets({ q, status }: ListArgs = {}) {
 			plate: true,
 			complaint: true,
 			assignee: { select: { id: true, name: true } },
-			_count: { select: { entries: true, attachments: true } },
+			_count: { select: { attachments: true } },
 		},
 	});
 }
@@ -51,10 +51,6 @@ export async function getTicket(id: number) {
 		include: {
 			author: { select: { id: true, name: true, email: true } },
 			assignee: { select: { id: true, name: true, email: true } },
-			entries: {
-				orderBy: { createdAt: "asc" },
-				include: { author: { select: { id: true, name: true } } },
-			},
 			attachments: { orderBy: { createdAt: "asc" } },
 		},
 	});

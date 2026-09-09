@@ -184,15 +184,6 @@ exports.Prisma.TicketScalarFieldEnum = {
   assigneeId: 'assigneeId'
 };
 
-exports.Prisma.TicketEntryScalarFieldEnum = {
-  id: 'id',
-  body: 'body',
-  system: 'system',
-  createdAt: 'createdAt',
-  ticketId: 'ticketId',
-  authorId: 'authorId'
-};
-
 exports.Prisma.AttachmentScalarFieldEnum = {
   id: 'id',
   kind: 'kind',
@@ -265,12 +256,6 @@ exports.Prisma.TicketOrderByRelevanceFieldEnum = {
   assigneeId: 'assigneeId'
 };
 
-exports.Prisma.TicketEntryOrderByRelevanceFieldEnum = {
-  id: 'id',
-  body: 'body',
-  authorId: 'authorId'
-};
-
 exports.Prisma.AttachmentOrderByRelevanceFieldEnum = {
   id: 'id',
   kind: 'kind',
@@ -287,7 +272,6 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   Ticket: 'Ticket',
-  TicketEntry: 'TicketEntry',
   Attachment: 'Attachment'
 };
 

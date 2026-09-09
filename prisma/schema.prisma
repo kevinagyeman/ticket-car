@@ -29,9 +29,8 @@ model User {
 
     accounts        Account[]
     sessions        Session[]
-    ticketsAuthored Ticket[]      @relation("TicketAuthor")
-    ticketsAssigned Ticket[]      @relation("TicketAssignee")
-    ticketEntries   TicketEntry[]
+    ticketsAuthored Ticket[]     @relation("TicketAuthor")
+    ticketsAssigned Ticket[]     @relation("TicketAssignee")
     attachments     Attachment[]
 }
 
@@ -110,26 +109,10 @@ model Ticket {
     assigneeId String?
     assignee   User?   @relation("TicketAssignee", fields: [assigneeId], references: [id])
 
-    entries     TicketEntry[]
     attachments Attachment[]
 
     @@index([status])
     @@index([plate])
-}
-
-// Append-only running log for a ticket ("interfaccia log").
-model TicketEntry {
-    id        String   @id @default(cuid())
-    body      String   @db.Text
-    system    Boolean  @default(false) // true = auto entry ("status → RESOLVED")
-    createdAt DateTime @default(now())
-
-    ticketId Int
-    ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-    authorId String
-    author   User   @relation(fields: [authorId], references: [id])
-
-    @@index([ticketId, createdAt])
 }
 
 model Attachment {

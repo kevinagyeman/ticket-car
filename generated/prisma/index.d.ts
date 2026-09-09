@@ -39,11 +39,6 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  */
 export type Ticket = $Result.DefaultSelection<Prisma.$TicketPayload>
 /**
- * Model TicketEntry
- * 
- */
-export type TicketEntry = $Result.DefaultSelection<Prisma.$TicketEntryPayload>
-/**
  * Model Attachment
  * 
  */
@@ -216,16 +211,6 @@ export class PrismaClient<
     * ```
     */
   get ticket(): Prisma.TicketDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.ticketEntry`: Exposes CRUD operations for the **TicketEntry** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TicketEntries
-    * const ticketEntries = await prisma.ticketEntry.findMany()
-    * ```
-    */
-  get ticketEntry(): Prisma.TicketEntryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.attachment`: Exposes CRUD operations for the **Attachment** model.
@@ -682,7 +667,6 @@ export namespace Prisma {
     Session: 'Session',
     VerificationToken: 'VerificationToken',
     Ticket: 'Ticket',
-    TicketEntry: 'TicketEntry',
     Attachment: 'Attachment'
   };
 
@@ -702,7 +686,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "ticket" | "ticketEntry" | "attachment"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "ticket" | "attachment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1036,72 +1020,6 @@ export namespace Prisma {
           }
         }
       }
-      TicketEntry: {
-        payload: Prisma.$TicketEntryPayload<ExtArgs>
-        fields: Prisma.TicketEntryFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TicketEntryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TicketEntryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>
-          }
-          findFirst: {
-            args: Prisma.TicketEntryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TicketEntryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>
-          }
-          findMany: {
-            args: Prisma.TicketEntryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>[]
-          }
-          create: {
-            args: Prisma.TicketEntryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>
-          }
-          createMany: {
-            args: Prisma.TicketEntryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.TicketEntryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>
-          }
-          update: {
-            args: Prisma.TicketEntryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>
-          }
-          deleteMany: {
-            args: Prisma.TicketEntryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TicketEntryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.TicketEntryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TicketEntryPayload>
-          }
-          aggregate: {
-            args: Prisma.TicketEntryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTicketEntry>
-          }
-          groupBy: {
-            args: Prisma.TicketEntryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TicketEntryGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TicketEntryCountArgs<ExtArgs>
-            result: $Utils.Optional<TicketEntryCountAggregateOutputType> | number
-          }
-        }
-      }
       Attachment: {
         payload: Prisma.$AttachmentPayload<ExtArgs>
         fields: Prisma.AttachmentFieldRefs
@@ -1269,7 +1187,6 @@ export namespace Prisma {
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
     ticket?: TicketOmit
-    ticketEntry?: TicketEntryOmit
     attachment?: AttachmentOmit
   }
 
@@ -1355,7 +1272,6 @@ export namespace Prisma {
     sessions: number
     ticketsAuthored: number
     ticketsAssigned: number
-    ticketEntries: number
     attachments: number
   }
 
@@ -1364,7 +1280,6 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     ticketsAuthored?: boolean | UserCountOutputTypeCountTicketsAuthoredArgs
     ticketsAssigned?: boolean | UserCountOutputTypeCountTicketsAssignedArgs
-    ticketEntries?: boolean | UserCountOutputTypeCountTicketEntriesArgs
     attachments?: boolean | UserCountOutputTypeCountAttachmentsArgs
   }
 
@@ -1410,13 +1325,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountTicketEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketEntryWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AttachmentWhereInput
   }
@@ -1427,12 +1335,10 @@ export namespace Prisma {
    */
 
   export type TicketCountOutputType = {
-    entries: number
     attachments: number
   }
 
   export type TicketCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    entries?: boolean | TicketCountOutputTypeCountEntriesArgs
     attachments?: boolean | TicketCountOutputTypeCountAttachmentsArgs
   }
 
@@ -1445,13 +1351,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the TicketCountOutputType
      */
     select?: TicketCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TicketCountOutputType without action
-   */
-  export type TicketCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketEntryWhereInput
   }
 
   /**
@@ -1642,7 +1541,6 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     ticketsAuthored?: boolean | User$ticketsAuthoredArgs<ExtArgs>
     ticketsAssigned?: boolean | User$ticketsAssignedArgs<ExtArgs>
-    ticketEntries?: boolean | User$ticketEntriesArgs<ExtArgs>
     attachments?: boolean | User$attachmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1664,7 +1562,6 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     ticketsAuthored?: boolean | User$ticketsAuthoredArgs<ExtArgs>
     ticketsAssigned?: boolean | User$ticketsAssignedArgs<ExtArgs>
-    ticketEntries?: boolean | User$ticketEntriesArgs<ExtArgs>
     attachments?: boolean | User$attachmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1676,7 +1573,6 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       ticketsAuthored: Prisma.$TicketPayload<ExtArgs>[]
       ticketsAssigned: Prisma.$TicketPayload<ExtArgs>[]
-      ticketEntries: Prisma.$TicketEntryPayload<ExtArgs>[]
       attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2030,7 +1926,6 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ticketsAuthored<T extends User$ticketsAuthoredArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketsAuthoredArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ticketsAssigned<T extends User$ticketsAssignedArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketsAssignedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ticketEntries<T extends User$ticketEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     attachments<T extends User$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2503,30 +2398,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
-  }
-
-  /**
-   * User.ticketEntries
-   */
-  export type User$ticketEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    where?: TicketEntryWhereInput
-    orderBy?: TicketEntryOrderByWithRelationInput | TicketEntryOrderByWithRelationInput[]
-    cursor?: TicketEntryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketEntryScalarFieldEnum | TicketEntryScalarFieldEnum[]
   }
 
   /**
@@ -5745,7 +5616,6 @@ export namespace Prisma {
     assigneeId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Ticket$assigneeArgs<ExtArgs>
-    entries?: boolean | Ticket$entriesArgs<ExtArgs>
     attachments?: boolean | Ticket$attachmentsArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
@@ -5781,7 +5651,6 @@ export namespace Prisma {
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Ticket$assigneeArgs<ExtArgs>
-    entries?: boolean | Ticket$entriesArgs<ExtArgs>
     attachments?: boolean | Ticket$attachmentsArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -5791,7 +5660,6 @@ export namespace Prisma {
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
       assignee: Prisma.$UserPayload<ExtArgs> | null
-      entries: Prisma.$TicketEntryPayload<ExtArgs>[]
       attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6159,7 +6027,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assignee<T extends Ticket$assigneeArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$assigneeArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    entries<T extends Ticket$entriesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     attachments<T extends Ticket$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6574,30 +6441,6 @@ export namespace Prisma {
   }
 
   /**
-   * Ticket.entries
-   */
-  export type Ticket$entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    where?: TicketEntryWhereInput
-    orderBy?: TicketEntryOrderByWithRelationInput | TicketEntryOrderByWithRelationInput[]
-    cursor?: TicketEntryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketEntryScalarFieldEnum | TicketEntryScalarFieldEnum[]
-  }
-
-  /**
    * Ticket.attachments
    */
   export type Ticket$attachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6637,984 +6480,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TicketInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TicketEntry
-   */
-
-  export type AggregateTicketEntry = {
-    _count: TicketEntryCountAggregateOutputType | null
-    _avg: TicketEntryAvgAggregateOutputType | null
-    _sum: TicketEntrySumAggregateOutputType | null
-    _min: TicketEntryMinAggregateOutputType | null
-    _max: TicketEntryMaxAggregateOutputType | null
-  }
-
-  export type TicketEntryAvgAggregateOutputType = {
-    ticketId: number | null
-  }
-
-  export type TicketEntrySumAggregateOutputType = {
-    ticketId: number | null
-  }
-
-  export type TicketEntryMinAggregateOutputType = {
-    id: string | null
-    body: string | null
-    system: boolean | null
-    createdAt: Date | null
-    ticketId: number | null
-    authorId: string | null
-  }
-
-  export type TicketEntryMaxAggregateOutputType = {
-    id: string | null
-    body: string | null
-    system: boolean | null
-    createdAt: Date | null
-    ticketId: number | null
-    authorId: string | null
-  }
-
-  export type TicketEntryCountAggregateOutputType = {
-    id: number
-    body: number
-    system: number
-    createdAt: number
-    ticketId: number
-    authorId: number
-    _all: number
-  }
-
-
-  export type TicketEntryAvgAggregateInputType = {
-    ticketId?: true
-  }
-
-  export type TicketEntrySumAggregateInputType = {
-    ticketId?: true
-  }
-
-  export type TicketEntryMinAggregateInputType = {
-    id?: true
-    body?: true
-    system?: true
-    createdAt?: true
-    ticketId?: true
-    authorId?: true
-  }
-
-  export type TicketEntryMaxAggregateInputType = {
-    id?: true
-    body?: true
-    system?: true
-    createdAt?: true
-    ticketId?: true
-    authorId?: true
-  }
-
-  export type TicketEntryCountAggregateInputType = {
-    id?: true
-    body?: true
-    system?: true
-    createdAt?: true
-    ticketId?: true
-    authorId?: true
-    _all?: true
-  }
-
-  export type TicketEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TicketEntry to aggregate.
-     */
-    where?: TicketEntryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TicketEntries to fetch.
-     */
-    orderBy?: TicketEntryOrderByWithRelationInput | TicketEntryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TicketEntryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TicketEntries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TicketEntries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TicketEntries
-    **/
-    _count?: true | TicketEntryCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TicketEntryAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TicketEntrySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TicketEntryMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TicketEntryMaxAggregateInputType
-  }
-
-  export type GetTicketEntryAggregateType<T extends TicketEntryAggregateArgs> = {
-        [P in keyof T & keyof AggregateTicketEntry]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTicketEntry[P]>
-      : GetScalarType<T[P], AggregateTicketEntry[P]>
-  }
-
-
-
-
-  export type TicketEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketEntryWhereInput
-    orderBy?: TicketEntryOrderByWithAggregationInput | TicketEntryOrderByWithAggregationInput[]
-    by: TicketEntryScalarFieldEnum[] | TicketEntryScalarFieldEnum
-    having?: TicketEntryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TicketEntryCountAggregateInputType | true
-    _avg?: TicketEntryAvgAggregateInputType
-    _sum?: TicketEntrySumAggregateInputType
-    _min?: TicketEntryMinAggregateInputType
-    _max?: TicketEntryMaxAggregateInputType
-  }
-
-  export type TicketEntryGroupByOutputType = {
-    id: string
-    body: string
-    system: boolean
-    createdAt: Date
-    ticketId: number
-    authorId: string
-    _count: TicketEntryCountAggregateOutputType | null
-    _avg: TicketEntryAvgAggregateOutputType | null
-    _sum: TicketEntrySumAggregateOutputType | null
-    _min: TicketEntryMinAggregateOutputType | null
-    _max: TicketEntryMaxAggregateOutputType | null
-  }
-
-  type GetTicketEntryGroupByPayload<T extends TicketEntryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TicketEntryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TicketEntryGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TicketEntryGroupByOutputType[P]>
-            : GetScalarType<T[P], TicketEntryGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TicketEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    body?: boolean
-    system?: boolean
-    createdAt?: boolean
-    ticketId?: boolean
-    authorId?: boolean
-    ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ticketEntry"]>
-
-
-
-  export type TicketEntrySelectScalar = {
-    id?: boolean
-    body?: boolean
-    system?: boolean
-    createdAt?: boolean
-    ticketId?: boolean
-    authorId?: boolean
-  }
-
-  export type TicketEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "body" | "system" | "createdAt" | "ticketId" | "authorId", ExtArgs["result"]["ticketEntry"]>
-  export type TicketEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $TicketEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TicketEntry"
-    objects: {
-      ticket: Prisma.$TicketPayload<ExtArgs>
-      author: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      body: string
-      system: boolean
-      createdAt: Date
-      ticketId: number
-      authorId: string
-    }, ExtArgs["result"]["ticketEntry"]>
-    composites: {}
-  }
-
-  type TicketEntryGetPayload<S extends boolean | null | undefined | TicketEntryDefaultArgs> = $Result.GetResult<Prisma.$TicketEntryPayload, S>
-
-  type TicketEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TicketEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TicketEntryCountAggregateInputType | true
-    }
-
-  export interface TicketEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TicketEntry'], meta: { name: 'TicketEntry' } }
-    /**
-     * Find zero or one TicketEntry that matches the filter.
-     * @param {TicketEntryFindUniqueArgs} args - Arguments to find a TicketEntry
-     * @example
-     * // Get one TicketEntry
-     * const ticketEntry = await prisma.ticketEntry.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TicketEntryFindUniqueArgs>(args: SelectSubset<T, TicketEntryFindUniqueArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TicketEntry that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TicketEntryFindUniqueOrThrowArgs} args - Arguments to find a TicketEntry
-     * @example
-     * // Get one TicketEntry
-     * const ticketEntry = await prisma.ticketEntry.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TicketEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, TicketEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TicketEntry that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryFindFirstArgs} args - Arguments to find a TicketEntry
-     * @example
-     * // Get one TicketEntry
-     * const ticketEntry = await prisma.ticketEntry.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TicketEntryFindFirstArgs>(args?: SelectSubset<T, TicketEntryFindFirstArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TicketEntry that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryFindFirstOrThrowArgs} args - Arguments to find a TicketEntry
-     * @example
-     * // Get one TicketEntry
-     * const ticketEntry = await prisma.ticketEntry.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TicketEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, TicketEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TicketEntries that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TicketEntries
-     * const ticketEntries = await prisma.ticketEntry.findMany()
-     * 
-     * // Get first 10 TicketEntries
-     * const ticketEntries = await prisma.ticketEntry.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const ticketEntryWithIdOnly = await prisma.ticketEntry.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TicketEntryFindManyArgs>(args?: SelectSubset<T, TicketEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TicketEntry.
-     * @param {TicketEntryCreateArgs} args - Arguments to create a TicketEntry.
-     * @example
-     * // Create one TicketEntry
-     * const TicketEntry = await prisma.ticketEntry.create({
-     *   data: {
-     *     // ... data to create a TicketEntry
-     *   }
-     * })
-     * 
-     */
-    create<T extends TicketEntryCreateArgs>(args: SelectSubset<T, TicketEntryCreateArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TicketEntries.
-     * @param {TicketEntryCreateManyArgs} args - Arguments to create many TicketEntries.
-     * @example
-     * // Create many TicketEntries
-     * const ticketEntry = await prisma.ticketEntry.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TicketEntryCreateManyArgs>(args?: SelectSubset<T, TicketEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a TicketEntry.
-     * @param {TicketEntryDeleteArgs} args - Arguments to delete one TicketEntry.
-     * @example
-     * // Delete one TicketEntry
-     * const TicketEntry = await prisma.ticketEntry.delete({
-     *   where: {
-     *     // ... filter to delete one TicketEntry
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TicketEntryDeleteArgs>(args: SelectSubset<T, TicketEntryDeleteArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TicketEntry.
-     * @param {TicketEntryUpdateArgs} args - Arguments to update one TicketEntry.
-     * @example
-     * // Update one TicketEntry
-     * const ticketEntry = await prisma.ticketEntry.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TicketEntryUpdateArgs>(args: SelectSubset<T, TicketEntryUpdateArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TicketEntries.
-     * @param {TicketEntryDeleteManyArgs} args - Arguments to filter TicketEntries to delete.
-     * @example
-     * // Delete a few TicketEntries
-     * const { count } = await prisma.ticketEntry.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TicketEntryDeleteManyArgs>(args?: SelectSubset<T, TicketEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TicketEntries.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TicketEntries
-     * const ticketEntry = await prisma.ticketEntry.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TicketEntryUpdateManyArgs>(args: SelectSubset<T, TicketEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one TicketEntry.
-     * @param {TicketEntryUpsertArgs} args - Arguments to update or create a TicketEntry.
-     * @example
-     * // Update or create a TicketEntry
-     * const ticketEntry = await prisma.ticketEntry.upsert({
-     *   create: {
-     *     // ... data to create a TicketEntry
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TicketEntry we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TicketEntryUpsertArgs>(args: SelectSubset<T, TicketEntryUpsertArgs<ExtArgs>>): Prisma__TicketEntryClient<$Result.GetResult<Prisma.$TicketEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TicketEntries.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryCountArgs} args - Arguments to filter TicketEntries to count.
-     * @example
-     * // Count the number of TicketEntries
-     * const count = await prisma.ticketEntry.count({
-     *   where: {
-     *     // ... the filter for the TicketEntries we want to count
-     *   }
-     * })
-    **/
-    count<T extends TicketEntryCountArgs>(
-      args?: Subset<T, TicketEntryCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TicketEntryCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TicketEntry.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TicketEntryAggregateArgs>(args: Subset<T, TicketEntryAggregateArgs>): Prisma.PrismaPromise<GetTicketEntryAggregateType<T>>
-
-    /**
-     * Group by TicketEntry.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TicketEntryGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TicketEntryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TicketEntryGroupByArgs['orderBy'] }
-        : { orderBy?: TicketEntryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TicketEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTicketEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TicketEntry model
-   */
-  readonly fields: TicketEntryFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TicketEntry.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TicketEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    ticket<T extends TicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TicketDefaultArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TicketEntry model
-   */
-  interface TicketEntryFieldRefs {
-    readonly id: FieldRef<"TicketEntry", 'String'>
-    readonly body: FieldRef<"TicketEntry", 'String'>
-    readonly system: FieldRef<"TicketEntry", 'Boolean'>
-    readonly createdAt: FieldRef<"TicketEntry", 'DateTime'>
-    readonly ticketId: FieldRef<"TicketEntry", 'Int'>
-    readonly authorId: FieldRef<"TicketEntry", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TicketEntry findUnique
-   */
-  export type TicketEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * Filter, which TicketEntry to fetch.
-     */
-    where: TicketEntryWhereUniqueInput
-  }
-
-  /**
-   * TicketEntry findUniqueOrThrow
-   */
-  export type TicketEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * Filter, which TicketEntry to fetch.
-     */
-    where: TicketEntryWhereUniqueInput
-  }
-
-  /**
-   * TicketEntry findFirst
-   */
-  export type TicketEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * Filter, which TicketEntry to fetch.
-     */
-    where?: TicketEntryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TicketEntries to fetch.
-     */
-    orderBy?: TicketEntryOrderByWithRelationInput | TicketEntryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TicketEntries.
-     */
-    cursor?: TicketEntryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TicketEntries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TicketEntries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TicketEntries.
-     */
-    distinct?: TicketEntryScalarFieldEnum | TicketEntryScalarFieldEnum[]
-  }
-
-  /**
-   * TicketEntry findFirstOrThrow
-   */
-  export type TicketEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * Filter, which TicketEntry to fetch.
-     */
-    where?: TicketEntryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TicketEntries to fetch.
-     */
-    orderBy?: TicketEntryOrderByWithRelationInput | TicketEntryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TicketEntries.
-     */
-    cursor?: TicketEntryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TicketEntries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TicketEntries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TicketEntries.
-     */
-    distinct?: TicketEntryScalarFieldEnum | TicketEntryScalarFieldEnum[]
-  }
-
-  /**
-   * TicketEntry findMany
-   */
-  export type TicketEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * Filter, which TicketEntries to fetch.
-     */
-    where?: TicketEntryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TicketEntries to fetch.
-     */
-    orderBy?: TicketEntryOrderByWithRelationInput | TicketEntryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TicketEntries.
-     */
-    cursor?: TicketEntryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TicketEntries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TicketEntries.
-     */
-    skip?: number
-    distinct?: TicketEntryScalarFieldEnum | TicketEntryScalarFieldEnum[]
-  }
-
-  /**
-   * TicketEntry create
-   */
-  export type TicketEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TicketEntry.
-     */
-    data: XOR<TicketEntryCreateInput, TicketEntryUncheckedCreateInput>
-  }
-
-  /**
-   * TicketEntry createMany
-   */
-  export type TicketEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TicketEntries.
-     */
-    data: TicketEntryCreateManyInput | TicketEntryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TicketEntry update
-   */
-  export type TicketEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TicketEntry.
-     */
-    data: XOR<TicketEntryUpdateInput, TicketEntryUncheckedUpdateInput>
-    /**
-     * Choose, which TicketEntry to update.
-     */
-    where: TicketEntryWhereUniqueInput
-  }
-
-  /**
-   * TicketEntry updateMany
-   */
-  export type TicketEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TicketEntries.
-     */
-    data: XOR<TicketEntryUpdateManyMutationInput, TicketEntryUncheckedUpdateManyInput>
-    /**
-     * Filter which TicketEntries to update
-     */
-    where?: TicketEntryWhereInput
-    /**
-     * Limit how many TicketEntries to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TicketEntry upsert
-   */
-  export type TicketEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TicketEntry to update in case it exists.
-     */
-    where: TicketEntryWhereUniqueInput
-    /**
-     * In case the TicketEntry found by the `where` argument doesn't exist, create a new TicketEntry with this data.
-     */
-    create: XOR<TicketEntryCreateInput, TicketEntryUncheckedCreateInput>
-    /**
-     * In case the TicketEntry was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TicketEntryUpdateInput, TicketEntryUncheckedUpdateInput>
-  }
-
-  /**
-   * TicketEntry delete
-   */
-  export type TicketEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
-    /**
-     * Filter which TicketEntry to delete.
-     */
-    where: TicketEntryWhereUniqueInput
-  }
-
-  /**
-   * TicketEntry deleteMany
-   */
-  export type TicketEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TicketEntries to delete
-     */
-    where?: TicketEntryWhereInput
-    /**
-     * Limit how many TicketEntries to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TicketEntry without action
-   */
-  export type TicketEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketEntry
-     */
-    select?: TicketEntrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketEntry
-     */
-    omit?: TicketEntryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketEntryInclude<ExtArgs> | null
   }
 
 
@@ -8725,18 +7590,6 @@ export namespace Prisma {
   export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
 
 
-  export const TicketEntryScalarFieldEnum: {
-    id: 'id',
-    body: 'body',
-    system: 'system',
-    createdAt: 'createdAt',
-    ticketId: 'ticketId',
-    authorId: 'authorId'
-  };
-
-  export type TicketEntryScalarFieldEnum = (typeof TicketEntryScalarFieldEnum)[keyof typeof TicketEntryScalarFieldEnum]
-
-
   export const AttachmentScalarFieldEnum: {
     id: 'id',
     kind: 'kind',
@@ -8833,15 +7686,6 @@ export namespace Prisma {
   export type TicketOrderByRelevanceFieldEnum = (typeof TicketOrderByRelevanceFieldEnum)[keyof typeof TicketOrderByRelevanceFieldEnum]
 
 
-  export const TicketEntryOrderByRelevanceFieldEnum: {
-    id: 'id',
-    body: 'body',
-    authorId: 'authorId'
-  };
-
-  export type TicketEntryOrderByRelevanceFieldEnum = (typeof TicketEntryOrderByRelevanceFieldEnum)[keyof typeof TicketEntryOrderByRelevanceFieldEnum]
-
-
   export const AttachmentOrderByRelevanceFieldEnum: {
     id: 'id',
     kind: 'kind',
@@ -8881,13 +7725,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -8911,7 +7748,6 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     ticketsAuthored?: TicketListRelationFilter
     ticketsAssigned?: TicketListRelationFilter
-    ticketEntries?: TicketEntryListRelationFilter
     attachments?: AttachmentListRelationFilter
   }
 
@@ -8926,7 +7762,6 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     ticketsAuthored?: TicketOrderByRelationAggregateInput
     ticketsAssigned?: TicketOrderByRelationAggregateInput
-    ticketEntries?: TicketEntryOrderByRelationAggregateInput
     attachments?: AttachmentOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
@@ -8945,7 +7780,6 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     ticketsAuthored?: TicketListRelationFilter
     ticketsAssigned?: TicketListRelationFilter
-    ticketEntries?: TicketEntryListRelationFilter
     attachments?: AttachmentListRelationFilter
   }, "id" | "email">
 
@@ -9195,7 +8029,6 @@ export namespace Prisma {
     assigneeId?: StringNullableFilter<"Ticket"> | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    entries?: TicketEntryListRelationFilter
     attachments?: AttachmentListRelationFilter
   }
 
@@ -9224,7 +8057,6 @@ export namespace Prisma {
     assigneeId?: SortOrderInput | SortOrder
     author?: UserOrderByWithRelationInput
     assignee?: UserOrderByWithRelationInput
-    entries?: TicketEntryOrderByRelationAggregateInput
     attachments?: AttachmentOrderByRelationAggregateInput
     _relevance?: TicketOrderByRelevanceInput
   }
@@ -9257,7 +8089,6 @@ export namespace Prisma {
     assigneeId?: StringNullableFilter<"Ticket"> | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    entries?: TicketEntryListRelationFilter
     attachments?: AttachmentListRelationFilter
   }, "id">
 
@@ -9317,72 +8148,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     authorId?: StringWithAggregatesFilter<"Ticket"> | string
     assigneeId?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
-  }
-
-  export type TicketEntryWhereInput = {
-    AND?: TicketEntryWhereInput | TicketEntryWhereInput[]
-    OR?: TicketEntryWhereInput[]
-    NOT?: TicketEntryWhereInput | TicketEntryWhereInput[]
-    id?: StringFilter<"TicketEntry"> | string
-    body?: StringFilter<"TicketEntry"> | string
-    system?: BoolFilter<"TicketEntry"> | boolean
-    createdAt?: DateTimeFilter<"TicketEntry"> | Date | string
-    ticketId?: IntFilter<"TicketEntry"> | number
-    authorId?: StringFilter<"TicketEntry"> | string
-    ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type TicketEntryOrderByWithRelationInput = {
-    id?: SortOrder
-    body?: SortOrder
-    system?: SortOrder
-    createdAt?: SortOrder
-    ticketId?: SortOrder
-    authorId?: SortOrder
-    ticket?: TicketOrderByWithRelationInput
-    author?: UserOrderByWithRelationInput
-    _relevance?: TicketEntryOrderByRelevanceInput
-  }
-
-  export type TicketEntryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: TicketEntryWhereInput | TicketEntryWhereInput[]
-    OR?: TicketEntryWhereInput[]
-    NOT?: TicketEntryWhereInput | TicketEntryWhereInput[]
-    body?: StringFilter<"TicketEntry"> | string
-    system?: BoolFilter<"TicketEntry"> | boolean
-    createdAt?: DateTimeFilter<"TicketEntry"> | Date | string
-    ticketId?: IntFilter<"TicketEntry"> | number
-    authorId?: StringFilter<"TicketEntry"> | string
-    ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type TicketEntryOrderByWithAggregationInput = {
-    id?: SortOrder
-    body?: SortOrder
-    system?: SortOrder
-    createdAt?: SortOrder
-    ticketId?: SortOrder
-    authorId?: SortOrder
-    _count?: TicketEntryCountOrderByAggregateInput
-    _avg?: TicketEntryAvgOrderByAggregateInput
-    _max?: TicketEntryMaxOrderByAggregateInput
-    _min?: TicketEntryMinOrderByAggregateInput
-    _sum?: TicketEntrySumOrderByAggregateInput
-  }
-
-  export type TicketEntryScalarWhereWithAggregatesInput = {
-    AND?: TicketEntryScalarWhereWithAggregatesInput | TicketEntryScalarWhereWithAggregatesInput[]
-    OR?: TicketEntryScalarWhereWithAggregatesInput[]
-    NOT?: TicketEntryScalarWhereWithAggregatesInput | TicketEntryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TicketEntry"> | string
-    body?: StringWithAggregatesFilter<"TicketEntry"> | string
-    system?: BoolWithAggregatesFilter<"TicketEntry"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"TicketEntry"> | Date | string
-    ticketId?: IntWithAggregatesFilter<"TicketEntry"> | number
-    authorId?: StringWithAggregatesFilter<"TicketEntry"> | string
   }
 
   export type AttachmentWhereInput = {
@@ -9477,7 +8242,6 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentCreateNestedManyWithoutUploadedByInput
   }
 
@@ -9492,7 +8256,6 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketUncheckedCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketUncheckedCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryUncheckedCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   }
 
@@ -9507,7 +8270,6 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -9522,7 +8284,6 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUncheckedUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUncheckedUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -9776,7 +8537,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
 
@@ -9803,7 +8563,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     authorId: string
     assigneeId?: string | null
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -9829,7 +8588,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
 
@@ -9856,7 +8614,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -9930,67 +8687,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TicketEntryCreateInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    ticket: TicketCreateNestedOneWithoutEntriesInput
-    author: UserCreateNestedOneWithoutTicketEntriesInput
-  }
-
-  export type TicketEntryUncheckedCreateInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    ticketId: number
-    authorId: string
-  }
-
-  export type TicketEntryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticket?: TicketUpdateOneRequiredWithoutEntriesNestedInput
-    author?: UserUpdateOneRequiredWithoutTicketEntriesNestedInput
-  }
-
-  export type TicketEntryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TicketEntryCreateManyInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    ticketId: number
-    authorId: string
-  }
-
-  export type TicketEntryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TicketEntryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AttachmentCreateInput = {
@@ -10134,12 +8830,6 @@ export namespace Prisma {
     none?: TicketWhereInput
   }
 
-  export type TicketEntryListRelationFilter = {
-    every?: TicketEntryWhereInput
-    some?: TicketEntryWhereInput
-    none?: TicketEntryWhereInput
-  }
-
   export type AttachmentListRelationFilter = {
     every?: AttachmentWhereInput
     some?: AttachmentWhereInput
@@ -10160,10 +8850,6 @@ export namespace Prisma {
   }
 
   export type TicketOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TicketEntryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10559,63 +9245,9 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type TicketScalarRelationFilter = {
     is?: TicketWhereInput
     isNot?: TicketWhereInput
-  }
-
-  export type TicketEntryOrderByRelevanceInput = {
-    fields: TicketEntryOrderByRelevanceFieldEnum | TicketEntryOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type TicketEntryCountOrderByAggregateInput = {
-    id?: SortOrder
-    body?: SortOrder
-    system?: SortOrder
-    createdAt?: SortOrder
-    ticketId?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type TicketEntryAvgOrderByAggregateInput = {
-    ticketId?: SortOrder
-  }
-
-  export type TicketEntryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    body?: SortOrder
-    system?: SortOrder
-    createdAt?: SortOrder
-    ticketId?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type TicketEntryMinOrderByAggregateInput = {
-    id?: SortOrder
-    body?: SortOrder
-    system?: SortOrder
-    createdAt?: SortOrder
-    ticketId?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type TicketEntrySumOrderByAggregateInput = {
-    ticketId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type AttachmentOrderByRelevanceInput = {
@@ -10698,13 +9330,6 @@ export namespace Prisma {
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
   }
 
-  export type TicketEntryCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<TicketEntryCreateWithoutAuthorInput, TicketEntryUncheckedCreateWithoutAuthorInput> | TicketEntryCreateWithoutAuthorInput[] | TicketEntryUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutAuthorInput | TicketEntryCreateOrConnectWithoutAuthorInput[]
-    createMany?: TicketEntryCreateManyAuthorInputEnvelope
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-  }
-
   export type AttachmentCreateNestedManyWithoutUploadedByInput = {
     create?: XOR<AttachmentCreateWithoutUploadedByInput, AttachmentUncheckedCreateWithoutUploadedByInput> | AttachmentCreateWithoutUploadedByInput[] | AttachmentUncheckedCreateWithoutUploadedByInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutUploadedByInput | AttachmentCreateOrConnectWithoutUploadedByInput[]
@@ -10738,13 +9363,6 @@ export namespace Prisma {
     connectOrCreate?: TicketCreateOrConnectWithoutAssigneeInput | TicketCreateOrConnectWithoutAssigneeInput[]
     createMany?: TicketCreateManyAssigneeInputEnvelope
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type TicketEntryUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<TicketEntryCreateWithoutAuthorInput, TicketEntryUncheckedCreateWithoutAuthorInput> | TicketEntryCreateWithoutAuthorInput[] | TicketEntryUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutAuthorInput | TicketEntryCreateOrConnectWithoutAuthorInput[]
-    createMany?: TicketEntryCreateManyAuthorInputEnvelope
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
   }
 
   export type AttachmentUncheckedCreateNestedManyWithoutUploadedByInput = {
@@ -10822,20 +9440,6 @@ export namespace Prisma {
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
-  export type TicketEntryUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<TicketEntryCreateWithoutAuthorInput, TicketEntryUncheckedCreateWithoutAuthorInput> | TicketEntryCreateWithoutAuthorInput[] | TicketEntryUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutAuthorInput | TicketEntryCreateOrConnectWithoutAuthorInput[]
-    upsert?: TicketEntryUpsertWithWhereUniqueWithoutAuthorInput | TicketEntryUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: TicketEntryCreateManyAuthorInputEnvelope
-    set?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    disconnect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    delete?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    update?: TicketEntryUpdateWithWhereUniqueWithoutAuthorInput | TicketEntryUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: TicketEntryUpdateManyWithWhereWithoutAuthorInput | TicketEntryUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: TicketEntryScalarWhereInput | TicketEntryScalarWhereInput[]
-  }
-
   export type AttachmentUpdateManyWithoutUploadedByNestedInput = {
     create?: XOR<AttachmentCreateWithoutUploadedByInput, AttachmentUncheckedCreateWithoutUploadedByInput> | AttachmentCreateWithoutUploadedByInput[] | AttachmentUncheckedCreateWithoutUploadedByInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutUploadedByInput | AttachmentCreateOrConnectWithoutUploadedByInput[]
@@ -10906,20 +9510,6 @@ export namespace Prisma {
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
-  export type TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<TicketEntryCreateWithoutAuthorInput, TicketEntryUncheckedCreateWithoutAuthorInput> | TicketEntryCreateWithoutAuthorInput[] | TicketEntryUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutAuthorInput | TicketEntryCreateOrConnectWithoutAuthorInput[]
-    upsert?: TicketEntryUpsertWithWhereUniqueWithoutAuthorInput | TicketEntryUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: TicketEntryCreateManyAuthorInputEnvelope
-    set?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    disconnect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    delete?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    update?: TicketEntryUpdateWithWhereUniqueWithoutAuthorInput | TicketEntryUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: TicketEntryUpdateManyWithWhereWithoutAuthorInput | TicketEntryUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: TicketEntryScalarWhereInput | TicketEntryScalarWhereInput[]
-  }
-
   export type AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput = {
     create?: XOR<AttachmentCreateWithoutUploadedByInput, AttachmentUncheckedCreateWithoutUploadedByInput> | AttachmentCreateWithoutUploadedByInput[] | AttachmentUncheckedCreateWithoutUploadedByInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutUploadedByInput | AttachmentCreateOrConnectWithoutUploadedByInput[]
@@ -10986,25 +9576,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type TicketEntryCreateNestedManyWithoutTicketInput = {
-    create?: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput> | TicketEntryCreateWithoutTicketInput[] | TicketEntryUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutTicketInput | TicketEntryCreateOrConnectWithoutTicketInput[]
-    createMany?: TicketEntryCreateManyTicketInputEnvelope
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-  }
-
   export type AttachmentCreateNestedManyWithoutTicketInput = {
     create?: XOR<AttachmentCreateWithoutTicketInput, AttachmentUncheckedCreateWithoutTicketInput> | AttachmentCreateWithoutTicketInput[] | AttachmentUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutTicketInput | AttachmentCreateOrConnectWithoutTicketInput[]
     createMany?: AttachmentCreateManyTicketInputEnvelope
     connect?: AttachmentWhereUniqueInput | AttachmentWhereUniqueInput[]
-  }
-
-  export type TicketEntryUncheckedCreateNestedManyWithoutTicketInput = {
-    create?: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput> | TicketEntryCreateWithoutTicketInput[] | TicketEntryUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutTicketInput | TicketEntryCreateOrConnectWithoutTicketInput[]
-    createMany?: TicketEntryCreateManyTicketInputEnvelope
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
   }
 
   export type AttachmentUncheckedCreateNestedManyWithoutTicketInput = {
@@ -11032,20 +9608,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTicketsAssignedInput, UserUpdateWithoutTicketsAssignedInput>, UserUncheckedUpdateWithoutTicketsAssignedInput>
   }
 
-  export type TicketEntryUpdateManyWithoutTicketNestedInput = {
-    create?: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput> | TicketEntryCreateWithoutTicketInput[] | TicketEntryUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutTicketInput | TicketEntryCreateOrConnectWithoutTicketInput[]
-    upsert?: TicketEntryUpsertWithWhereUniqueWithoutTicketInput | TicketEntryUpsertWithWhereUniqueWithoutTicketInput[]
-    createMany?: TicketEntryCreateManyTicketInputEnvelope
-    set?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    disconnect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    delete?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    update?: TicketEntryUpdateWithWhereUniqueWithoutTicketInput | TicketEntryUpdateWithWhereUniqueWithoutTicketInput[]
-    updateMany?: TicketEntryUpdateManyWithWhereWithoutTicketInput | TicketEntryUpdateManyWithWhereWithoutTicketInput[]
-    deleteMany?: TicketEntryScalarWhereInput | TicketEntryScalarWhereInput[]
-  }
-
   export type AttachmentUpdateManyWithoutTicketNestedInput = {
     create?: XOR<AttachmentCreateWithoutTicketInput, AttachmentUncheckedCreateWithoutTicketInput> | AttachmentCreateWithoutTicketInput[] | AttachmentUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutTicketInput | AttachmentCreateOrConnectWithoutTicketInput[]
@@ -11068,20 +9630,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type TicketEntryUncheckedUpdateManyWithoutTicketNestedInput = {
-    create?: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput> | TicketEntryCreateWithoutTicketInput[] | TicketEntryUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: TicketEntryCreateOrConnectWithoutTicketInput | TicketEntryCreateOrConnectWithoutTicketInput[]
-    upsert?: TicketEntryUpsertWithWhereUniqueWithoutTicketInput | TicketEntryUpsertWithWhereUniqueWithoutTicketInput[]
-    createMany?: TicketEntryCreateManyTicketInputEnvelope
-    set?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    disconnect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    delete?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    connect?: TicketEntryWhereUniqueInput | TicketEntryWhereUniqueInput[]
-    update?: TicketEntryUpdateWithWhereUniqueWithoutTicketInput | TicketEntryUpdateWithWhereUniqueWithoutTicketInput[]
-    updateMany?: TicketEntryUpdateManyWithWhereWithoutTicketInput | TicketEntryUpdateManyWithWhereWithoutTicketInput[]
-    deleteMany?: TicketEntryScalarWhereInput | TicketEntryScalarWhereInput[]
-  }
-
   export type AttachmentUncheckedUpdateManyWithoutTicketNestedInput = {
     create?: XOR<AttachmentCreateWithoutTicketInput, AttachmentUncheckedCreateWithoutTicketInput> | AttachmentCreateWithoutTicketInput[] | AttachmentUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutTicketInput | AttachmentCreateOrConnectWithoutTicketInput[]
@@ -11094,38 +9642,6 @@ export namespace Prisma {
     update?: AttachmentUpdateWithWhereUniqueWithoutTicketInput | AttachmentUpdateWithWhereUniqueWithoutTicketInput[]
     updateMany?: AttachmentUpdateManyWithWhereWithoutTicketInput | AttachmentUpdateManyWithWhereWithoutTicketInput[]
     deleteMany?: AttachmentScalarWhereInput | AttachmentScalarWhereInput[]
-  }
-
-  export type TicketCreateNestedOneWithoutEntriesInput = {
-    create?: XOR<TicketCreateWithoutEntriesInput, TicketUncheckedCreateWithoutEntriesInput>
-    connectOrCreate?: TicketCreateOrConnectWithoutEntriesInput
-    connect?: TicketWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutTicketEntriesInput = {
-    create?: XOR<UserCreateWithoutTicketEntriesInput, UserUncheckedCreateWithoutTicketEntriesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTicketEntriesInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type TicketUpdateOneRequiredWithoutEntriesNestedInput = {
-    create?: XOR<TicketCreateWithoutEntriesInput, TicketUncheckedCreateWithoutEntriesInput>
-    connectOrCreate?: TicketCreateOrConnectWithoutEntriesInput
-    upsert?: TicketUpsertWithoutEntriesInput
-    connect?: TicketWhereUniqueInput
-    update?: XOR<XOR<TicketUpdateToOneWithWhereWithoutEntriesInput, TicketUpdateWithoutEntriesInput>, TicketUncheckedUpdateWithoutEntriesInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutTicketEntriesNestedInput = {
-    create?: XOR<UserCreateWithoutTicketEntriesInput, UserUncheckedCreateWithoutTicketEntriesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTicketEntriesInput
-    upsert?: UserUpsertWithoutTicketEntriesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTicketEntriesInput, UserUpdateWithoutTicketEntriesInput>, UserUncheckedUpdateWithoutTicketEntriesInput>
   }
 
   export type TicketCreateNestedOneWithoutAttachmentsInput = {
@@ -11348,19 +9864,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -11444,7 +9947,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
 
@@ -11470,7 +9972,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     assigneeId?: string | null
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -11505,7 +10006,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
     attachments?: AttachmentCreateNestedManyWithoutTicketInput
   }
 
@@ -11531,7 +10031,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -11542,32 +10041,6 @@ export namespace Prisma {
 
   export type TicketCreateManyAssigneeInputEnvelope = {
     data: TicketCreateManyAssigneeInput | TicketCreateManyAssigneeInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TicketEntryCreateWithoutAuthorInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    ticket: TicketCreateNestedOneWithoutEntriesInput
-  }
-
-  export type TicketEntryUncheckedCreateWithoutAuthorInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    ticketId: number
-  }
-
-  export type TicketEntryCreateOrConnectWithoutAuthorInput = {
-    where: TicketEntryWhereUniqueInput
-    create: XOR<TicketEntryCreateWithoutAuthorInput, TicketEntryUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type TicketEntryCreateManyAuthorInputEnvelope = {
-    data: TicketEntryCreateManyAuthorInput | TicketEntryCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -11724,34 +10197,6 @@ export namespace Prisma {
     data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutAssigneeInput>
   }
 
-  export type TicketEntryUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: TicketEntryWhereUniqueInput
-    update: XOR<TicketEntryUpdateWithoutAuthorInput, TicketEntryUncheckedUpdateWithoutAuthorInput>
-    create: XOR<TicketEntryCreateWithoutAuthorInput, TicketEntryUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type TicketEntryUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: TicketEntryWhereUniqueInput
-    data: XOR<TicketEntryUpdateWithoutAuthorInput, TicketEntryUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type TicketEntryUpdateManyWithWhereWithoutAuthorInput = {
-    where: TicketEntryScalarWhereInput
-    data: XOR<TicketEntryUpdateManyMutationInput, TicketEntryUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type TicketEntryScalarWhereInput = {
-    AND?: TicketEntryScalarWhereInput | TicketEntryScalarWhereInput[]
-    OR?: TicketEntryScalarWhereInput[]
-    NOT?: TicketEntryScalarWhereInput | TicketEntryScalarWhereInput[]
-    id?: StringFilter<"TicketEntry"> | string
-    body?: StringFilter<"TicketEntry"> | string
-    system?: BoolFilter<"TicketEntry"> | boolean
-    createdAt?: DateTimeFilter<"TicketEntry"> | Date | string
-    ticketId?: IntFilter<"TicketEntry"> | number
-    authorId?: StringFilter<"TicketEntry"> | string
-  }
-
   export type AttachmentUpsertWithWhereUniqueWithoutUploadedByInput = {
     where: AttachmentWhereUniqueInput
     update: XOR<AttachmentUpdateWithoutUploadedByInput, AttachmentUncheckedUpdateWithoutUploadedByInput>
@@ -11793,7 +10238,6 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11807,7 +10251,6 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketUncheckedCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketUncheckedCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryUncheckedCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11837,7 +10280,6 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -11851,7 +10293,6 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUncheckedUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUncheckedUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -11865,7 +10306,6 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11879,7 +10319,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketUncheckedCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketUncheckedCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryUncheckedCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11909,7 +10348,6 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -11923,7 +10361,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUncheckedUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUncheckedUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -11937,7 +10374,6 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     ticketsAssigned?: TicketCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11951,7 +10387,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     ticketsAssigned?: TicketUncheckedCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryUncheckedCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11970,7 +10405,6 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketCreateNestedManyWithoutAuthorInput
-    ticketEntries?: TicketEntryCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentCreateNestedManyWithoutUploadedByInput
   }
 
@@ -11984,39 +10418,12 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketUncheckedCreateNestedManyWithoutAuthorInput
-    ticketEntries?: TicketEntryUncheckedCreateNestedManyWithoutAuthorInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   }
 
   export type UserCreateOrConnectWithoutTicketsAssignedInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutTicketsAssignedInput, UserUncheckedCreateWithoutTicketsAssignedInput>
-  }
-
-  export type TicketEntryCreateWithoutTicketInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    author: UserCreateNestedOneWithoutTicketEntriesInput
-  }
-
-  export type TicketEntryUncheckedCreateWithoutTicketInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    authorId: string
-  }
-
-  export type TicketEntryCreateOrConnectWithoutTicketInput = {
-    where: TicketEntryWhereUniqueInput
-    create: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput>
-  }
-
-  export type TicketEntryCreateManyTicketInputEnvelope = {
-    data: TicketEntryCreateManyTicketInput | TicketEntryCreateManyTicketInput[]
-    skipDuplicates?: boolean
   }
 
   export type AttachmentCreateWithoutTicketInput = {
@@ -12072,7 +10479,6 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     ticketsAssigned?: TicketUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -12086,7 +10492,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     ticketsAssigned?: TicketUncheckedUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -12111,7 +10516,6 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUpdateManyWithoutAuthorNestedInput
-    ticketEntries?: TicketEntryUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUpdateManyWithoutUploadedByNestedInput
   }
 
@@ -12125,24 +10529,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUncheckedUpdateManyWithoutAuthorNestedInput
-    ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
-  }
-
-  export type TicketEntryUpsertWithWhereUniqueWithoutTicketInput = {
-    where: TicketEntryWhereUniqueInput
-    update: XOR<TicketEntryUpdateWithoutTicketInput, TicketEntryUncheckedUpdateWithoutTicketInput>
-    create: XOR<TicketEntryCreateWithoutTicketInput, TicketEntryUncheckedCreateWithoutTicketInput>
-  }
-
-  export type TicketEntryUpdateWithWhereUniqueWithoutTicketInput = {
-    where: TicketEntryWhereUniqueInput
-    data: XOR<TicketEntryUpdateWithoutTicketInput, TicketEntryUncheckedUpdateWithoutTicketInput>
-  }
-
-  export type TicketEntryUpdateManyWithWhereWithoutTicketInput = {
-    where: TicketEntryScalarWhereInput
-    data: XOR<TicketEntryUpdateManyMutationInput, TicketEntryUncheckedUpdateManyWithoutTicketInput>
   }
 
   export type AttachmentUpsertWithWhereUniqueWithoutTicketInput = {
@@ -12159,196 +10546,6 @@ export namespace Prisma {
   export type AttachmentUpdateManyWithWhereWithoutTicketInput = {
     where: AttachmentScalarWhereInput
     data: XOR<AttachmentUpdateManyMutationInput, AttachmentUncheckedUpdateManyWithoutTicketInput>
-  }
-
-  export type TicketCreateWithoutEntriesInput = {
-    date?: Date | string
-    status?: string
-    priority?: string
-    client?: string | null
-    plate?: string | null
-    make?: string | null
-    model?: string | null
-    km?: number | null
-    ol?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutTicketsAuthoredInput
-    assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    attachments?: AttachmentCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketUncheckedCreateWithoutEntriesInput = {
-    id?: number
-    date?: Date | string
-    status?: string
-    priority?: string
-    client?: string | null
-    plate?: string | null
-    make?: string | null
-    model?: string | null
-    km?: number | null
-    ol?: string | null
-    systemModel?: string | null
-    softwareVersion?: string | null
-    complaint?: string | null
-    diagnosis?: string | null
-    resolutionNote?: string | null
-    openedAt?: Date | string
-    closedAt?: Date | string | null
-    archivedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    assigneeId?: string | null
-    attachments?: AttachmentUncheckedCreateNestedManyWithoutTicketInput
-  }
-
-  export type TicketCreateOrConnectWithoutEntriesInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutEntriesInput, TicketUncheckedCreateWithoutEntriesInput>
-  }
-
-  export type UserCreateWithoutTicketEntriesInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    password?: string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    ticketsAuthored?: TicketCreateNestedManyWithoutAuthorInput
-    ticketsAssigned?: TicketCreateNestedManyWithoutAssigneeInput
-    attachments?: AttachmentCreateNestedManyWithoutUploadedByInput
-  }
-
-  export type UserUncheckedCreateWithoutTicketEntriesInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    password?: string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    ticketsAuthored?: TicketUncheckedCreateNestedManyWithoutAuthorInput
-    ticketsAssigned?: TicketUncheckedCreateNestedManyWithoutAssigneeInput
-    attachments?: AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
-  }
-
-  export type UserCreateOrConnectWithoutTicketEntriesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutTicketEntriesInput, UserUncheckedCreateWithoutTicketEntriesInput>
-  }
-
-  export type TicketUpsertWithoutEntriesInput = {
-    update: XOR<TicketUpdateWithoutEntriesInput, TicketUncheckedUpdateWithoutEntriesInput>
-    create: XOR<TicketCreateWithoutEntriesInput, TicketUncheckedCreateWithoutEntriesInput>
-    where?: TicketWhereInput
-  }
-
-  export type TicketUpdateToOneWithWhereWithoutEntriesInput = {
-    where?: TicketWhereInput
-    data: XOR<TicketUpdateWithoutEntriesInput, TicketUncheckedUpdateWithoutEntriesInput>
-  }
-
-  export type TicketUpdateWithoutEntriesInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    client?: NullableStringFieldUpdateOperationsInput | string | null
-    plate?: NullableStringFieldUpdateOperationsInput | string | null
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    ol?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
-    assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    attachments?: AttachmentUpdateManyWithoutTicketNestedInput
-  }
-
-  export type TicketUncheckedUpdateWithoutEntriesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    priority?: StringFieldUpdateOperationsInput | string
-    client?: NullableStringFieldUpdateOperationsInput | string | null
-    plate?: NullableStringFieldUpdateOperationsInput | string | null
-    make?: NullableStringFieldUpdateOperationsInput | string | null
-    model?: NullableStringFieldUpdateOperationsInput | string | null
-    km?: NullableIntFieldUpdateOperationsInput | number | null
-    ol?: NullableStringFieldUpdateOperationsInput | string | null
-    systemModel?: NullableStringFieldUpdateOperationsInput | string | null
-    softwareVersion?: NullableStringFieldUpdateOperationsInput | string | null
-    complaint?: NullableStringFieldUpdateOperationsInput | string | null
-    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
-    resolutionNote?: NullableStringFieldUpdateOperationsInput | string | null
-    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    archivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
-  }
-
-  export type UserUpsertWithoutTicketEntriesInput = {
-    update: XOR<UserUpdateWithoutTicketEntriesInput, UserUncheckedUpdateWithoutTicketEntriesInput>
-    create: XOR<UserCreateWithoutTicketEntriesInput, UserUncheckedCreateWithoutTicketEntriesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutTicketEntriesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutTicketEntriesInput, UserUncheckedUpdateWithoutTicketEntriesInput>
-  }
-
-  export type UserUpdateWithoutTicketEntriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    ticketsAuthored?: TicketUpdateManyWithoutAuthorNestedInput
-    ticketsAssigned?: TicketUpdateManyWithoutAssigneeNestedInput
-    attachments?: AttachmentUpdateManyWithoutUploadedByNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutTicketEntriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    ticketsAuthored?: TicketUncheckedUpdateManyWithoutAuthorNestedInput
-    ticketsAssigned?: TicketUncheckedUpdateManyWithoutAssigneeNestedInput
-    attachments?: AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
   export type TicketCreateWithoutAttachmentsInput = {
@@ -12373,7 +10570,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutTicketsAuthoredInput
     assignee?: UserCreateNestedOneWithoutTicketsAssignedInput
-    entries?: TicketEntryCreateNestedManyWithoutTicketInput
   }
 
   export type TicketUncheckedCreateWithoutAttachmentsInput = {
@@ -12399,7 +10595,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     authorId: string
     assigneeId?: string | null
-    entries?: TicketEntryUncheckedCreateNestedManyWithoutTicketInput
   }
 
   export type TicketCreateOrConnectWithoutAttachmentsInput = {
@@ -12418,7 +10613,6 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutAttachmentsInput = {
@@ -12432,7 +10626,6 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     ticketsAuthored?: TicketUncheckedCreateNestedManyWithoutAuthorInput
     ticketsAssigned?: TicketUncheckedCreateNestedManyWithoutAssigneeInput
-    ticketEntries?: TicketEntryUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutAttachmentsInput = {
@@ -12473,7 +10666,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
   }
 
   export type TicketUncheckedUpdateWithoutAttachmentsInput = {
@@ -12499,7 +10691,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
   }
 
   export type UserUpsertWithoutAttachmentsInput = {
@@ -12524,7 +10715,6 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAttachmentsInput = {
@@ -12538,7 +10728,6 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     ticketsAuthored?: TicketUncheckedUpdateManyWithoutAuthorNestedInput
     ticketsAssigned?: TicketUncheckedUpdateManyWithoutAssigneeNestedInput
-    ticketEntries?: TicketEntryUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -12608,14 +10797,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
-  }
-
-  export type TicketEntryCreateManyAuthorInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    ticketId: number
   }
 
   export type AttachmentCreateManyUploadedByInput = {
@@ -12713,7 +10894,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignee?: UserUpdateOneWithoutTicketsAssignedNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
 
@@ -12739,7 +10919,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -12788,7 +10967,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutTicketsAuthoredNestedInput
-    entries?: TicketEntryUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUpdateManyWithoutTicketNestedInput
   }
 
@@ -12814,7 +10992,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
-    entries?: TicketEntryUncheckedUpdateManyWithoutTicketNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -12840,30 +11017,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TicketEntryUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticket?: TicketUpdateOneRequiredWithoutEntriesNestedInput
-  }
-
-  export type TicketEntryUncheckedUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TicketEntryUncheckedUpdateManyWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketId?: IntFieldUpdateOperationsInput | number
   }
 
   export type AttachmentUpdateWithoutUploadedByInput = {
@@ -12899,14 +11052,6 @@ export namespace Prisma {
     ticketId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type TicketEntryCreateManyTicketInput = {
-    id?: string
-    body: string
-    system?: boolean
-    createdAt?: Date | string
-    authorId: string
-  }
-
   export type AttachmentCreateManyTicketInput = {
     id?: string
     kind: string
@@ -12916,30 +11061,6 @@ export namespace Prisma {
     storageKey: string
     createdAt?: Date | string
     uploadedById: string
-  }
-
-  export type TicketEntryUpdateWithoutTicketInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutTicketEntriesNestedInput
-  }
-
-  export type TicketEntryUncheckedUpdateWithoutTicketInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TicketEntryUncheckedUpdateManyWithoutTicketInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    body?: StringFieldUpdateOperationsInput | string
-    system?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AttachmentUpdateWithoutTicketInput = {

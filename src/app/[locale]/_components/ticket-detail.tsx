@@ -1,9 +1,7 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/utils";
 import { getTicket } from "@/server/tickets";
-import { AddEntryForm } from "./add-entry-form";
 import { PrioritySelect, StatusSelect } from "./status-select";
 import { TicketFieldsForm } from "./ticket-fields-form";
 
@@ -78,49 +76,6 @@ export async function TicketDetail({
 						resolutionNote: ticket.resolutionNote,
 					}}
 				/>
-
-				<section className="space-y-2">
-					<h3 className="font-medium text-muted-foreground text-xs uppercase">
-						{t("detail.log")}
-					</h3>
-					<div className="max-h-72 space-y-2.5 overflow-y-auto border border-border p-2.5">
-						{ticket.entries.length === 0 ? (
-							<p className="text-muted-foreground text-xs">
-								{t("detail.noEntries")}
-							</p>
-						) : (
-							ticket.entries.map((entry) => (
-								<div className="text-sm" key={entry.id}>
-									<div className="flex items-center gap-2 text-[11px] text-muted-foreground">
-										<span className="font-medium text-foreground">
-											{entry.author.name}
-										</span>
-										<span>
-											{format.dateTime(entry.createdAt, {
-												dateStyle: "short",
-												timeStyle: "short",
-											})}
-										</span>
-										{entry.system ? (
-											<span className="uppercase">
-												· {t("detail.systemEntry")}
-											</span>
-										) : null}
-									</div>
-									<p
-										className={cn(
-											"whitespace-pre-wrap",
-											entry.system && "text-muted-foreground italic",
-										)}
-									>
-										{entry.body}
-									</p>
-								</div>
-							))
-						)}
-					</div>
-					<AddEntryForm ticketId={ticket.id} />
-				</section>
 
 				<section className="space-y-2">
 					<h3 className="font-medium text-muted-foreground text-xs uppercase">

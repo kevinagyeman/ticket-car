@@ -17,6 +17,8 @@
 		"signOut": "Esci"
 	},
 	"nav": {
+		"dashboard": "Dashboard",
+		"ticketsList": "Elenco ticket",
 		"newTicket": "Nuovo ticket"
 	},
 	"tickets": {
@@ -61,15 +63,10 @@
 			"priority": "Priorità"
 		},
 		"detail": {
-			"log": "Log",
-			"addToLog": "Aggiungi al log…",
-			"addToLogAction": "Aggiungi",
 			"attachments": "Allegati",
 			"uploadSoon": "Upload file in arrivo",
 			"save": "Salva",
-			"saved": "Salvato",
-			"systemEntry": "sistema",
-			"noEntries": "Nessuna voce nel log"
+			"saved": "Salvato"
 		},
 		"new": {
 			"title": "Nuovo ticket",

@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 
-import { Link } from "@/i18n/navigation";
 import { auth } from "@/server/auth";
+import { AppHeader } from "../../_components/app-header";
 import { NewTicketForm } from "./new-ticket-form";
 
 export default async function NewTicketPage({
@@ -20,17 +20,9 @@ export default async function NewTicketPage({
 
 	return (
 		<div className="min-h-dvh bg-background">
-			<div className="flex items-center justify-between border-border border-b bg-card px-4 py-3 sm:px-6">
-				<h1 className="font-semibold text-lg">{t("new.title")}</h1>
-				<Link
-					className="text-muted-foreground text-sm underline-offset-2 hover:underline"
-					href="/"
-				>
-					{t("new.cancel")}
-				</Link>
-			</div>
-
+			<AppHeader />
 			<div className="px-4 py-6 sm:px-6">
+				<h1 className="mb-5 font-semibold text-lg">{t("new.title")}</h1>
 				<NewTicketForm
 					authorName={session.user.name ?? session.user.email ?? ""}
 				/>

@@ -9,7 +9,6 @@ const DEV_PASSWORD = "password";
 async function main() {
 	// wipe ticket data, keep users
 	await db.attachment.deleteMany();
-	await db.ticketEntry.deleteMany();
 	await db.ticket.deleteMany();
 	try {
 		await db.$executeRawUnsafe("ALTER TABLE `Ticket` AUTO_INCREMENT = 1");
@@ -46,7 +45,6 @@ async function main() {
 			daysAgo: 0,
 			complaint:
 				"Apple CarPlay wireless si disconnette dopo pochi minuti e non si riconnette.",
-			entries: ["Vettura lasciata in officina, problema riproducibile."],
 		},
 		{
 			client: "Giulia Bianchi",
@@ -59,7 +57,6 @@ async function main() {
 			daysAgo: 2,
 			complaint: "Touchscreen lento, a volte nero per qualche secondo.",
 			diagnosis: "Aggiornamento software datato, previsto reflash.",
-			entries: ["Estratti log diagnostici.", "status → IN_PROGRESS"],
 		},
 		{
 			client: "Andrea Conti",
@@ -73,7 +70,6 @@ async function main() {
 			daysAgo: 5,
 			complaint: "Microfono vivavoce con volume bassissimo.",
 			diagnosis: "Microfono difettoso da sostituire.",
-			entries: ["Ordinato microfono.", "status → WAITING_PARTS"],
 		},
 		{
 			client: "Elena Ferrari",
@@ -86,7 +82,6 @@ async function main() {
 			priority: "LOW",
 			daysAgo: 7,
 			complaint: "Vuole abilitare Android Auto wireless.",
-			entries: ["Preventivo inviato, in attesa di conferma."],
 		},
 		{
 			client: "Davide Marchetti",
@@ -102,7 +97,6 @@ async function main() {
 			diagnosis: "Firmware datato.",
 			resolutionNote: "Aggiornato firmware, accoppiamento OK. Testato.",
 			closed: true,
-			entries: ["Aggiornamento completato.", "status → RESOLVED"],
 		},
 		{
 			client: "Mario Rossi",
@@ -117,7 +111,6 @@ async function main() {
 			complaint: "Schermo in boot loop dopo aggiornamento OTA fallito.",
 			resolutionNote: "Reflash software, ripristinata versione stabile. Consegnata.",
 			closed: true,
-			entries: ["Reflash completato.", "status → CLOSED"],
 		},
 	];
 
@@ -144,14 +137,6 @@ async function main() {
 				diagnosis: spec.diagnosis ?? null,
 				resolutionNote: spec.resolutionNote ?? null,
 				authorId: author.id,
-				entries: {
-					create: (spec.entries ?? []).map((body, i) => ({
-						body,
-						system: body.startsWith("status →"),
-						createdAt: new Date(openedAt.getTime() + (i + 1) * 60 * 60 * 1000),
-						authorId: author.id,
-					})),
-				},
 			},
 		});
 		n += 1;

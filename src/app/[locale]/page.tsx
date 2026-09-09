@@ -43,9 +43,11 @@ export default async function HomePage({
 
 	return (
 		<div className="flex h-dvh flex-col bg-background">
-			<AppHeader>
+			<AppHeader />
+
+			<div className="flex items-center border-border border-b bg-card px-3 py-2 sm:px-4">
 				<SearchBar />
-			</AppHeader>
+			</div>
 
 			<div className="flex min-h-0 flex-1 flex-col md:grid md:grid-cols-[minmax(280px,340px)_1fr]">
 				<aside
