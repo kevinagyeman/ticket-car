@@ -3,6 +3,6 @@ import { LOCALE_ENUM } from "@/lib/constants";
 
 export const routing = defineRouting({
 	locales: LOCALE_ENUM,
-	defaultLocale: "en",
+	defaultLocale: LOCALE_ENUM[0],
 	localePrefix: "never",
 });

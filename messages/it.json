@@ -23,7 +23,7 @@
 	},
 	"tickets": {
 		"title": "Ticket",
-		"search": "Cerca per targa…",
+		"search": "Cerca targa, cliente, lamentela…",
 		"newTicket": "Nuovo ticket",
 		"empty": "Nessun ticket",
 		"selectPrompt": "Seleziona un ticket dalla lista",

@@ -5,10 +5,7 @@ import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { type CreateTicketState, createTicket } from "@/server/ticket-actions";
-import {
-	TicketFormFields,
-	TicketTextFields,
-} from "../../_components/ticket-fields";
+import { TicketFormFields, TicketTextFields } from "./ticket-fields";
 
 export function NewTicketForm({ authorName }: { authorName: string }) {
 	const t = useTranslations("tickets");

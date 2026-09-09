@@ -23,7 +23,7 @@
 	},
 	"tickets": {
 		"title": "Tickets",
-		"search": "Search by plate…",
+		"search": "Search plate, client, complaint…",
 		"newTicket": "New ticket",
 		"empty": "No tickets",
 		"selectPrompt": "Select a ticket from the list",
