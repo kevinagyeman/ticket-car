@@ -15,7 +15,6 @@ export async function AppHeader() {
 			</Link>
 
 			<nav className="flex items-center gap-1">
-				<NavLink href="/">{t("dashboard")}</NavLink>
 				<NavLink href="/">{t("ticketsList")}</NavLink>
 				<NavLink href="/tickets/new">{t("newTicket")}</NavLink>
 			</nav>
