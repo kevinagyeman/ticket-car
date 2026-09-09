@@ -16,30 +16,10 @@ async function requireUserId() {
 
 const nullify = (v?: string | null) => (v && v.trim() !== "" ? v.trim() : null);
 
-// --- mutations on an existing ticket -----------------------------------------
+const isClosed = (status: string) =>
+	status === "CLOSED" || status === "RESOLVED";
 
-export async function setTicketStatus(ticketId: number, value: string) {
-	await requireUserId();
-	const status = ticketStatusSchema.parse(value);
-
-	await db.ticket.update({
-		where: { id: ticketId },
-		data: {
-			status,
-			closedAt:
-				status === "CLOSED" || status === "RESOLVED" ? new Date() : null,
-		},
-	});
-
-	revalidatePath("/");
-}
-
-export async function setTicketPriority(ticketId: number, value: string) {
-	await requireUserId();
-	const priority = ticketPrioritySchema.parse(value);
-	await db.ticket.update({ where: { id: ticketId }, data: { priority } });
-	revalidatePath("/");
-}
+// --- edit an existing ticket ------------------------------------------------
 
 const text = z.string().max(10_000).optional();
 const short = z.string().max(200).optional();
@@ -54,6 +34,8 @@ const fieldsSchema = z.object({
 	ol: short,
 	systemModel: short,
 	softwareVersion: short,
+	status: ticketStatusSchema.catch("OPEN"),
+	priority: ticketPrioritySchema.catch("NORMAL"),
 	complaint: text,
 	diagnosis: text,
 	resolutionNote: text,
@@ -70,6 +52,14 @@ export async function saveTicketFields(
 	if (!parsed.success) return { ok: false, error: "invalid" };
 	const d = parsed.data;
 
+	const current = await db.ticket.findUnique({
+		where: { id: d.ticketId },
+		select: { closedAt: true },
+	});
+	const closedAt = isClosed(d.status)
+		? (current?.closedAt ?? new Date())
+		: null;
+
 	await db.ticket.update({
 		where: { id: d.ticketId },
 		data: {
@@ -80,6 +70,9 @@ export async function saveTicketFields(
 			ol: nullify(d.ol),
 			systemModel: nullify(d.systemModel),
 			softwareVersion: nullify(d.softwareVersion),
+			status: d.status,
+			priority: d.priority,
+			closedAt,
 			complaint: nullify(d.complaint),
 			diagnosis: nullify(d.diagnosis),
 			resolutionNote: nullify(d.resolutionNote),

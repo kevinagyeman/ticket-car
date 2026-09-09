@@ -1,8 +1,7 @@
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 import { getTicket } from "@/server/tickets";
-import { PrioritySelect, StatusSelect } from "./status-select";
 import { TicketFieldsForm } from "./ticket-fields-form";
 
 export async function TicketDetail({
@@ -12,10 +11,9 @@ export async function TicketDetail({
 	id: number;
 	query: Record<string, string>;
 }) {
-	const [ticket, t, format] = await Promise.all([
+	const [ticket, t] = await Promise.all([
 		getTicket(id),
 		getTranslations("tickets"),
-		getFormatter(),
 	]);
 
 	if (!ticket) {
@@ -35,34 +33,16 @@ export async function TicketDetail({
 				>
 					← {t("backToList")}
 				</Link>
-				<div className="flex items-baseline gap-2">
-					<span className="font-semibold text-lg">#{ticket.id}</span>
-					<span className="text-muted-foreground text-xs">
-						{format.dateTime(ticket.date, { dateStyle: "medium" })}
-					</span>
-				</div>
-				<div className="ml-auto flex items-center gap-2">
-					<PrioritySelect ticketId={ticket.id} value={ticket.priority} />
-					<StatusSelect ticketId={ticket.id} value={ticket.status} />
-				</div>
+				<span className="font-semibold text-lg">#{ticket.id}</span>
 			</div>
 
 			<div className="flex-1 space-y-5 overflow-y-auto p-4">
-				<dl className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm sm:grid-cols-3">
-					<Meta label={t("field.author")}>
-						{ticket.author.name ?? ticket.author.email}
-					</Meta>
-					{ticket.assignee ? (
-						<Meta label={t("field.assignee")}>
-							{ticket.assignee.name ?? ticket.assignee.email}
-						</Meta>
-					) : null}
-				</dl>
-
 				<TicketFieldsForm
+					authorName={ticket.author.name ?? ticket.author.email ?? ""}
 					key={ticket.updatedAt.getTime()}
 					ticket={{
 						id: ticket.id,
+						dateISO: ticket.date.toISOString().slice(0, 10),
 						client: ticket.client,
 						plate: ticket.plate,
 						make: ticket.make,
@@ -71,6 +51,8 @@ export async function TicketDetail({
 						ol: ticket.ol,
 						systemModel: ticket.systemModel,
 						softwareVersion: ticket.softwareVersion,
+						status: ticket.status,
+						priority: ticket.priority,
 						complaint: ticket.complaint,
 						diagnosis: ticket.diagnosis,
 						resolutionNote: ticket.resolutionNote,
@@ -103,21 +85,6 @@ export async function TicketDetail({
 					</p>
 				</section>
 			</div>
-		</div>
-	);
-}
-
-function Meta({
-	label,
-	children,
-}: {
-	label: string;
-	children: React.ReactNode;
-}) {
-	return (
-		<div>
-			<dt className="text-muted-foreground text-xs">{label}</dt>
-			<dd className="truncate">{children}</dd>
 		</div>
 	);
 }

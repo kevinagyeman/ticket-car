@@ -5,13 +5,12 @@ import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { type SaveState, saveTicketFields } from "@/server/ticket-actions";
+import { TicketFormFields, TicketTextFields } from "./ticket-fields";
 
 type Fields = {
 	id: number;
+	dateISO: string;
 	client: string | null;
 	plate: string | null;
 	make: string | null;
@@ -20,12 +19,20 @@ type Fields = {
 	ol: string | null;
 	systemModel: string | null;
 	softwareVersion: string | null;
+	status: string;
+	priority: string;
 	complaint: string | null;
 	diagnosis: string | null;
 	resolutionNote: string | null;
 };
 
-export function TicketFieldsForm({ ticket }: { ticket: Fields }) {
+export function TicketFieldsForm({
+	ticket,
+	authorName,
+}: {
+	ticket: Fields;
+	authorName: string;
+}) {
 	const t = useTranslations("tickets");
 	const [state, action, pending] = useActionState<SaveState, FormData>(
 		saveTicketFields,
@@ -38,58 +45,15 @@ export function TicketFieldsForm({ ticket }: { ticket: Fields }) {
 	}, [state]);
 
 	return (
-		<form action={action} className="flex flex-col gap-3">
+		<form action={action} className="flex flex-col gap-5 text-sm">
 			<input name="ticketId" type="hidden" value={ticket.id} />
 
-			<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-				<Small label={t("field.client")}>
-					<Input defaultValue={ticket.client ?? ""} name="client" />
-				</Small>
-				<Small label={t("field.plate")}>
-					<Input
-						className="uppercase"
-						defaultValue={ticket.plate ?? ""}
-						name="plate"
-					/>
-				</Small>
-				<Small label={t("field.ol")}>
-					<Input defaultValue={ticket.ol ?? ""} name="ol" />
-				</Small>
-				<Small label={t("field.make")}>
-					<Input defaultValue={ticket.make ?? ""} name="make" />
-				</Small>
-				<Small label={t("field.model")}>
-					<Input defaultValue={ticket.model ?? ""} name="model" />
-				</Small>
-				<Small label={t("field.km")}>
-					<Input defaultValue={ticket.km ?? ""} inputMode="numeric" name="km" />
-				</Small>
-				<Small label={t("field.systemModel")}>
-					<Input defaultValue={ticket.systemModel ?? ""} name="systemModel" />
-				</Small>
-				<Small label={t("field.softwareVersion")}>
-					<Input
-						defaultValue={ticket.softwareVersion ?? ""}
-						name="softwareVersion"
-					/>
-				</Small>
-			</div>
-
-			<Box
-				defaultValue={ticket.complaint ?? ""}
-				label={t("field.complaint")}
-				name="complaint"
+			<TicketFormFields
+				authorName={authorName}
+				date={ticket.dateISO}
+				values={ticket}
 			/>
-			<Box
-				defaultValue={ticket.diagnosis ?? ""}
-				label={t("field.diagnosis")}
-				name="diagnosis"
-			/>
-			<Box
-				defaultValue={ticket.resolutionNote ?? ""}
-				label={t("field.resolutionNote")}
-				name="resolutionNote"
-			/>
+			<TicketTextFields values={ticket} />
 
 			<div>
 				<Button disabled={pending} size="sm" type="submit">
@@ -97,44 +61,5 @@ export function TicketFieldsForm({ ticket }: { ticket: Fields }) {
 				</Button>
 			</div>
 		</form>
-	);
-}
-
-function Small({
-	label,
-	children,
-}: {
-	label: string;
-	children: React.ReactNode;
-}) {
-	return (
-		<div className="flex flex-col gap-1">
-			<Label className="text-muted-foreground text-xs">{label}</Label>
-			{children}
-		</div>
-	);
-}
-
-function Box({
-	label,
-	name,
-	defaultValue,
-}: {
-	label: string;
-	name: string;
-	defaultValue: string;
-}) {
-	return (
-		<div className="flex flex-col gap-1">
-			<Label className="text-muted-foreground text-xs" htmlFor={name}>
-				{label}
-			</Label>
-			<Textarea
-				className="h-36 resize-none overflow-y-auto"
-				defaultValue={defaultValue}
-				id={name}
-				name={name}
-			/>
-		</div>
 	);
 }
