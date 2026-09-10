@@ -25,7 +25,7 @@ export function TicketList({
 	}
 
 	return (
-		<ul className="divide-y divide-border">
+		<ul className="divide-y-[3px] divide-border">
 			{tickets.map((ticket) => {
 				const active = ticket.id === activeId;
 				return (

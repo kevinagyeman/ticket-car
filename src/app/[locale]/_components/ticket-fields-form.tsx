@@ -6,7 +6,11 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { type SaveState, saveTicketFields } from "@/server/ticket-actions";
-import { TicketFormFields, TicketTextFields } from "./ticket-fields";
+import {
+	saveButtonClass,
+	TicketFormFields,
+	TicketTextFields,
+} from "./ticket-fields";
 
 type Fields = {
 	id: number;
@@ -56,7 +60,7 @@ export function TicketFieldsForm({
 			<TicketTextFields values={ticket} />
 
 			<div>
-				<Button disabled={pending} size="sm" type="submit">
+				<Button className={saveButtonClass} disabled={pending} type="submit">
 					{pending ? "…" : t("detail.save")}
 				</Button>
 			</div>

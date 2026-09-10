@@ -31,7 +31,7 @@ export function NavLink({
 	return (
 		<Link
 			className={cn(
-				"px-2 py-1 text-sm",
+				"px-2 py-1 text-sm uppercase",
 				active
 					? "font-medium text-foreground"
 					: "text-muted-foreground hover:text-foreground",

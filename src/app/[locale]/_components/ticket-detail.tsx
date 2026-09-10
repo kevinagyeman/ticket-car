@@ -26,7 +26,7 @@ export async function TicketDetail({
 
 	return (
 		<div className="flex h-full flex-col">
-			<div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-border border-b px-4 py-3">
+			<div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-border border-b-[3px] px-4 py-3">
 				<Link
 					className="text-muted-foreground text-sm underline-offset-2 hover:underline md:hidden"
 					href={{ pathname: "/", query }}
@@ -36,7 +36,7 @@ export async function TicketDetail({
 				<span className="font-semibold text-lg">#{ticket.id}</span>
 			</div>
 
-			<div className="flex-1 space-y-5 overflow-y-auto p-4">
+			<div className="flex-1 space-y-5 overflow-y-auto p-4 pb-10">
 				<TicketFieldsForm
 					authorName={ticket.author.name ?? ticket.author.email ?? ""}
 					key={ticket.updatedAt.getTime()}

@@ -31,6 +31,13 @@ export type TicketTextValues = {
 const selectClass =
 	"h-8 w-full border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring";
 
+/** Red uppercase — the "create ticket" submit button. */
+export const submitButtonClass =
+	"bg-red-600 font-semibold text-white uppercase tracking-wide hover:bg-red-700";
+
+/** Black uppercase — the "save" submit button on the detail form. */
+export const saveButtonClass = "font-semibold uppercase tracking-wide";
+
 /** One cell in the fields grid. */
 function Field({
 	label,

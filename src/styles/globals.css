@@ -130,6 +130,8 @@
 	}
 	html {
 		@apply font-sans;
+		/* nudge every rem-based size up a touch */
+		font-size: 106.25%;
 	}
 }
 

@@ -58,14 +58,14 @@ export default async function HomePage({
 		<div className="flex h-dvh flex-col bg-background">
 			<AppHeader />
 
-			<div className="border-border border-b bg-card px-3 py-2 sm:px-4">
+			<div className="border-border border-b-[3px] bg-background px-3 py-2 sm:px-4">
 				<SearchBar options={filterOptions} />
 			</div>
 
 			<div className="flex min-h-0 flex-1 flex-col md:grid md:grid-cols-[minmax(280px,340px)_1fr]">
 				<aside
 					className={cn(
-						"min-h-0 overflow-y-auto border-border md:block md:border-r",
+						"min-h-0 overflow-y-auto border-border pb-8 md:block md:border-r-[3px]",
 						paneOpen ? "hidden md:block" : "flex-1 md:flex-none",
 					)}
 				>
@@ -84,7 +84,7 @@ export default async function HomePage({
 				>
 					{newMode ? (
 						<div className="flex h-full flex-col">
-							<div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-border border-b px-4 py-3">
+							<div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-border border-b-[3px] px-4 py-3">
 								<Link
 									className="text-muted-foreground text-sm underline-offset-2 hover:underline md:hidden"
 									href={{ pathname: "/", query }}
@@ -93,7 +93,7 @@ export default async function HomePage({
 								</Link>
 								<span className="font-semibold text-lg">{t("new.title")}</span>
 							</div>
-							<div className="flex-1 overflow-y-auto p-4">
+							<div className="flex-1 overflow-y-auto p-4 pb-10">
 								<NewTicketForm
 									authorName={session.user.name ?? session.user.email ?? ""}
 								/>

@@ -5,7 +5,11 @@ import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { type CreateTicketState, createTicket } from "@/server/ticket-actions";
-import { TicketFormFields, TicketTextFields } from "./ticket-fields";
+import {
+	submitButtonClass,
+	TicketFormFields,
+	TicketTextFields,
+} from "./ticket-fields";
 
 export function NewTicketForm({ authorName }: { authorName: string }) {
 	const t = useTranslations("tickets");
@@ -28,7 +32,12 @@ export function NewTicketForm({ authorName }: { authorName: string }) {
 			<TicketTextFields />
 
 			<div>
-				<Button disabled={pending} type="submit">
+				<Button
+					className={submitButtonClass}
+					disabled={pending}
+					size="lg"
+					type="submit"
+				>
 					{pending ? "…" : t("new.create")}
 				</Button>
 			</div>
